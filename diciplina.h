@@ -54,4 +54,6 @@ typedef struct diciplina Diciplina;
 *    Recebe uma diciplina e retorna o seu nome.
 *
 ***********************************************************************/
+char* DIC_le_codigo(void);
 DIC_tpCondRet DIC_get_nome(Diciplina* d, char* nome);
+DIC_tpCondRet DIC_get_codigo(Diciplina *d, char *codigo);
