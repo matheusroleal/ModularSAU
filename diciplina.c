@@ -39,7 +39,41 @@ struct diciplina{
   int creditos;
   char *bibliografia;
 };
+/***************************************************************************
+*
+*  Função: DIC ler bibliografia
+*  ****/
+ char *DIC_le_Bib(void){
 
+	char *n = (char *)malloc(300*sizeof(char));
+
+	if(*n == NULL){
+
+	printf("Espaço em memória insuficiente\n");
+    free(n);
+    exit(-1);
+	}
+	printf("Digite a bibliografia\n");
+	scanf(" %300[^\n]s", n);
+
+
+
+return n;
+
+} /* Fim função: DIC ler bibliografia */
+/***************************************************************************
+*
+*  Função: DIC obter bibliografia
+*  ****/
+ DIC_tpCondRet DIC_get_bibliografia(Diciplina *d, char *bibliografia) {
+	if (d->bibliografia)
+	{
+		strcpy(bibliografia, d->bibliografia);
+		return DIC_CondRetOK;
+	}
+	return DIC_CondRetErroEstrutura;
+}
+/* Fim função: DIC obter bibliografia */
 /***************************************************************************
 *
 *  Função: DIC ler codigo
