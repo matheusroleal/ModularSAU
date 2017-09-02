@@ -11,7 +11,7 @@
 *  Projeto: Sistema Acadêmico da turma 3WB
 *  Gestor:  Grupo 4
 *  Autores: mrol - Matheus Rodrigues de Oliveira Leal
-                 - Leonardo Abreu Santos
+*                - Leonardo Abreu Santos
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data      Observações
