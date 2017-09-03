@@ -63,7 +63,7 @@ DIS_tpCondRet DIS_cria_Disciplina(void)
 *  ****/
 DIS_tpCondRet DIS_exibe(void){
   if (d != NULL){
-    printf("NOME: %s - CODIGO: %s - CREDITOS: %d - BIBLIOGRAFIA: %s\n",d->nome, d->codigo, d->creditos, d->bibliografia);
+    printf("NOME: %s - CODIGO: %s - CREDITOS: %d - BIBLIOGRAFIA: %s - EMENTA: %s\n",d->nome, d->codigo, d->creditos, d->bibliografia,d->ementa);
     return DIS_CondRetOK;
   }
   return DIS_CondRetErroEstrutura;
