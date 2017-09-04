@@ -172,3 +172,12 @@ char* DIS_le_nome(void);
 *
 ***********************************************************************/
 char *DIS_le_ementa(void);
+/***********************************************************************
+*
+*  $FC Função: DIS deleta Disciplina
+*
+*  $ED Descrição da função
+*    Deleta disciplina recebida como parâmetro
+*
+***********************************************************************/
+void DIS_deleta_Disciplina (Disciplina *d);
