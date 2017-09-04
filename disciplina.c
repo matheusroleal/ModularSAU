@@ -83,7 +83,7 @@ char *DIS_le_ementa(void){
   char *ementa = (char *)malloc(MAX_EMENTA*sizeof(char));
   if(ementa == NULL)  { exit(1);  }
   printf("Digite a ementa\n");
-  scanf(" %MAX_EMENTAs", ementa);
+  scanf(" %300s", ementa);
   return ementa;
 } /* Fim função: DIS ler bibliografia */
 /***************************************************************************
@@ -123,7 +123,7 @@ char *DIS_le_Bib(void){
     exit(1);
   }
   printf("Digite a bibliografia\n");
-  scanf(" %MAX_BIBLIOGRAFIA[^\n]s", n);
+  scanf(" %300[^\n]s", n);
   return n;
 } /* Fim função: DIS ler bibliografia */
 /***************************************************************************
