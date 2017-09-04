@@ -25,7 +25,6 @@
 *     Uma disciplina deverá ter um critério de avaliação, que será um código que se *refere a uma forma de calcular a média final para poder determinar se um aluno *está aprovado ou não.
 ***************************************************************************/
 typedef struct disciplina Disciplina;
-
 /***********************************************************************
 *
 *  $TC Tipo de dados: DIS ConDISoes de retorno
@@ -41,8 +40,10 @@ typedef struct disciplina Disciplina;
          DIS_CondRetErroEstrutura = 1 ,
               /* Estrutura da Disciplina está errada */
 
-         DIS_CondRetFaltouMemoria = 8
+         DIS_CondRetFaltouMemoria = 8 ,
                /* Faltou memória ao alocar dados */
+	 DIS_CondRetCreditoNegativo = 2 
+		/* Creditos negativo fornecido */
 
    }DIS_tpCondRet;
 
@@ -54,7 +55,7 @@ typedef struct disciplina Disciplina;
 *    Retorna o nome.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_nome(char* nome);
+DIS_tpCondRet DIS_get_nome(char** nome);
 /***********************************************************************
 *
 *  $FC Função: DIS obter codigo
@@ -63,7 +64,7 @@ DIS_tpCondRet DIS_get_nome(char* nome);
 *    Retorna o codigo.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_codigo(char* codigo);
+DIS_tpCondRet DIS_get_codigo(char** codigo);
 /***********************************************************************
 *
 *  $FC Função: DIS obter bibliografia
@@ -72,7 +73,7 @@ DIS_tpCondRet DIS_get_codigo(char* codigo);
 *    Retorna a bibliografia
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_bibliografia(char* bibliografia);
+DIS_tpCondRet DIS_get_bibliografia(char** bibliografia);
 /***********************************************************************
 *
 *  $FC Função: DIS obter por meio do teclado

@@ -28,6 +28,7 @@
 #define MAX_CODIGO 8
 #define MAX_BIBLIOGRAFIA 300
 #define MAX_EMENTA 300
+#define MIN_CREDITOS 1
 /***********************************************************************
 *
 *  $TC Tipo de dados: DIS Descritor de Disciplina
@@ -157,16 +158,16 @@ char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
 *
 *  Função: DIS obter bibliografia
 *  ****/
- DIS_tpCondRet DIS_get_bibliografia(char* bibliografia) {
+ DIS_tpCondRet DIS_get_bibliografia(char** bibliografia) {
 	if (d->bibliografia)
 	{
-		bibliografia = (char*) malloc(MAX_BIBLIOGRAFIA*sizeof(char));
+		*bibliografia = (char*) malloc(MAX_BIBLIOGRAFIA*sizeof(char));
 		if(bibliografia == NULL)
 		{
 			printf("Memoria insuficiente");
 			exit(1);
 		}
-		strcpy(bibliografia, d->bibliografia);
+		strcpy(*bibliografia, d->bibliografia);
 		return DIS_CondRetOK;
 	}
 	return DIS_CondRetErroEstrutura;
@@ -175,17 +176,17 @@ char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
 *
 *  Função: DIS obter codigo
 *  ****/
-DIS_tpCondRet DIS_get_codigo(char* codigo)
+DIS_tpCondRet DIS_get_codigo(char** codigo)
 {
 	if (d->codigo)
 	{
-		codigo = (char*) malloc (MAX_CODIGO*sizeof(char));
+		*codigo = (char*) malloc (MAX_CODIGO*sizeof(char));
 			if(codigo == NULL)
 			{
 				printf("Memoria insuficiente");
 				exit(1);
 			}
-		strcpy(codigo, d->codigo);
+		strcpy(*codigo, d->codigo);
 		return DIS_CondRetOK;
 	}
 	return DIS_CondRetErroEstrutura;
@@ -194,16 +195,16 @@ DIS_tpCondRet DIS_get_codigo(char* codigo)
 *
 *  Função: DIS obter nome
 *  ****/
-DIS_tpCondRet DIS_get_nome(char* nome)
+DIS_tpCondRet DIS_get_nome(char** nome)
 {
   if(d->nome){
-   nome = (char*) malloc (MAX_NOME*sizeof(char));
+   *nome = (char*) malloc (MAX_NOME*sizeof(char));
    if(nome == NULL)
    {
-     printf("Memoria insuficiente");
-     exit(1);
+    printf("Memoria insuficiente");
+     return DIS_CondRetFaltouMemoria;
    }
-   strcpy(nome,d->nome);
+   strcpy(*nome,d->nome);
    return DIS_CondRetOK;
   }
   return DIS_CondRetErroEstrutura;
@@ -212,21 +213,39 @@ DIS_tpCondRet DIS_get_nome(char* nome)
 *
 *  Função: DIS obter ementa
 *  ****/
-DIS_tpCondRet DIS_get_ementa(char* ementa)
+DIS_tpCondRet DIS_get_ementa(char** ementa)
 {
   if(d->ementa)
   {
-	ementa = (char*) malloc (MAX_EMENTA*sizeof(char));
+	*ementa = (char*) malloc (MAX_EMENTA*sizeof(char));
 	if(ementa == NULL)
 	{
 		printf("Memoria insuficiente");
 		exit(1);
 	}
-	strcpy(ementa, d->ementa);
+	strcpy(*ementa, d->ementa);
 	return DIS_CondRetOK;
   }
   return DIS_CondRetErroEstrutura;
 }/* Fim função: DIS obter ementa */
+/***************************************************************************
+*
+*  Função: DIS get creditos
+*  ****/
+DIS_tpCondRet DIS_get_creditos (int *creditos)
+{
+	if(d->creditos)
+	{
+		if(d->creditos<MIN_CREDITOS)
+		{
+			printf("Creditos invalidos\n");
+			return DIS_CondRetCreditoNegativo;
+		}
+		*creditos=d->creditos;
+		return DIS_CondRetOK;
+	}
+	return DIS_CondRetErroEstrutura;
+}/* Fim função: DIS get creditos */
 /*************************************************************************
 *  ngtgmp
 *
