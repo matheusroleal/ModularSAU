@@ -46,7 +46,24 @@ typedef struct disciplina Disciplina;
 		/* Creditos negativo fornecido */
 
    }DIS_tpCondRet;
-
+/***********************************************************************
+*
+*  $FC Função: DIS obter diciplina
+*
+*  $ED Descrição da função
+*    Retorna a diciplina.
+*
+***********************************************************************/
+DIS_tpCondRet DIS_get_diciplina(Disciplina* dis);
+/***********************************************************************
+*
+*  $FC Função: DIS obter creditos
+*
+*  $ED Descrição da função
+*    Retorna o creditos.
+*
+***********************************************************************/
+DIS_tpCondRet DIS_get_creditos(Disciplina* dis, int* creditos);
 /***********************************************************************
 *
 *  $FC Função: DIS obter nome
@@ -55,7 +72,7 @@ typedef struct disciplina Disciplina;
 *    Retorna o nome.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_nome(char** nome);
+DIS_tpCondRet DIS_get_nome(Disciplina* dis, char** nome);
 /***********************************************************************
 *
 *  $FC Função: DIS obter codigo
@@ -64,7 +81,7 @@ DIS_tpCondRet DIS_get_nome(char** nome);
 *    Retorna o codigo.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_codigo(char** codigo);
+DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo);
 /***********************************************************************
 *
 *  $FC Função: DIS obter bibliografia
@@ -73,7 +90,16 @@ DIS_tpCondRet DIS_get_codigo(char** codigo);
 *    Retorna a bibliografia
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_bibliografia(char** bibliografia);
+DIS_tpCondRet DIS_get_bibliografia(Disciplina* dis, char** bibliografia);
+/***********************************************************************
+*
+*  $FC Função: DIS obter ementa
+*
+*  $ED Descrição da função
+*    Retorna a ementa
+*
+***********************************************************************/
+DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa);
 /***********************************************************************
 *
 *  $FC Função: DIS obter por meio do teclado
@@ -109,7 +135,7 @@ DIS_tpCondRet DIS_exibe(void);
 *    DIS cria a struct disciplina
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_cria_Disciplina(void);
+DIS_tpCondRet DIS_cria_Disciplina(Disciplina *d);
 /***********************************************************************
 *
 *  $FC Função: DIS le codigo
