@@ -10,9 +10,10 @@
 *
 *  Projeto: Sistema Acadêmico da turma 3WB
 *  Gestor:  Grupo 4
-*  Autores: mrol - Matheus Rodrigues de Oliveira Leal
-*                - Leonardo Abreu Santos
-*	          ngtgmp - Felipe Nogueira de Souza
+*  Autores: 	mrol - Matheus Rodrigues de Oliveira Leal
+*             SaintL - Leonardo Abreu Santos
+*	      ngtgmp - Felipe Nogueira de Souza
+	          LL - Clayton Lucas Mendes Lima
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data      Observações
@@ -310,3 +311,13 @@ DIS_tpCondRet DIS_gera_param(char* nome, char* codigo, int creditos, char* bibli
 	
   return DIS_CondRetOK;
 }/* Fim função: DIS gera uma disciplina recebendo parâmetros externos */
+/***************************************************************************
+*
+*  Função: DIS deleta disciplina
+*  ****/
+void DIS_deleta_Disciplina (Disciplina *d)
+{
+	d = NULL;
+	free(d);
+}
+/* Fim função: DIS deleta Disciplina */
