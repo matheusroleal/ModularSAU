@@ -67,7 +67,7 @@ DIS_tpCondRet DIS_get_diciplina(Disciplina** dis);
 *    Retorna o creditos.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_creditos(Disciplina** dis, int* creditos);
+DIS_tpCondRet DIS_get_creditos(Disciplina* dis, int* creditos);
 /***********************************************************************
 *
 *  $FC Função: DIS obter nome
@@ -76,7 +76,7 @@ DIS_tpCondRet DIS_get_creditos(Disciplina** dis, int* creditos);
 *    Retorna o nome.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_nome(Disciplina** dis, char** nome);
+DIS_tpCondRet DIS_get_nome(Disciplina* dis, char** nome);
 /***********************************************************************
 *
 *  $FC Função: DIS obter codigo
@@ -85,7 +85,7 @@ DIS_tpCondRet DIS_get_nome(Disciplina** dis, char** nome);
 *    Retorna o codigo.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_codigo(Disciplina** dis, char** codigo);
+DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo);
 /***********************************************************************
 *
 *  $FC Função: DIS obter bibliografia
@@ -94,7 +94,7 @@ DIS_tpCondRet DIS_get_codigo(Disciplina** dis, char** codigo);
 *    Retorna a bibliografia
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_bibliografia(Disciplina** dis, char** bibliografia);
+DIS_tpCondRet DIS_get_bibliografia(Disciplina* dis, char** bibliografia);
 /***********************************************************************
 *
 *  $FC Função: DIS obter ementa
@@ -103,7 +103,7 @@ DIS_tpCondRet DIS_get_bibliografia(Disciplina** dis, char** bibliografia);
 *    Retorna a ementa
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_ementa(Disciplina** dis, char** ementa);
+DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa);
 /***********************************************************************
 *
 *  $FC Função: DIS obter por meio do teclado
