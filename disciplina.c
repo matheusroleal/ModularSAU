@@ -155,6 +155,7 @@ char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
   while((int)cod2[0]<48 ||(int) cod2[0]>57 ||(int)cod2[1]<48 || (int)cod2[1]>57 || (int)cod2[2]<48 ||(int) cod2[2]>57 ||(int) cod2[3]<48 ||(int) cod2[3]>57 || strlen(cod2)<4)
   {
     printf("Selecione caracteres validos (0 >= x <=9):");
+    scanf("%4s", cod2);
   }
 
   strcat(cod1, cod2);	  			/* Concatena "inf" + 4 numerais no máximo */
