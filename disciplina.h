@@ -33,17 +33,21 @@ typedef struct disciplina Disciplina;
 ***********************************************************************/
 
    typedef enum {
+     DIS_CondRetOK = 0 ,
+       /* Executou correto */
 
-         DIS_CondRetOK = 0 ,
-               /* Executou correto */
-
-         DIS_CondRetErroEstrutura = 1 ,
-              /* Estrutura da Disciplina está errada */
-
-         DIS_CondRetFaltouMemoria = 8 ,
-               /* Faltou memória ao alocar dados */
-	 DIS_CondRetCreditoNegativo = 2 
-		/* Creditos negativo fornecido */
+     DIS_CondRetErroEstrutura = 1 ,
+      /* Estrutura da Disciplina está errada */
+     DIS_CondRetDisciplinaCriada = 2,
+     /* Estrutura da Disciplina está criada */
+     DIS_CondRetDisciplinaDeletada = 3,
+     /* Estrutura da Disciplina está deletada */
+     DIS_CondRetFaltouMemoria = 4 ,
+     /* Faltou memória ao alocar dados */
+	   DIS_CondRetCreditoNegativo = 5,
+		 /* Creditos negativo fornecido */
+     DIS_CondRetOKEstrutura = 6
+     /* Estrutura da Disciplina está correta */
 
    }DIS_tpCondRet;
 /***********************************************************************
@@ -54,7 +58,7 @@ typedef struct disciplina Disciplina;
 *    Retorna a diciplina.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_diciplina(Disciplina* dis);
+DIS_tpCondRet DIS_get_diciplina(Disciplina** dis);
 /***********************************************************************
 *
 *  $FC Função: DIS obter creditos
@@ -63,7 +67,7 @@ DIS_tpCondRet DIS_get_diciplina(Disciplina* dis);
 *    Retorna o creditos.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_creditos(Disciplina* dis, int* creditos);
+DIS_tpCondRet DIS_get_creditos(Disciplina** dis, int* creditos);
 /***********************************************************************
 *
 *  $FC Função: DIS obter nome
@@ -72,7 +76,7 @@ DIS_tpCondRet DIS_get_creditos(Disciplina* dis, int* creditos);
 *    Retorna o nome.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_nome(Disciplina* dis, char** nome);
+DIS_tpCondRet DIS_get_nome(Disciplina** dis, char** nome);
 /***********************************************************************
 *
 *  $FC Função: DIS obter codigo
@@ -81,7 +85,7 @@ DIS_tpCondRet DIS_get_nome(Disciplina* dis, char** nome);
 *    Retorna o codigo.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo);
+DIS_tpCondRet DIS_get_codigo(Disciplina** dis, char** codigo);
 /***********************************************************************
 *
 *  $FC Função: DIS obter bibliografia
@@ -90,7 +94,7 @@ DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo);
 *    Retorna a bibliografia
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_bibliografia(Disciplina* dis, char** bibliografia);
+DIS_tpCondRet DIS_get_bibliografia(Disciplina** dis, char** bibliografia);
 /***********************************************************************
 *
 *  $FC Função: DIS obter ementa
@@ -99,7 +103,7 @@ DIS_tpCondRet DIS_get_bibliografia(Disciplina* dis, char** bibliografia);
 *    Retorna a ementa
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa);
+DIS_tpCondRet DIS_get_ementa(Disciplina** dis, char** ementa);
 /***********************************************************************
 *
 *  $FC Função: DIS obter por meio do teclado
@@ -129,55 +133,10 @@ DIS_tpCondRet DIS_gera_param(char* nome, char* codigo, int creditos, char* bibli
 DIS_tpCondRet DIS_exibe(void);
 /***********************************************************************
 *
-*  $FC Função: DIS cria disciplina
-*
-*  $ED Descrição da função
-*    DIS cria a struct disciplina
-*
-***********************************************************************/
-DIS_tpCondRet DIS_cria_Disciplina(Disciplina *d);
-/***********************************************************************
-*
-*  $FC Função: DIS le codigo
-*
-*  $ED Descrição da função
-*    Le o codigo pelo teclado.
-*
-***********************************************************************/
-char* DIS_le_codigo(void);
-/***********************************************************************
-*
-*  $FC Função: DIS le creditos
-*
-*  $ED Descrição da função
-*    Le o creditos pelo teclado.
-*
-***********************************************************************/
-int DIS_le_creditos(void);
-/***********************************************************************
-*
-*  $FC Função: DIS le codigo
-*
-*  $ED Descrição da função
-*    Le o nome pelo teclado.
-*
-***********************************************************************/
-char* DIS_le_nome(void);
-/***********************************************************************
-*
-*  $FC Função: DIS le ementa
-*
-*  $ED Descrição da função
-*    Le a ementa pelo teclado.
-*
-***********************************************************************/
-char *DIS_le_ementa(void);
-/***********************************************************************
-*
 *  $FC Função: DIS deleta Disciplina
 *
 *  $ED Descrição da função
 *    Deleta disciplina recebida como parâmetro
 *
 ***********************************************************************/
-void DIS_deleta_Disciplina (Disciplina *d);
+DIS_tpCondRet DIS_deleta_Disciplina (Disciplina **d);
