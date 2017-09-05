@@ -140,16 +140,15 @@ char *DIS_le_Bib(void){
 *  ****/
 char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
 {
-  char* cod1 = (char*)malloc(MAX_CODIGO * sizeof(char)); 	/*cod1 = prefixo*/
-  char cod2 [5];
+  char* cod1 = (char*)calloc(MAX_CODIGO, sizeof(char)); 	/*cod1 = prefixo*/
+  char* cod2 = (char*)calloc(5, sizeof(char));
   if (cod1 == NULL)
   {
     printf("Memoria insuficiente!\n\n");
     return DIS_CondRetErroEstrutura;
   }
   strcat(cod1, "inf");
-
-  printf("\n\nDigite o código numerico da disciplina:\n");
+  printf("\nDigite o codigo numerico da disciplina:\n");
   scanf("%4s", cod2); 				/* O usuario digitará apenas a parte numerica do codigo (4 Numerais no caso)*/
   /*ngtgmp - não deixa o usuário escrever algo que não sejam numerais*/
   while((int)cod2[0]<48 ||(int) cod2[0]>57 ||(int)cod2[1]<48 || (int)cod2[1]>57 || (int)cod2[2]<48 ||(int) cod2[2]>57 ||(int) cod2[3]<48 ||(int) cod2[3]>57 || strlen(cod2)<4)
@@ -157,11 +156,8 @@ char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
     printf("Selecione caracteres validos (0 >= x <=9):");
     scanf("%4s", cod2);
   }
-
   strcat(cod1, cod2);	  			/* Concatena "inf" + 4 numerais no máximo */
-
   free(cod2);
-
   return cod1;
 }/* Fim função: DIS ler codigo  */
 /***************************************************************************
