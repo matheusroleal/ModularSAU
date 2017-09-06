@@ -55,7 +55,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include    "TST_ESPC.h"
+#include    "tst_espc.h"
 
 #include    "generico.h"
 #include    "lerparm.h"
@@ -101,14 +101,15 @@
       DIS_tpCondRet CondRetEsperada = DIS_CondRetFaltouMemoria ;
                                       /* inicializa para qualquer coisa */
 
-      char ValorEsperado = '?'  ;
-      char ValorObtido   = '!'  ;
-      char ValorDado1     = '\0' ;
-      char ValorDado2     = '\0' ;
-      char ValorDado3     = '\0' ;
-      char ValorDado4     = '\0' ;
-      char ValorDado5     = '\0' ;
-      Disciplina **ValorDado = DIS_cria_Disciplina();
+      Disciplina *dis = NULL;
+
+      char ValorEsperado;
+      char ValorObtido;
+      char ValorDado1;
+      char ValorDado2;
+      int ValorDado3;
+      char ValorDado4;
+      char ValorDado5;
 
       int  NumLidos = -1 ;
 
@@ -176,14 +177,14 @@
          else if ( strcmp( ComandoTeste , OBTER_DIS_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "si" , &ValorDado,
+            NumLidos = LER_LerParametros( "ci" , &ValorDado1,
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_diciplina( &ValorDado ) ;
+            CondRetObtido = DIS_get_diciplina( &ValorDado1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter struct disciplina.\n" );
@@ -195,14 +196,14 @@
          else if ( strcmp( ComandoTeste , OBTER_CRE_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "sci" , &ValorDado , &ValorDado1,
+            NumLidos = LER_LerParametros( "ci" , &ValorDado1 ,
                                &CondRetEsperada ) ;
-            if ( NumLidos != 3 )
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_codigo( &ValorDado, &ValorDado1 ) ;
+            CondRetObtido = DIS_get_codigo( dis , ValorDado1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter creditos.\n" );
@@ -214,14 +215,14 @@
          else if ( strcmp( ComandoTeste , OBTER_EM_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "sci" , &ValorDado , &ValorDado1,
+            NumLidos = LER_LerParametros( "ci" , &ValorDado1 , &ValorDado2,
                                &CondRetEsperada ) ;
-            if ( NumLidos != 3 )
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_ementa( &ValorDado, &ValorDado1 ) ;
+            CondRetObtido = DIS_get_ementa(dis , ValorDado1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para direita." );
@@ -233,14 +234,14 @@
          else if ( strcmp( ComandoTeste , OBTER_NOME_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "sci" , &ValorDado , &ValorDado1,
+            NumLidos = LER_LerParametros( "ci" , ValorDado1 ,
                                &CondRetEsperada ) ;
-            if ( NumLidos != 3 )
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_nome( &ValorDado, &ValorDado1 ) ;
+            CondRetObtido = DIS_get_nome( dis, ValorDado1  ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter nome.\n" );
@@ -251,14 +252,14 @@
          else if ( strcmp( ComandoTeste , OBTER_COD_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "sci" , &ValorDado , &ValorDado1,
+            NumLidos = LER_LerParametros( "ci" , ValorDado1 ,
                                &CondRetEsperada ) ;
-            if ( NumLidos != 3 )
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_codigo( &ValorDado, &ValorDado1 ) ;
+            CondRetObtido = DIS_get_codigo( dis , ValorDado1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter codigo.\n" );
@@ -269,14 +270,14 @@
          else if ( strcmp( ComandoTeste , OBTER_BIB_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "sci" , &ValorDado , &ValorDado1,
+            NumLidos = LER_LerParametros( "ci" , &ValorDado1 ,
                                &CondRetEsperada ) ;
-            if ( NumLidos != 3 )
+            if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_bibliografia( &ValorDado, &ValorDado1 ) ;
+            CondRetObtido = DIS_get_bibliografia( dis , ValorDado2 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter bibliografia.\n" );
@@ -286,8 +287,7 @@
 
          else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
          {
-	    NumLidos = LER_LerParametros( "s" , &ValorDado) ;
-            DIS_deleta_Disciplina(&ValorDado) ;
+            DIS_deleta_Disciplina(dis) ;
 
             return TST_CondRetOK ;
 
