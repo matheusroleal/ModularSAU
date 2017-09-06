@@ -145,7 +145,7 @@ char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
   if (cod1 == NULL)
   {
     printf("Memoria insuficiente!\n\n");
-    return DIS_CondRetErroEstrutura;
+    exit(1);
   }
   strcat(cod1, "inf");
   printf("\nDigite o codigo numerico da disciplina:\n");
