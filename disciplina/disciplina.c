@@ -54,7 +54,6 @@ static char* DIS_le_codigo(void);
 static int DIS_le_creditos(void);
 static char* DIS_le_nome(void);
 static char *DIS_le_ementa(void);
-static DIS_tpCondRet DIS_cria_Disciplina(void);
 /*****  Código das funções exportadas pelo módulo  *****/
 /***************************************************************************
 *
