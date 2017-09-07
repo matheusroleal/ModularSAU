@@ -140,9 +140,9 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
          else if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ississi" ,
+            NumLidos = LER_LerParametros( "ssissi" ,
                                ValorDado1, ValorDado2, &ValorDado3 , ValorDado4, ValorDado5 , &CondRetEsperada ) ;
-            if ( NumLidos != 5 )
+            if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
             } /* if */
