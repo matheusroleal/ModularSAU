@@ -1,0 +1,61 @@
+// Script:    testeDisciplina.script
+// Autor:     Matheus Leal
+// Data:      6/set/2017
+// Propósito: Ilustrar arquivo de script,
+//            Testa a construção de uma disciplina usando parâmetros simbólicos
+//            Verifica se as operações modificaram corretamente as referências
+//
+
+== Declarar as condicoes de retorno
+=declararparm  OK           int 0
+=declararparm  ErrEstrutura int 1
+=declararparm  DisCriada    int 2
+=declararparm  DisDeletada  int 3
+=declararparm  Memoria      int 4
+=declararparm  CredNegativo int 5
+=declararparm  OkEstrutura  int 6
+
+== Declarar os conteúdos dos nós
+=declararparm  creditoA      int 2
+=declararparm  creditoB      int -1
+=declararparm  nome          string "ALUNO"
+=declararparm  bibliografia  string "teste_biblio"
+=declararparm  ementa        string "ementa_teste"
+=declararparm  codigo        string "inf1301"
+=declararparm  ementaB        string "\0"
+=declararparm  nomeB         string "\0"
+=declararparm  bibliografiaB string "\0"
+=declararparm  codigoB       string "\0"
+
+
+== Criar disciplina pelo teclado
+=gerainp  0  DisCriada
+
+== Destroi a disciplina
+=destruir 0 DisDeletada
+
+== Criar disciplina por parametro
+=gerainp 0 nome codigo creditoA bibliografia ementa DisCriada
+
+== Exibe disciplina
+=exibe   0   OK
+
+== Obtem disciplina
+=obterdis   0   OK
+
+== Obtem credito
+=obterdis   0 codigoB OK
+
+== Obtem nome
+=obterdis   0 nomeB OK
+
+== Obtem ementa
+=obterdis   0 ementaB OK
+
+== Obtem codigo
+=obterdis   0 codigoB OK
+
+== Obtem bibliografia
+=obterdis   0 bibliografiaB OK
+
+// fim
