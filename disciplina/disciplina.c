@@ -49,10 +49,6 @@ struct disciplina{
   char *ementa;
 };
 
-/*****  Dados encapsulados no módulo  *****/
-
-Disciplina *d = NULL;
-
 /***** Protótipos das funções encapuladas no módulo *****/
 static char* DIS_le_codigo(void);
 static int DIS_le_creditos(void);
@@ -62,20 +58,9 @@ static DIS_tpCondRet DIS_cria_Disciplina(void);
 /*****  Código das funções exportadas pelo módulo  *****/
 /***************************************************************************
 *
-*  Função: Cria disciplina
-*  ****/
-DIS_tpCondRet DIS_cria_Disciplina(void)
-{
-  d = (Disciplina*) malloc(sizeof(Disciplina));
-  if(d == NULL)
-		return DIS_CondRetFaltouMemoria;
-  return DIS_CondRetOKEstrutura;
-}/* Fim função: DIS cria */
-/***************************************************************************
-*
 *  Função: DIS exibe
 *  ****/
-DIS_tpCondRet DIS_exibe(void){
+DIS_tpCondRet DIS_exibe(Disciplina* d){
   if (d != NULL){
     printf("NOME: %s - CODIGO: %s - CREDITOS: %d - BIBLIOGRAFIA: %s - EMENTA: %s\n",d->nome, d->codigo, d->creditos, d->bibliografia,d->ementa);
     return DIS_CondRetOK;
@@ -160,39 +145,6 @@ char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
   free(cod2);
   return cod1;
 }/* Fim função: DIS ler codigo  */
-/***************************************************************************
-*
-*  Função: DIS obter struct disciplina
-*  ****/
-DIS_tpCondRet DIS_get_diciplina(Disciplina** dis) {
-  if((*dis) == NULL){
-    (*dis) = (Disciplina*) malloc(sizeof(Disciplina));
-    if((*dis) == NULL){
-  		return DIS_CondRetFaltouMemoria;
-    }
-  }  (*dis)->nome = (char*)malloc(MAX_CODIGO*sizeof(char));
-  if((*dis)->nome==NULL){
-    return DIS_CondRetFaltouMemoria;
-  }
-  strcpy((*dis)->nome, d->nome);
-  (*dis)->codigo = (char*)malloc(sizeof(d->codigo));
-  if((*dis)->codigo==NULL){
-    return DIS_CondRetFaltouMemoria;
-  }
-  strcpy((*dis)->codigo, d->codigo);
-  (*dis)->creditos = d->creditos;
-  (*dis)->bibliografia = (char*)malloc(sizeof(d->bibliografia));
-  if((*dis)->bibliografia==NULL){
-    return DIS_CondRetFaltouMemoria;
-  }
-  strcpy((*dis)->bibliografia, d->bibliografia);
-  (*dis)->ementa = (char*)malloc(sizeof(d->ementa));
-  if((*dis)->ementa==NULL){
-    return DIS_CondRetFaltouMemoria;
-  }
-  strcpy((*dis)->ementa, d->ementa);
-  return DIS_CondRetOK;
-}/* Fim função: DIS obter disciplina  */
 /***************************************************************************
 *
 *  Função: DIS obter bibliografia
@@ -290,17 +242,16 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 *
 *  Função: DIS gera uma disciplina por input do teclado
 *  ****/
-DIS_tpCondRet DIS_gera_cmd(void)
+DIS_tpCondRet DIS_gera_cmd(Disciplina** d)
 {
-  int i = DIS_cria_Disciplina();
-  if(i == DIS_CondRetFaltouMemoria)
-	return DIS_CondRetFaltouMemoria;
-
-  d->creditos = DIS_le_creditos();
-  d->bibliografia = DIS_le_Bib();
-  d->nome = DIS_le_nome();
-  d->codigo = DIS_le_codigo();
-  d->ementa = DIS_le_ementa();
+  (*d) = (Disciplina*) malloc(sizeof(Disciplina));
+  if((*d) == NULL)
+		return DIS_CondRetFaltouMemoria;
+  (*d)->creditos = DIS_le_creditos();
+  (*d)->bibliografia = DIS_le_Bib();
+  (*d)->nome = DIS_le_nome();
+  (*d)->codigo = DIS_le_codigo();
+  (*d)->ementa = DIS_le_ementa();
 
   return DIS_CondRetDisciplinaCriada;
 }/* Fim função: DIS gera uma disciplina por input do teclado */
@@ -309,29 +260,28 @@ DIS_tpCondRet DIS_gera_cmd(void)
 *
 *  Função: DIS gera uma disciplina recebendo parâmetros externos
 *  ****/
-DIS_tpCondRet DIS_gera_param(char* nome, char* codigo, int creditos, char* bibliografia, char* ementa)
+DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa)
 {
-  int i = DIS_cria_Disciplina();
-  if(i == DIS_CondRetFaltouMemoria)
+  (*d) = (Disciplina*) malloc(sizeof(Disciplina));
+  if((*d) == NULL)
 		return DIS_CondRetFaltouMemoria;
-
-  d->nome = (char*)malloc(sizeof(nome));
-  if(d->nome == NULL)
+  (*d)->nome = (char*)malloc(sizeof(nome));
+  if((*d)->nome == NULL)
 	  return DIS_CondRetFaltouMemoria;
-  strcpy(d->nome, nome);
-  d->codigo = (char*)malloc(sizeof(codigo));
-  if(d->codigo == NULL)
+  strcpy((*d)->nome, nome);
+  (*d)->codigo = (char*)malloc(sizeof(codigo));
+  if((*d)->codigo == NULL)
 	  return DIS_CondRetFaltouMemoria;
-  strcpy(d->codigo, codigo);
-  d->creditos = creditos;
-  d->bibliografia = (char*)malloc(sizeof(bibliografia));
-  if(d->bibliografia == NULL)
+  strcpy((*d)->codigo, codigo);
+  (*d)->creditos = creditos;
+  (*d)->bibliografia = (char*)malloc(sizeof(bibliografia));
+  if((*d)->bibliografia == NULL)
 	  return DIS_CondRetFaltouMemoria;
-  strcpy(d->bibliografia, bibliografia);
-  d->ementa = (char*)malloc(sizeof(ementa));
-  if(d->ementa == NULL)
+  strcpy((*d)->bibliografia, bibliografia);
+  (*d)->ementa = (char*)malloc(sizeof(ementa));
+  if((*d)->ementa == NULL)
 	  return DIS_CondRetFaltouMemoria;
-  strcpy(d->ementa, ementa);
+  strcpy((*d)->ementa, ementa);
 
   return DIS_CondRetDisciplinaCriada;
 }/* Fim função: DIS gera uma disciplina recebendo parâmetros externos */
