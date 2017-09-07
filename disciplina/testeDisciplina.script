@@ -22,14 +22,14 @@
 =declararparm  bibliografia  string "teste_biblio"
 =declararparm  ementa        string "ementa_teste"
 =declararparm  codigo        string "inf1301"
-=declararparm  ementaB        string "\0"
+=declararparm  ementaB       string "\0"
 =declararparm  nomeB         string "\0"
 =declararparm  bibliografiaB string "\0"
 =declararparm  codigoB       string "\0"
 
 
 == Criar disciplina pelo teclado
-=gerainp  0  DisCriada
+=gerainp 0 DisCriada
 
 == Destroi a disciplina
 =destruir 0 DisDeletada
@@ -38,24 +38,24 @@
 =gerainp 0 nome codigo creditoA bibliografia ementa DisCriada
 
 == Exibe disciplina
-=exibe   0   OK
+=exibe 0 OK
 
 == Obtem disciplina
-=obterdis   0   OK
+=obterdis 0 OK
 
 == Obtem credito
-=obterdis   0 codigoB OK
+=obtercre 0 codigoB OK
 
 == Obtem nome
-=obterdis   0 nomeB OK
+=obternome 0 nomeB OK
 
 == Obtem ementa
-=obterdis   0 ementaB OK
+=obterem 0 ementaB OK
 
 == Obtem codigo
-=obterdis   0 codigoB OK
+=obtercod 0 codigoB OK
 
 == Obtem bibliografia
-=obterdis   0 bibliografiaB OK
+=obterbib 0 bibliografiaB OK
 
 // fim
