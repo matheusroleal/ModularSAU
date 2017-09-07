@@ -105,7 +105,7 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
       
 
-      char ValorEsperado;
+      //char ValorEsperado;
       char ValorDado1[20];
       char ValorDado2[20];
       int ValorDado3;
@@ -113,8 +113,11 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
       char ValorDado5[20];
       int index =0;
       int  NumLidos = -1 ;
+      char *ValorDado11[20];
+      int *ValorDado33;
 
-      TST_tpCondRet Ret ;
+
+      //TST_tpCondRet Ret ;
 
       /* Testar DIS Gerar disciplina por input do teclado */
 
@@ -178,14 +181,14 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
          else if ( strcmp( ComandoTeste , OBTER_DIS_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ii" , &index,
+            NumLidos = LER_LerParametros( "i" , 
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_diciplina( dis[index] ) ;
+            CondRetObtido = DIS_get_diciplina( dis ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter struct disciplina.\n" );
@@ -197,14 +200,14 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
          else if ( strcmp( ComandoTeste , OBTER_CRE_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "isi" ,&index, ValorDado1 ,
+            NumLidos = LER_LerParametros( "iii" ,&index, &ValorDado33 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_codigo( dis[index] , ValorDado1 ) ;
+            CondRetObtido = DIS_get_creditos( dis[index], ValorDado33 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter creditos.\n" );
@@ -216,14 +219,14 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
          else if ( strcmp( ComandoTeste , OBTER_EM_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "isi" , &index, ValorDado1 ,
+            NumLidos = LER_LerParametros( "isi" ,&index,  ValorDado11 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_ementa(dis[index] , ValorDado1 ) ;
+            CondRetObtido = DIS_get_ementa(dis[index] , ValorDado11 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para direita." );
@@ -235,14 +238,14 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
          else if ( strcmp( ComandoTeste , OBTER_NOME_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "isi" ,&index, ValorDado1 ,
+            NumLidos = LER_LerParametros( "isi" ,&index, ValorDado11 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_nome( dis[index], ValorDado1  ) ;
+            CondRetObtido = DIS_get_nome( dis[index], ValorDado11  ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter nome.\n" );
@@ -253,14 +256,14 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
          else if ( strcmp( ComandoTeste , OBTER_COD_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "isi" ,&index, ValorDado1 ,
+            NumLidos = LER_LerParametros( "isi" ,&index, ValorDado11 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_codigo( dis[index] , ValorDado1 ) ;
+            CondRetObtido = DIS_get_codigo( dis[index] , ValorDado11 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter codigo.\n" );
@@ -271,14 +274,14 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
          else if ( strcmp( ComandoTeste , OBTER_BIB_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "isi" ,&index, ValorDado1 ,
+            NumLidos = LER_LerParametros( "isi" ,&index, ValorDado11 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_bibliografia( dis[index] , ValorDado2 ) ;
+            CondRetObtido = DIS_get_bibliografia( dis[index] , ValorDado11 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter bibliografia.\n" );
@@ -288,13 +291,8 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
          else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
          {
-	    NumLidos = LER_LerParametros( "i" ,
-                               &index ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } 
-            DIS_deleta_Disciplina(dis[index]) ;
+	    
+            DIS_deleta_Disciplina(dis) ;
 
             return TST_CondRetOK ;
 
