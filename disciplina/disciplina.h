@@ -52,15 +52,6 @@ typedef struct disciplina Disciplina;
    }DIS_tpCondRet;
 /***********************************************************************
 *
-*  $FC Função: DIS obter diciplina
-*
-*  $ED Descrição da função
-*    Retorna a diciplina.
-*
-***********************************************************************/
-DIS_tpCondRet DIS_get_diciplina(Disciplina** dis);
-/***********************************************************************
-*
 *  $FC Função: DIS obter creditos
 *
 *  $ED Descrição da função
@@ -112,7 +103,7 @@ DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa);
 *    Função: DIS gera uma disciplina por input do teclado
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_gera_cmd(void);
+DIS_tpCondRet DIS_gera_cmd(Disciplina** d);
 /***********************************************************************
 *
 *  $FC Função: DIS gera por meio de parametros
@@ -121,7 +112,7 @@ DIS_tpCondRet DIS_gera_cmd(void);
 *    DIS gera uma disciplina recebendo parâmetros externos
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_gera_param(char* nome, char* codigo, int creditos, char* bibliografia, char* ementa);
+DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa);
 /***********************************************************************
 *
 *  $FC Função: DIS exibe disciplina
@@ -130,7 +121,7 @@ DIS_tpCondRet DIS_gera_param(char* nome, char* codigo, int creditos, char* bibli
 *    DIS exibe os parametros de disciplina
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_exibe(void);
+DIS_tpCondRet DIS_exibe(Disciplina* d);
 /***********************************************************************
 *
 *  $FC Função: DIS deleta Disciplina
