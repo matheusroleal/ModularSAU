@@ -27,32 +27,31 @@
 =declararparm  bibliografiaB string "\0"
 =declararparm  codigoB       string "\0"
 
+== Tenta exibir disciplina vazia
+=exibe ErrEstrutura
 
 == Criar disciplina por parametro
-=gerapar 0 nome codigo creditoA bibliografia ementa DisCriada
+=gerapar nome codigo creditoA bibliografia ementa DisCriada
 
 == Exibe disciplina
-=exibe 0 OK
-
-== Obtem disciplina
-=obterdis 0 OK
-
-== Obtem credito
-=obtercre 0 codigoB OK
-
-== Obtem nome
-=obternome 0 nomeB OK
-
-== Obtem ementa
-=obterem 0 ementaB OK
-
-== Obtem codigo
-=obtercod 0 codigoB OK
+=exibe OK
 
 == Obtem bibliografia
-=obterbib 0 bibliografiaB OK
+=obterbib bibliografiaB OK
+
+== Obtem nome
+=obternome nomeB OK
+
+== Obtem ementa
+=obterem ementaB OK
+
+== Obtem credito
+=obtercre creditoB OK
+
+== Obtem codigo
+=obtercod codigoB OK
 
 == Destroi a disciplina
-=destruir 0 DisDeletada
+=destruir DisDeletada
 
 // fim
