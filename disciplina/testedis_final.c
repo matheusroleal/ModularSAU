@@ -253,11 +253,17 @@ Disciplina *dis=NULL;
 
          else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
          {
+            NumLidos = LER_LerParametros( "i",
+                               &CondRetEsperada ) ;
+            if ( NumLidos != 1 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
 
-            DIS_deleta_Disciplina(&dis) ;
+            CondRetObtido = DIS_deleta_Disciplina(&dis) ;
 
-            return TST_CondRetOK ;
-
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao obter bibliografia.\n" );
          } /* fim ativa: DIS Destruir disciplina */
 
       return TST_CondRetNaoConhec ;
