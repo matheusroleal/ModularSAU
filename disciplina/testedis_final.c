@@ -104,15 +104,15 @@ Disciplina *dis=NULL;
 
 
       //char ValorEsperado;
-      char ValorDado1[20];
-      char ValorDado2[20];
+      char ValorDado1[25];
+      char ValorDado2[8];
       int ValorDado3;
-      char ValorDado4[20];
-      char ValorDado5[20];
+      char ValorDado4[300];
+      char ValorDado5[300];
       int index =0;
       int  NumLidos = -1 ;
-      char *ValorDado11[20];
-      int *ValorDado33;
+      char *ValorDado11;
+      int ValorDado33;
 
 
       //TST_tpCondRet Ret ;
@@ -147,7 +147,7 @@ Disciplina *dis=NULL;
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_exibe ( dis[index] ) ;
+            CondRetObtido = DIS_exibe ( dis ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao exibir as informacoes de disciplina." );
