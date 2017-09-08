@@ -17,7 +17,7 @@
 
 == Declarar os conteúdos dos nós
 =declararparm  creditoA      int 2
-=declararparm  creditoB      int -1
+=declararparm  creditoB      int 0
 =declararparm  nome          string "ALUNO"
 =declararparm  bibliografia  string "teste_biblio"
 =declararparm  ementa        string "ementa_teste"
@@ -28,14 +28,8 @@
 =declararparm  codigoB       string "\0"
 
 
-== Criar disciplina pelo teclado
-=gerainp 0 DisCriada
-
-== Destroi a disciplina
-=destruir 0 DisDeletada
-
 == Criar disciplina por parametro
-=gerainp 0 nome codigo creditoA bibliografia ementa DisCriada
+=gerapar 0 nome codigo creditoA bibliografia ementa DisCriada
 
 == Exibe disciplina
 =exibe 0 OK
@@ -57,5 +51,8 @@
 
 == Obtem bibliografia
 =obterbib 0 bibliografiaB OK
+
+== Destroi a disciplina
+=destruir 0 DisDeletada
 
 // fim

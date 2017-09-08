@@ -32,21 +32,21 @@
 *                     Obs. notação: <Char> <Int> são os valores dos parâmetros
 *                     que se encontram no comando de teste.
 *
-*     "=exibe"      - chama a função DIS_exibe  
-*                   
-*     "=obterdis" <Struct Disciplina>     
+*     "=exibe"      - chama a função DIS_exibe
+*
+*     "=obterdis" <Struct Disciplina>
 *                      - chama a função DIS_get_disciplina
-*     "=obtercre" <Struct Disciplina> <INT>     
+*     "=obtercre" <Struct Disciplina> <INT>
 *                      - chama a função DIS_get_creditos
-*     "=obterem" <Struct Disciplina> <Char>      
+*     "=obterem" <Struct Disciplina> <Char>
 *                      - chama a função DIS_get_ementa
 *     "=obternome" <Struct Disciplina> <Char>
 *                      - chama a função DIS_get_nome
-*     "=obtercod" <Struct Disciplina> <Char>     
+*     "=obtercod" <Struct Disciplina> <Char>
 *                      - chama a função DIS_get_codigo
-*     "=obterbib" <Struct Disciplina> <Char>  
+*     "=obterbib" <Struct Disciplina> <Char>
 *                      - chama a função DIS_get_bibliografia
-*       
+*
 *     "=destroi"    - chama a função ARV_DestruirArvore( )
 *
 ***************************************************************************/
@@ -92,17 +92,16 @@
 *     Ver TST_tpCondRet definido em TST_ESPC.H
 *
 ***********************************************************************/
-#define MAX 8
 
-Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+Disciplina *dis=NULL;
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
 
-      DIS_tpCondRet CondRetObtido   = DIS_CondRetOK ;
-      DIS_tpCondRet CondRetEsperada = DIS_CondRetFaltouMemoria ;
+      DIS_tpCondRet CondRetObtido  ;
+      DIS_tpCondRet CondRetEsperada  ;
                                       /* inicializa para qualquer coisa */
 
-      
+
 
       //char ValorEsperado;
       char ValorDado1[20];
@@ -118,38 +117,18 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
       //TST_tpCondRet Ret ;
 
-      /* Testar DIS Gerar disciplina por input do teclado */
-
-         if ( strcmp( ComandoTeste , GERA_INP_DIS_CMD ) == 0 )
-         {
-
-            NumLidos = LER_LerParametros( "i" , 
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-            CondRetObtido = DIS_gera_cmd( dis ) ;
-
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao gerar disciplina por input do teclado.\n" );
-
-         } /* fim ativa: Testar DIS Gerar disciplina por input do teclado */
-
       /* Testar DIS Gerar discipina por parametros externos */
 
          else if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ssissi" ,
-                               ValorDado1, ValorDado2, &ValorDado3 , ValorDado4, ValorDado5 , &CondRetEsperada ) ;
+            NumLidos = LER_LerParametros( "ississi" ,&index, ValorDado1, ValorDado2, &ValorDado3 , ValorDado4, ValorDado5 , &CondRetEsperada ) ;
             if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_gera_param( dis, ValorDado1, ValorDado2, ValorDado3, ValorDado4, ValorDado5 ) ;
+            CondRetObtido = DIS_gera_param( &dis, ValorDado1, ValorDado2, ValorDado3, ValorDado4, ValorDado5 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
@@ -188,7 +167,7 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_creditos( dis[index], ValorDado33 ) ;
+            CondRetObtido = DIS_get_creditos( dis, &ValorDado33 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter creditos.\n" );
@@ -207,7 +186,7 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_ementa(dis[index] , ValorDado11 ) ;
+            CondRetObtido = DIS_get_ementa(dis, &ValorDado11 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao ir para direita." );
@@ -226,7 +205,7 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_nome( dis[index], ValorDado11  ) ;
+            CondRetObtido = DIS_get_nome( dis, &ValorDado11  ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter nome.\n" );
@@ -244,7 +223,7 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_codigo( dis[index] , ValorDado11 ) ;
+            CondRetObtido = DIS_get_codigo( dis , &ValorDado11 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter codigo.\n" );
@@ -262,7 +241,7 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_bibliografia( dis[index] , ValorDado11 ) ;
+            CondRetObtido = DIS_get_bibliografia( dis , &ValorDado11 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao obter bibliografia.\n" );
@@ -272,8 +251,8 @@ Disciplina *dis[MAX]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
          else if ( strcmp( ComandoTeste , DESTROI_CMD ) == 0 )
          {
-	    
-            DIS_deleta_Disciplina(dis) ;
+
+            DIS_deleta_Disciplina(&dis) ;
 
             return TST_CondRetOK ;
 
