@@ -13,10 +13,10 @@ abra o saida.txt criado após a execução.
 --Arquivos de código fonte que compõem o exemplo 
 Estes módulos são substituídos pelos módulos a testar e correspondentes módulos de controle
 de teste específicos.
- • disciplina.c, disciplina.h – são os módulos de implementação e de definição do exemplo, um
+ • disciplina.c, disciplina.h – são os módulos de implementação e de definição do trabalho, um
   módulo de edição e acesso aos dados da estrutura disciplina.
  • testedis.c – é o módulo de implementação do módulo de teste específico do módulo editor de
-  disciplina DisciplinaE. Ela faz uso da instrumentação e trata de uma única disciplina. 
+  disciplina Disciplina. Ela trata de uma única disciplina. 
 
 --Utilitários e ferramentas 
  • run_test.bat – é um batch utilizado para rodar o teste automatizado. 
