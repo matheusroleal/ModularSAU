@@ -20,8 +20,9 @@
 *       0.01 mrol     30/08/2017  Início do desenvolvimento
 *       0.02 ngtgmp   01/09/2017  $Des.
 *       0.03 mrol     03/09/2017  $Des. Funções básicas implementadas e funcionando
-*	0.04 Leonardo 04/09/2017  $Des. Função delete
-*	0.05 todos    05/09/2017  Correções gerais
+*		0.04 Leonardo 04/09/2017  $Des. Função delete
+*		0.05 todos    05/09/2017  Correções gerais
+*		0.05 ngtgmp   08/09/2017  Aumentando a segurança do código - vazamentos de memória nos testes
 ***************************************************************************/
 #include <string.h>
 #include <stdio.h>
@@ -42,11 +43,11 @@
 *
 ***********************************************************************/
 struct disciplina{
-  char *nome;
-  char *codigo;
+  char nome[MAX_NOME];
+  char codigo[MAX_CODIGO];
   int creditos;
-  char *bibliografia;
-  char *ementa;
+  char bibliografia[MAX_BIBLIOGRAFIA];
+  char ementa[MAX_EMENTA];
 };
 
 /***** Protótipos das funções encapuladas no módulo *****/
@@ -70,9 +71,9 @@ DIS_tpCondRet DIS_exibe(Disciplina* d){
 * ngtgmp
 *
 *  Função: DIS ler ementa
-*  ****/
-char *DIS_le_ementa(void){
-  char *ementa = (char *)malloc(MAX_EMENTA*sizeof(char));
+* ****/
+char* DIS_le_ementa(void){
+  char* ementa = (char *)calloc(MAX_EMENTA, sizeof(char));
   if(ementa == NULL)  { exit(1);  }
   printf("Digite a ementa\n");
   scanf(" %300s", ementa);
@@ -93,14 +94,14 @@ int DIS_le_creditos(void){
 *  Função: DIS ler nome
 *  ****/
 char* DIS_le_nome(void){
-  char *n = (char *)malloc(300*sizeof(char));
+  char* n = (char *)calloc(MAX_NOME, sizeof(char));
   if(n == NULL)
   {
     printf("Espaço em memória insuficiente\n");
     exit(-1);
   }
   printf("Digite o nome\n");
-  scanf(" %300[^\n]s", n);
+  scanf(" %25[^\n]s", n);
   return n;
 } /* Fim função: DIS ler creditos */
 /***************************************************************************
@@ -108,7 +109,7 @@ char* DIS_le_nome(void){
 *  Função: DIS ler bibliografia
 *  ****/
 char *DIS_le_Bib(void){
-  char *n = (char *)malloc(MAX_BIBLIOGRAFIA*sizeof(char));
+  char *n = (char *)calloc(MAX_BIBLIOGRAFIA, sizeof(char));
   if(n == NULL)
   {
     printf("Espaço em memória insuficiente\n");
@@ -151,7 +152,7 @@ char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
  DIS_tpCondRet DIS_get_bibliografia(Disciplina* dis, char** bibliografia) {
 	if (dis->bibliografia)
 	{
-		*bibliografia = (char*) malloc(MAX_BIBLIOGRAFIA*sizeof(char));
+		*bibliografia = (char*) calloc(MAX_BIBLIOGRAFIA, sizeof(char));
 		if(bibliografia == NULL)
 		{
 			printf("Memoria insuficiente");
@@ -170,7 +171,7 @@ DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo)
 {
 	if (dis->codigo)
 	{
-		*codigo = (char*) malloc (MAX_CODIGO*sizeof(char));
+		*codigo = (char*) calloc (MAX_CODIGO, sizeof(char));
 			if(codigo == NULL)
 			{
 				printf("Memoria insuficiente");
@@ -188,7 +189,7 @@ DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo)
 DIS_tpCondRet DIS_get_nome(Disciplina* dis, char** nome)
 {
   if(dis->nome){
-   *nome = (char*) malloc (MAX_NOME*sizeof(char));
+   *nome = (char*) calloc (MAX_NOME, sizeof(char));
    if(nome == NULL)
    {
     printf("Memoria insuficiente");
@@ -207,7 +208,7 @@ DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa)
 {
   if(dis->ementa)
   {
-	*ementa = (char*) malloc (MAX_EMENTA*sizeof(char));
+	*ementa = (char*) calloc (MAX_EMENTA, sizeof(char));
 	if(ementa == NULL)
 	{
 		printf("Memoria insuficiente");
@@ -243,14 +244,14 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 *  ****/
 DIS_tpCondRet DIS_gera_cmd(Disciplina** d)
 {
-  (*d) = (Disciplina*) malloc(sizeof(Disciplina));
+  (*d) = (Disciplina*) calloc(1, sizeof(Disciplina));
   if((*d) == NULL)
 		return DIS_CondRetFaltouMemoria;
   (*d)->creditos = DIS_le_creditos();
-  (*d)->bibliografia = DIS_le_Bib();
-  (*d)->nome = DIS_le_nome();
-  (*d)->codigo = DIS_le_codigo();
-  (*d)->ementa = DIS_le_ementa();
+  strcpy((*d)->bibliografia,DIS_le_Bib());
+  strcpy((*d)->nome, DIS_le_nome());
+  strcpy((*d)->codigo, DIS_le_codigo());
+  strcpy((*d)->ementa, DIS_le_ementa());
 
   return DIS_CondRetDisciplinaCriada;
 }/* Fim função: DIS gera uma disciplina por input do teclado */
@@ -261,25 +262,21 @@ DIS_tpCondRet DIS_gera_cmd(Disciplina** d)
 *  ****/
 DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa)
 {
-  (*d) = (Disciplina*) malloc(sizeof(Disciplina));
+  (*d) = (Disciplina*) calloc(1,sizeof(Disciplina));
   if((*d) == NULL)
 		return DIS_CondRetFaltouMemoria;
-  (*d)->nome = (char*)malloc(sizeof(nome));
-  if((*d)->nome == NULL)
-	  return DIS_CondRetFaltouMemoria;
+  if(sizeof(nome)>MAX_NOME*sizeof(char))
+	  return DIS_CondRetParametroInvalido;
   strcpy((*d)->nome, nome);
-  (*d)->codigo = (char*)malloc(sizeof(codigo));
-  if((*d)->codigo == NULL)
-	  return DIS_CondRetFaltouMemoria;
+  if(sizeof(codigo)>MAX_CODIGO*sizeof(char))
+	  return DIS_CondRetParametroInvalido;
   strcpy((*d)->codigo, codigo);
   (*d)->creditos = creditos;
-  (*d)->bibliografia = (char*)malloc(sizeof(bibliografia));
-  if((*d)->bibliografia == NULL)
-	  return DIS_CondRetFaltouMemoria;
+  if(sizeof(bibliografia)>MAX_BIBLIOGRAFIA*sizeof(char))
+	  return DIS_CondRetParametroInvalido;
   strcpy((*d)->bibliografia, bibliografia);
-  (*d)->ementa = (char*)malloc(sizeof(ementa));
-  if((*d)->ementa == NULL)
-	  return DIS_CondRetFaltouMemoria;
+  if(sizeof(ementa)>MAX_EMENTA*sizeof(char))
+	  return DIS_CondRetParametroInvalido;
   strcpy((*d)->ementa, ementa);
 
   return DIS_CondRetDisciplinaCriada;
