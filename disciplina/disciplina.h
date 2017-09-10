@@ -44,10 +44,12 @@ typedef struct disciplina Disciplina;
      /* Estrutura da Disciplina está deletada */
      DIS_CondRetFaltouMemoria = 4 ,
      /* Faltou memória ao alocar dados */
-	   DIS_CondRetCreditoNegativo = 5,
+     DIS_CondRetCreditoNegativo = 5,
 		 /* Creditos negativo fornecido */
      DIS_CondRetOKEstrutura = 6
      /* Estrutura da Disciplina está correta */
+     DIS_CondRetParametroInvalido = 7
+	  /* Erro no parametro da disciplina */
 
    }DIS_tpCondRet;
 /***********************************************************************
