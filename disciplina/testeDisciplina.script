@@ -14,11 +14,12 @@
 =declararparm  Memoria      int 4
 =declararparm  CredNegativo int 5
 =declararparm  OkEstrutura  int 6
+=declararparm  ParInvalido  int 7
 
 == Declarar os conteúdos dos nós
-=declararparm  creditoA      int 2
-=declararparm  creditoB      int 0
+=declararparm  creditoC      int  0
 =declararparm  nome          string "ALUNO"
+=declararparm  creditoA      int    2
 =declararparm  bibliografia  string "teste_biblio"
 =declararparm  ementa        string "ementa_teste"
 =declararparm  codigo        string "inf1301"
@@ -27,8 +28,9 @@
 =declararparm  bibliografiaB string "\0"
 =declararparm  codigoB       string "\0"
 
-== Tenta exibir disciplina vazia
-=exibe ErrEstrutura
+== Tentar exibir disciplina inexistente
+=exibe OK
+=recuperar
 
 == Criar disciplina por parametro
 =gerapar nome codigo creditoA bibliografia ementa DisCriada
@@ -36,8 +38,8 @@
 == Exibe disciplina
 =exibe OK
 
-== Obtem bibliografia
-=obterbib bibliografiaB OK
+== Obtem credito
+=obtercre creditoC OK
 
 == Obtem nome
 =obternome nomeB OK
@@ -45,11 +47,11 @@
 == Obtem ementa
 =obterem ementaB OK
 
-== Obtem credito
-=obtercre creditoB OK
-
 == Obtem codigo
 =obtercod codigoB OK
+
+== Obtem bibliografia
+=obterbib bibliografiaB OK
 
 == Destroi a disciplina
 =destruir DisDeletada
