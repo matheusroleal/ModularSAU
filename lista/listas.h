@@ -15,13 +15,21 @@ struct list		//Estrutura Lista para armazenar e navegar (cursor) em uma lista
 	Node* cursor; //Aponta para o nó cursor
 };
 
-typedef struct list List;  // IMPORTANTE!!! <!><!><!><!><!> perceba que List é definida como tipo list*, LOGO CRIA-SE UMA VARIÁVEL (list*) SEMPRE QUE CRIAR UMA VARIÁVEL (List) <!><!><!><!><!><!>
+typedef struct list List;
 
 void createList(List** l); //cria uma lista vazia IMPORTANTE: ESTA FUNÇÃO RECEBE: (& variável do tipo List), perceba que Lista é declarado como tipo list*
 
 void push_back(List* l, void* val); //insere um elemento no final da List
 
-void* pop_front(List* l); //insere um elemento no começo da List
+void push_front(List* l, void* val)/ //insere um elemento no começo da List
+	
+void* pop_back(List* l);  //retorna a referência para o valor do último nó, e retira o nó da lista
+
+/*void* pop_cursor(List* l); A fazer - Remove o nó cursor da lista e retorna referência para seu valor. */
+
+/*void prt_cursor(List* l); Depende da estrutura, então não dá pra fazer aqui. */
+
+/*void exclui_cursor(List* l); A fazer - Destrui nó cursor e reposiciona o cursor segundo convenção. */
 
 unsigned int list_size(List* l); //retorna a quantidade de elementos na List
 
@@ -29,5 +37,5 @@ void next(List* l);//atualiza o cursor para o próximo nó
 
 void prev(List* l);//atualiza o cursor para o nó anterior
 
-/*void del(List l); A fazer */
+/*void del(List l); A fazer - Deleta toda a lista. */
 
