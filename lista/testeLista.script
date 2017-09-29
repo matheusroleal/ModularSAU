@@ -22,11 +22,11 @@
 =nextno OK
 =recuperar
 
-== Retorna a quantidade de elementos na List
+== Nao retorna a quantidade de elementos de uma lista vazia
 =sizelist listaTam Vazia
 
 == Criar lista
-=geralist PARAMETRO_DE_RETORNO
+=geralist OK
 
 == Insere um elemento no final da lista
 =pushb OK
