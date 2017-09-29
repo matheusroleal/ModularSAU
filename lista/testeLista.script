@@ -1,0 +1,52 @@
+// Script:    testeLista.script
+// Autor:     Matheus Leal
+// Data:      6/set/2017
+// Propósito: Ilustrar arquivo de script,
+//            Testa a construção de uma lista usando parâmetros simbólicos
+//            Verifica se as operações modificaram corretamente as referências
+//
+
+== Declarar as condicoes de retorno
+=declararparm  OK           int 0
+=declararparm  Vazia        int 1
+=declararparm  Memoria      int 2
+=declararparm  NoFinal      int 3
+=declararparm  NoInicio     int 3
+
+
+== Declarar os conteúdos
+=declararparm  listaTam      int  0
+
+
+== Tentar ir para frente lista inexistente
+=nextno OK
+=recuperar
+
+== Retorna a quantidade de elementos na List
+=sizelist listaTam Vazia
+
+== Criar lista
+=geralist PARAMETRO_DE_RETORNO
+
+== Insere um elemento no final da lista
+=pushb OK
+
+== Insere um elemento no começo da lista
+=pushf OK
+
+== Retorna a quantidade de elementos na List
+=sizelist listaTam OK
+
+== Atualiza o cursor para o nó anterior
+=prevno OK
+
+== Atualiza o cursor para o próximo nó
+=nextno OK
+
+== Retorna a referência para o valor do último nó, e retira o nó da lista
+=popb OK
+
+== Retorna a referência para o valor do começo nó, e retira o nó da lista
+=popf OK
+
+// fim
