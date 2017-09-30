@@ -35,7 +35,7 @@ CRI_tpCondRet CRI_criterio1(float G1, float G2, float G3, float* media, int* sit
 	if (G1 >= 3.0 && G2 >= 3.0 && NF >= 6.0)
 	{
 		*situacao = 1; /* Aprovado */
-		CRI_CondRetOK;
+		return CRI_CondRetOK;
 	}
 	else
 	{
@@ -45,16 +45,16 @@ CRI_tpCondRet CRI_criterio1(float G1, float G2, float G3, float* media, int* sit
 		if (NF >= 5.0)
 		{
 			*situacao = 1; /* Aprovado */
-			CRI_CondRetOK;
+			return CRI_CondRetOK;
 		}
 		else
 		{
 			*situacao = 0; /* Reprovado */
-			CRI_CondRetOK;
+			return CRI_CondRetOK;
 		}
 	}
 
-	CRI_CondRetErroEstrutura;
+	return CRI_CondRetErroEstrutura;
 }
 /* Fim função: CRI criterio 1 */
 /***************************************************************************
@@ -71,7 +71,7 @@ CRI_tpCondRet CRI_criterio2(float G1, float G2, float G3, float G4, float* media
 	{
 		*media = NF;
 		*situacao = 1; /* Aprovado */
-		CRI_CondRetOK;
+		return CRI_CondRetOK;
 	}
 	else
 	{
@@ -83,12 +83,12 @@ CRI_tpCondRet CRI_criterio2(float G1, float G2, float G3, float G4, float* media
 			if (NF >= 5.0)
 			{
 				*situacao = 1; /* Aprovado */
-				CRI_CondRetOK;
+				return CRI_CondRetOK;
 			}
 			else
 			{
 				*situacao = 0; /* Reprovado */
-				CRI_CondRetOK;
+				return CRI_CondRetOK;
 			}
 		}
 		else
@@ -121,17 +121,17 @@ CRI_tpCondRet CRI_criterio2(float G1, float G2, float G3, float G4, float* media
 			if (NF >= 5.0)
 			{
 				*situacao = 1; /* Aprovado */
-				CRI_CondRetOK;
+				return CRI_CondRetOK;
 			}
 			else
 			{
 				*situacao = 0; /* Reprovado */
-				CRI_CondRetOK;
+				return CRI_CondRetOK;
 			}
 		}
 	}
 
-	CRI_CondRetErroEstrutura;
+	return CRI_CondRetErroEstrutura;
 
 }
 /* Fim função: CRI criterio 2 */
@@ -156,7 +156,7 @@ CRI_tpCondRet Criterio_3 (float G1, float G2, float G3, float G4, float *media,i
 		}                                              //Essa parte calcula e retorna a media final do aluno
 	if (G1 >= 3.0 && G2 >= 3.0 && G3 >= 3.0 && *media >= 5.0){
 		*situacao = 1;
-		CRI_condRetOk;
+		return CRI_condRetOk;
 	}
 	else  if( G4 >= 3.0){
 
@@ -170,14 +170,14 @@ CRI_tpCondRet Criterio_3 (float G1, float G2, float G3, float G4, float *media,i
 }
         if(*media >=5){
         *situacao = 1;
-        CRI_condRetOk;
+        return  CRI_condRetOk;
         }
         else{
             *situacao = 0;
-        CRI_condRetOk;
+        return CRI_condRetOk;
         }
         
-        CRI_CondRetErroEstrutura;
+        return CRI_CondRetErroEstrutura;
 }/* Fim função: CRI criterio 3 */
 /***************************************************************************
 *
@@ -203,7 +203,7 @@ CRI_tpCondRet Criterio_4(float G1, float G2, float G3, float *media, int *situac
 
 	if(G1 >= 3.0 && G2 >= 3.0 && *media >=5.0) {                            //Essa parte calcula a media e indica a situaçao do aluno
 		*situaçao = 1;
-		CRI_condRetOk;
+		return CRI_condRetOk;
 	}
 			else if(G1 >= 3.0 && G2>= 3.0 || ((G1 < 3.0 || G2 < 3.0) && G3 >=3.0)){
 
@@ -217,13 +217,13 @@ CRI_tpCondRet Criterio_4(float G1, float G2, float G3, float *media, int *situac
 	
 	if(*media >=5){
         *situacao = 1;
-        CRI_condRetOk;
+        return CRI_condRetOk;
         }
         else{
             *situacao = 0;
-        CRI_condRetOk;
+        return CRI_condRetOk;
         }
         
-        CRI_CondRetErroEstrutura;
+        return CRI_CondRetErroEstrutura;
 		
 }/* Fim função: CRI criterio 4 */
