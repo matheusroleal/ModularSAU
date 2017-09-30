@@ -135,3 +135,95 @@ CRI_tpCondRet CRI_criterio2(float G1, float G2, float G3, float G4, float* media
 
 }
 /* Fim função: CRI criterio 2 */
+/***************************************************************************
+*
+*  Função: CRI criterio 3
+*  ****/
+CRI_tpCondRet Criterio_3 (float G1, float G2, float G3, float G4, float *media,int *situacao){
+	 *media =(G1 + G2 + G3)/3;
+	float maior1 = G1, maior2 = G2;
+
+		if(maior1 < maior2 ){                             //Essa parte calcula os dois maiores valores entre G1 e G3
+		maior1 = G2;
+		maior2 = G1;
+		}
+	    if(maior2 < G3){
+			maior2 = G3;
+		}
+		if(maior1 < G3){
+			maior2 = maior1;
+			maior1 = G3;
+		}                                              //Essa parte calcula e retorna a media final do aluno
+	if (G1 >= 3.0 && G2 >= 3.0 && G3 >= 3.0 && *media >= 5.0){
+		*situacao = 1;
+		CRI_condRetOk;
+	}
+	else  if( G4 >= 3.0){
+
+		*media = (maior1 + maior2 + G4)/3;
+            
+		
+
+	}else if(G4 < 3.0){}
+        *media = ((G1 + G2 + G3 + (G4 *3)))/6;
+        
+}
+        if(*media >=5){
+        *situacao = 1;
+        CRI_condRetOk;
+        }
+        else{
+            *situacao = 0;
+        CRI_condRetOk;
+        }
+        
+        CRI_CondRetErroEstrutura;
+}/* Fim função: CRI criterio 3 */
+/***************************************************************************
+*
+*  Função: CRI criterio 4
+*  ****/
+CRI_tpCondRet Criterio_4(float G1, float G2, float G3, float *media, int *situacao){
+	 *media = (G1 + G2)/2;
+	float maior1 = G1, maior2 = G2;
+
+	    if(maior1 < maior2 ){                             //Essa parte calcula os dois maiores valores entre G1 e G3
+		maior1 = G2;
+		maior2 = G1;
+		}
+		if(maior2 < G3){
+			maior2 = G3;			
+		}
+	    if(maior1 < G3){
+			maior2 = maior1;
+			maior1 = G3;			
+		}
+        
+	 
+
+	if(G1 >= 3.0 && G2 >= 3.0 && *media >=5.0) {                            //Essa parte calcula a media e indica a situaçao do aluno
+		*situaçao = 1;
+		CRI_condRetOk;
+	}
+			else if(G1 >= 3.0 && G2>= 3.0 || ((G1 < 3.0 || G2 < 3.0) && G3 >=3.0)){
+
+				*media = (maior1 + maior2)/2;
+
+	}else
+
+    if(G1 < 3.0 || G2 < 3.0 && G3 < 3.0)
+	*media = (G1 + G2 + (G3*2))/4;
+
+	
+	if(*media >=5){
+        *situacao = 1;
+        CRI_condRetOk;
+        }
+        else{
+            *situacao = 0;
+        CRI_condRetOk;
+        }
+        
+        CRI_CondRetErroEstrutura;
+		
+}/* Fim função: CRI criterio 4 */
