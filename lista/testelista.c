@@ -31,8 +31,7 @@
 #include    "tst_espc.h"
 #include    "generico.h"
 #include    "lerparm.h"
-
-#include    "lista.h"
+#include    "listas.h"
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
@@ -73,14 +72,15 @@ List *lst = NULL;
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
 
-      LIST_tpCondRet CondRetObtido  ;
-      LIST_tpCondRet CondRetEsperada  ;
+      LIS_tpCondRet CondRetObtido  ;
+      LIS_tpCondRet CondRetEsperada  ;
 
       /* inicializa para qualquer coisa */
-      int ValorEsperado33;
+      int ValorEsperado33 = 0;
       void *structX = NULL;
+	  int NumLidos = -1;
+	  int a[3] = {10,120,570};
       TST_tpCondRet Ret;
-
       /* Testar LST Gerar lista */
 
          if ( strcmp( ComandoTeste , GERA_LIST ) == 0 )
@@ -110,7 +110,7 @@ List *lst = NULL;
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = push_back( lst, structX ) ;
+            CondRetObtido = push_back( lst, &(a[1]) ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao inserir um elemento no final da lista." );
@@ -129,7 +129,7 @@ List *lst = NULL;
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = push_front( lst, structX ) ;
+            CondRetObtido = push_front( lst, &(a[0]) ) ;
 
 			return TST_CompararInt ( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao inserir um elemento no inicio da lista.\n" );
@@ -177,14 +177,14 @@ List *lst = NULL;
          else if ( strcmp( ComandoTeste , SIZE_LIST ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ii", ValorEsperado33;
+            NumLidos = LER_LerParametros( "ii", ValorEsperado33,
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = list_size( lst, &ValorEsperado33; ) ;
+            CondRetObtido = list_size( lst, &ValorEsperado33 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao tentar obter tamanho da lista.\n" );
@@ -225,12 +225,7 @@ List *lst = NULL;
 
          } /* fim ativa: Testar atualizar o cursor para o nó anterior */
 
-      return TST_CondRetNaoConhec ;
-
-   } /* Fim função: TLIS Efetuar operações de teste específicas para lista */
-
-   /* Testar atualizar o parâmetro val para o valor no nó cursor*/
-
+		    /* Testar atualizar o parâmetro val para o valor no nó cursor*/
    else if ( strcmp( ComandoTeste , PEGA_VALOR ) == 0 )
    {
 
@@ -283,4 +278,7 @@ List *lst = NULL;
 
    } /* fim ativa: Testar deletar uma lista já criada */
 
+      return TST_CondRetNaoConhec ;
+
+   } /* Fim função: TLIS Efetuar operações de teste específicas para lista */
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
