@@ -62,9 +62,39 @@ CRI_tpCondRet CRI_criterio1(float G1, float G2, float G3, float* media, int* sit
 *	 sobre as notas de um aluno.
 *	 Baseado no Criterio 5 da PUC-RIO
 *    
-*  $Acertiva de Entrada: Recebe 4 Notas (G1, G2, G3 e G4)
+*  $Acertiva de Entrada: Recebe 4 Notas (G1, G2, G3 e G4) e ponteiros para media e situação do aluno
 *
 *  $Acertiva de Saída: Retorna situação e média do Aluno
 *
 ***********************************************************************/
 CRI_tpCondRet CRI_criterio2(float G1, float G2, float G3, float G4, float* media, int* situacao);
+/***********************************************************************
+*
+*  $FC Função: CRI criterio 3
+*
+*  $ED Descrição da função
+*	 Aplica o critério de avaliação 3
+*	 sobre as notas de um aluno.
+*	 Baseado no Criterio 4 da PUC-RIO
+*    
+*  $Acertiva de Entrada: Recebe 4 Notas (G1, G2, G3 e G4) e ponteiro para media e situação do aluno
+*
+*  $Acertiva de Saída: Retorna situação e média do Aluno
+*
+***********************************************************************/
+CRI_tpCondRet Criterio_3 (float G1, float G2, float G3, float G4, float *media,int *situacao);
+/***********************************************************************
+*
+*  $FC Função: CRI criterio 4
+*
+*  $ED Descrição da função
+*	 Aplica o critério de avaliação 4
+*	 sobre as notas de um aluno.
+*	 Baseado no Criterio 6 da PUC-RIO
+*    
+*  $Acertiva de Entrada: Recebe 3 Notas (G1, G2, G3) e ponteiro para media e situação do aluno
+*
+*  $Acertiva de Saída: Retorna situação e média do Aluno
+*
+***********************************************************************/
+CRI_tpCondRet Criterio_4(float G1, float G2, float G3, float *media, int *situacao)
