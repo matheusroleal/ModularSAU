@@ -17,14 +17,6 @@
 == Declarar os conteúdos
 =declararparm  listaTam      int  0
 
-
-== Tentar ir para frente lista inexistente
-=nextno OK
-=recuperar
-
-== Nao retorna a quantidade de elementos de uma lista vazia
-=sizelist listaTam Vazia
-
 == Criar lista
 =geralist OK
 
@@ -34,14 +26,17 @@
 == Insere um elemento no começo da lista
 =pushf OK
 
-== Retorna a quantidade de elementos na List
-=sizelist listaTam OK
+== Insere um elemento no final da lista
+=pushb OK
 
-== Atualiza o cursor para o nó anterior
-=prevno OK
+== Pega valor do cursor
+=pegaval OK
 
 == Atualiza o cursor para o próximo nó
 =nextno OK
+
+== Atualiza o cursor para o nó anterior
+=prevno OK
 
 == Retorna a referência para o valor do último nó, e retira o nó da lista
 =popb OK
@@ -49,13 +44,10 @@
 == Retorna a referência para o valor do começo nó, e retira o nó da lista
 =popf OK
 
-== Pega valor do cursor
-=pegaval OK
-
 == Limpa uma lista
 =clearlist OK
 
-== Deleta uma lista
+==Deleta uma lista
 =dellist OK
 
 // fim
