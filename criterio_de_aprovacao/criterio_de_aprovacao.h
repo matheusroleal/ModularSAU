@@ -97,4 +97,4 @@ CRI_tpCondRet Criterio_3 (float G1, float G2, float G3, float G4, float *media,i
 *  $Acertiva de Saída: Retorna situação e média do Aluno
 *
 ***********************************************************************/
-CRI_tpCondRet Criterio_4(float G1, float G2, float G3, float *media, int *situacao)
+CRI_tpCondRet Criterio_4(float G1, float G2, float G3, float *media, int *situacao);
