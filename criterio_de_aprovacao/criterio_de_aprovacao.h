@@ -11,13 +11,15 @@
 *  Projeto: Sistema Acadêmico da turma 3WB
 *  Gestor:  Grupo 4
 *  Autores: SaintL - Leonardo Abreu Santos
-*               LL _ Clayton Lucas    
+*               LL _ Clayton Lucas   
+*               pg - Pedro Gabriel Serodio Sales
 *
 *
 *  $HA Histórico de evolução:
 *     Versão   Autor    Data        Observações
-*       0.01		    28/09/2017  Início do desenvolvimento
-*       0.02    LL          28/09/2017  Critérios 3 e 4
+*       0.01	        28/09/2017  Início do desenvolvimento
+*       0.02    LL      28/09/2017  Critérios 3 e 4
+*       0.03    pg      30/09/2017   Aplica critério
 *  $ED Descrição do módulo:
 *	  Este módulo implementa um conjunto de funções aritméticas
 *	  para calcular a média de um aluno e dizer se o mesmo foi
@@ -98,3 +100,33 @@ CRI_tpCondRet Criterio_3 (float G1, float G2, float G3, float G4, float *media,i
 *
 ***********************************************************************/
 CRI_tpCondRet Criterio_4(float G1, float G2, float G3, float *media, int *situacao);
+/***********************************************************************
+*
+*  $FC Função: CRI Verifica_Criterio01
+*
+*  $ED Descrição da função
+*    Aplica o criterio de avaliação 1
+*    baseado no criterio 1 da PUC-RIO 
+*
+*    $Assertiva de Entrada: Recebe 2 Notas (G1, G2) e um ponteiro para media e outro para situação do aluno
+*    
+*    $Assertiva de Saída: Retorna a situação e a média do Aluno
+*
+***********************************************************************/
+CRI_tpCondRet CRI_Verifica_Criterio01(float G1, float G2, float *media_aluno, float media_aprovado, int *resultado);
+/***********************************************************************
+*
+*  $FC Função: CRI Aplica_Credito
+*
+*  $ED Descrição da função
+*	Aplica o criterio de avaliação 
+(        desejado pelo numero do critério. 
+*
+*    $Assertiva de entrada: Recebe 3 Notas (G1,G2,G3), a media de aprovacao, e o número do criterio de avaliação 
+*
+*    $Assertiva de saída: Retorna se o aluno foi aprovado ou não e sua média final.      
+*     
+*
+***********************************************************************/
+CRI_tpCondRet CRI_Aplica_Criterio(float G1, float G2, float G3, float *media_aluno, float media_aprovado, int *resultado, int num_criterio);
+/***********************************************************************/
