@@ -11,13 +11,13 @@
 *  Projeto: Sistema Acadêmico da turma 3WB
 *  Gestor:  Grupo 4
 *  Autores: SaintL - Leonardo Abreu Santos
-*
+*               LL _ Clayton Lucas    
 *
 *
 *  $HA Histórico de evolução:
 *     Versão   Autor    Data        Observações
 *       0.01		    28/09/2017  Início do desenvolvimento
-*
+*       0.02    LL          28/09/2017  Critérios 3 e 4
 *  $ED Descrição do módulo:
 *	  Este módulo implementa um conjunto de funções aritméticas
 *	  para calcular a média de um aluno e dizer se o mesmo foi
