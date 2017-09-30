@@ -9,14 +9,15 @@
 *
 *  Projeto: Disciplinas INF 1628 / 1301
 *  Gestor:  DI/PUC-Rio
-*  Autores: Pedro Gabriel Serodio Sales
+*  Autores: Pedro Gabriel Serodio Sales - pg
+*           Matheus Rodrigues de Oliveira Leal - mrol
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*       3.00   avs   28/02/2003 Uniformização da interface das funções e
+*       3.00   mrol  08/09/2017 Uniformização da interface das funções e
 *                               de todas as condições de retorno.
-*       2.00   avs   03/08/2002 Eliminação de código duplicado, reestruturação
-*       1.00   avs   15/08/2001 Início do desenvolvimento
+*       2.00   pg   06/09/2017 Eliminação de código duplicado, reestruturação
+*       1.00   pg   05/09/2017 Início do desenvolvimento
 *
 *  $ED Descrição do módulo
 *     Este módulo contém as funções específicas para o teste do
@@ -113,9 +114,9 @@ Disciplina *dis=NULL;
 
       int  NumLidos = -1 ;
       char *ValorObtido1;
-	  char *ValorEsperado1;
+	    char *ValorEsperado1;
       int ValorEsperado33;
-	  int ValorObtido33;
+	    int ValorObtido33;
 
 
       TST_tpCondRet Ret ;
@@ -170,7 +171,7 @@ Disciplina *dis=NULL;
             } /* if */
 
             CondRetObtido = DIS_get_creditos( dis, &ValorObtido33 ) ;
-			
+
 			return TST_CompararInt ( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao tentar obter creditos.\n" );
 
