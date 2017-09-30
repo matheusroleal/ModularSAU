@@ -49,4 +49,13 @@
 == Retorna a referência para o valor do começo nó, e retira o nó da lista
 =popf OK
 
+== Pega valor do cursor
+=pegaval OK
+
+== Limpa uma lista
+=clearlist OK
+
+== Deleta uma lista
+=dellist OK
+
 // fim

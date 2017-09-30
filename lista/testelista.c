@@ -38,12 +38,16 @@
 
 #define     GERA_LIST    "=geralist"
 #define     PUSH_BACK    "=pushb"
-#define     PUSH_FOWARD  "=pushf"
+#define     PUSH_FRONT   "=pushf"
 #define     POP_BACK     "=popb"
-#define     POP_BACK     "=popf"
+#define     POP_FRONT    "=popf"
 #define     SIZE_LIST    "=sizelist"
 #define     NEXT_NO      "=nextno"
 #define     PREV_NO      "=prevno"
+#define     PEGA_VALOR   "=pegaval"
+#define     DEL_LIST     "=dellist"
+#define     CLEAR_LIST   "=clearlist"
+
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -116,7 +120,7 @@ List *lst = NULL;
 
       /* Testar Testar inserir um elemento no comeco da listas */
 
-         else if ( strcmp( ComandoTeste , PUSH_FOWARD ) == 0 )
+         else if ( strcmp( ComandoTeste , PUSH_FRONT ) == 0 )
          {
 
             NumLidos = LER_LerParametros( "i",&CondRetEsperada) ;
@@ -161,7 +165,7 @@ List *lst = NULL;
                   return TST_CondRetParm ;
                } /* if */
 
-               CondRetObtido = pop_fornt(lst, &structX);
+               CondRetObtido = pop_front(lst, &structX);
 
                return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                        "Retorno errado ao tentar retornar a referência para o valor do último nó, e retira o nó da lista." );
@@ -203,7 +207,7 @@ List *lst = NULL;
                                     "Retorno errado ao tentar atualizar o cursor para o próximo nó.\n" );
 
          } /* fim ativa: Testar atualizar o cursor para o próximo nó */
-	/* Testar atualizar o cursor para o nó anterior */
+	       /* Testar atualizar o cursor para o nó anterior */
 
          else if ( strcmp( ComandoTeste , PREV_NO ) == 0 )
          {
@@ -224,5 +228,59 @@ List *lst = NULL;
       return TST_CondRetNaoConhec ;
 
    } /* Fim função: TLIS Efetuar operações de teste específicas para lista */
+
+   /* Testar atualizar o parâmetro val para o valor no nó cursor*/
+
+   else if ( strcmp( ComandoTeste , PEGA_VALOR ) == 0 )
+   {
+
+      NumLidos = LER_LerParametros( "i", &CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = get_val_cursor(lst, &structX) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao tentar atualizar o cursor para o próximo nó.\n" );
+
+   } /* fim ativa: Testar atualizar o parâmetro val para o valor no nó cursor*/
+
+   /* Testar limpar uma lista criada para zero nós*/
+
+   else if ( strcmp( ComandoTeste , CLEAR_LIST ) == 0 )
+   {
+
+      NumLidos = LER_LerParametros( "i", &CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = clear(lst) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao tentar atualizar o cursor para o próximo nó.\n" );
+
+   } /* fim ativa: Testar limpar uma lista criada para zero nós*/
+
+   /* Testar deletar uma lista já criada */
+
+   else if ( strcmp( ComandoTeste , DEL_LIST ) == 0 )
+   {
+
+      NumLidos = LER_LerParametros( "i", &CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = del(lst) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao tentar atualizar o cursor para o próximo nó.\n" );
+
+   } /* fim ativa: Testar deletar uma lista já criada */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
