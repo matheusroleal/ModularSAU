@@ -3,7 +3,7 @@
 *  $MCD Módulo de definição: Módulo Critério de Avaliação
 *
 *  Arquivo gerado:              criterio_de_aprovacao.h
-*  Letras identificadoras:      CRT
+*  Letras identificadoras:      CRI
 *
 *  Nome da base de software:
 *  Arquivo da base de software:
@@ -26,21 +26,21 @@
 ***************************************************************************/
 /***********************************************************************
 *
-*  $TC Tipo de dados: CRT Condições de retorno
+*  $TC Tipo de dados: CRI Condições de retorno
 *
 *
 ***********************************************************************/
 typedef enum 
 {
-	CRT_CondRetAprovado = 1 ,
-		/* Aluno aprovado segundo o Critério */
-	CRT_CondRetReprovado = 0
-		/* Aluno reprovado segundo o Critério */
+	CRI_CondRetOK = 0 ,
+		/* Executou correto */
+	CRI_CondRetErroEstrutura = 1
+		/* Estrutura do Critério está errada */
 
-}CRT_tpCondRet;
+}CRI_tpCondRet;
 /***********************************************************************
 *
-*  $FC Função: CRT criterio 1
+*  $FC Função: CRI criterio 1
 *
 *  $ED Descrição da função
 *	 Aplica o critério de avaliação 1
@@ -52,10 +52,10 @@ typedef enum
 *  $Acertiva de Saída: Retorna situação e média do Aluno
 *
 ***********************************************************************/
-CRT_tpCondRet CRT_criterio1(float G1, float G2, float G3, float* media);
+CRI_tpCondRet CRI_criterio1(float G1, float G2, float G3, float* media, int* situacao);
 /***********************************************************************
 *
-*  $FC Função: CRT criterio 2
+*  $FC Função: CRI criterio 2
 *
 *  $ED Descrição da função
 *	 Aplica o critério de avaliação 2
@@ -67,4 +67,4 @@ CRT_tpCondRet CRT_criterio1(float G1, float G2, float G3, float* media);
 *  $Acertiva de Saída: Retorna situação e média do Aluno
 *
 ***********************************************************************/
-CRT_tpCondRet CRT_criterio2(float G1, float G2, float G3, float G4, float* media);
+CRI_tpCondRet CRI_criterio2(float G1, float G2, float G3, float G4, float* media, int* situacao);
