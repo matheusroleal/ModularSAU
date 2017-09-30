@@ -3,7 +3,7 @@
 *  $MCI Módulo de definição: Módulo Critério de avaliação
 *
 *  Arquivo gerado:              criterio_de_aprovacao.C
-*  Letras identificadoras:      CRT
+*  Letras identificadoras:      CRI
 *
 *  Nome da base de software:
 *  Arquivo da base de software:
@@ -14,7 +14,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data        Observações
-*       0.01		   28/09/2017  Início do desenvolvimento
+*       0.01		   28/09/2017  
 ***************************************************************************/
 
 #include <stdio.h>
@@ -23,9 +23,9 @@
 
 /***************************************************************************
 *
-*  Função: CRT criterio 1
+*  Função: CRI criterio 1
 *  ****/
-CRT_tpCondRet CRT_criterio1(float G1, float G2, float G3, float* media)
+CRI_tpCondRet CRI_criterio1(float G1, float G2, float G3, float* media, int* situacao)
 {
 	float NF;
 
@@ -34,7 +34,8 @@ CRT_tpCondRet CRT_criterio1(float G1, float G2, float G3, float* media)
 
 	if (G1 >= 3.0 && G2 >= 3.0 && NF >= 6.0)
 	{
-		CRT_CondRetAprovado;
+		*situacao = 1; /* Aprovado */
+		CRI_CondRetOK;
 	}
 	else
 	{
@@ -43,20 +44,24 @@ CRT_tpCondRet CRT_criterio1(float G1, float G2, float G3, float* media)
 
 		if (NF >= 5.0)
 		{
-			CRT_CondRetAprovado;
+			*situacao = 1; /* Aprovado */
+			CRI_CondRetOK;
 		}
 		else
 		{
-			CRT_CondRetReprovado;
+			*situacao = 0; /* Reprovado */
+			CRI_CondRetOK;
 		}
 	}
+
+	CRI_CondRetErroEstrutura;
 }
-/* Fim função: CRT criterio 1 */
+/* Fim função: CRI criterio 1 */
 /***************************************************************************
 *
-*  Função: CRT criterio 2
+*  Função: CRI criterio 2
 *  ****/
-CRT_tpCondRet CRT_criterio2(float G1, float G2, float G3, float G4, float* media)
+CRI_tpCondRet CRI_criterio2(float G1, float G2, float G3, float G4, float* media, int* situacao)
 {
 	float NF, Gm, Gn, temp;
 
@@ -65,7 +70,8 @@ CRT_tpCondRet CRT_criterio2(float G1, float G2, float G3, float G4, float* media
 	if (( G1 >= 5.0 && G2 >= 5.0 && G3 >=5.0 ) || NF >= 6.0)
 	{
 		*media = NF;
-		CRT_CondRetAprovado;
+		*situacao = 1; /* Aprovado */
+		CRI_CondRetOK;
 	}
 	else
 	{
@@ -76,11 +82,13 @@ CRT_tpCondRet CRT_criterio2(float G1, float G2, float G3, float G4, float* media
 
 			if (NF >= 5.0)
 			{
-				CRT_CondRetAprovado;
+				*situacao = 1; /* Aprovado */
+				CRI_CondRetOK;
 			}
 			else
 			{
-				CRT_CondRetReprovado;
+				*situacao = 0; /* Reprovado */
+				CRI_CondRetOK;
 			}
 		}
 		else
@@ -112,13 +120,18 @@ CRT_tpCondRet CRT_criterio2(float G1, float G2, float G3, float G4, float* media
 
 			if (NF >= 5.0)
 			{
-				CRT_CondRetAprovado;
+				*situacao = 1; /* Aprovado */
+				CRI_CondRetOK;
 			}
 			else
 			{
-				CRT_CondRetReprovado;
+				*situacao = 0; /* Reprovado */
+				CRI_CondRetOK;
 			}
 		}
 	}
+
+	CRI_CondRetErroEstrutura;
+
 }
-/* Fim função: CRT criterio 2 */
+/* Fim função: CRI criterio 2 */
