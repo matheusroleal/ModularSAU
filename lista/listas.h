@@ -58,6 +58,24 @@ typedef struct list List;
 LIS_tpCondRet createList(List** l);
 /***********************************************************************
 *
+*  $FC Função: LIS del
+*
+*  $ED Descrição da função
+*    Deleta uma lista já criada
+*
+***********************************************************************/
+LIS_tpCondRet del(List* l);
+/***********************************************************************
+*
+*  $FC Função: LIS clear
+*
+*  $ED Descrição da função
+*    Limpa uma lista criada para zero nós
+*
+***********************************************************************/
+LIS_tpCondRet clear(List* l);
+/***********************************************************************
+*
 *  $FC Função: LIS push back
 *
 *  $ED Descrição da função
@@ -97,20 +115,27 @@ LIS_tpCondRet pop_front(List* l, void** val);
 *  $FC Função: LIS pop cursor
 *
 *  $ED Descrição da função
-*    Remove o nó cursor da lista e retorna a referência para seu valor.
+*    Remove o nó cursor da lista e retorna a referência para seu valor. 
+*	 Caso o nó cursor seja o último nó, o cursor se torna o anterior, caso seja o primeiro
+*	 o cursor se torna o seguinte. Em qualquer outro caso o cursor se torna o próximo.
 *
 ***********************************************************************/
-/*LIS_tpCondRet pop_cursor(List* l, void** val); A fazer - Remove o nó cursor da lista e retorna referência para seu valor. */
-
-/*void prt_cursor(List* l); Depende da estrutura, então não dá pra fazer aqui. */
-
-/*void exclui_cursor(List* l); A fazer - Destrui nó cursor e reposiciona o cursor segundo convenção. */
+LIS_tpCondRet pop_cursor(List* l, void** val);
+/***********************************************************************
+*
+*  $FC Função: LIS get val cursor
+*
+*  $ED Descrição da função
+*    Atualiza o parâmetro val para o valor no nó cursor.
+*
+***********************************************************************/
+LIS_tpCondRet get_val_cursor(List* l, void** val);
 /***********************************************************************
 *
 *  $FC Função: LIS list size
 *
 *  $ED Descrição da função
-*    Retorna a quantidade de elementos da lista
+*    Atualiza o parametro size para o tamanho da lista.
 *
 ***********************************************************************/
 LIS_tpCondRet list_size(List* l, unsigned int size); //retorna a quantidade de elementos na List
@@ -132,12 +157,3 @@ LIS_tpCondRet next(List* l);//atualiza o cursor para o próximo nó
 *
 ***********************************************************************/
 LIS_tpCondRet prev(List* l);//atualiza o cursor para o nó anterior
-/***********************************************************************
-*
-*  $FC Função: LIS del
-*
-*  $ED Descrição da função
-*    Deleta uma lista já criada
-*
-***********************************************************************/
-/*void del(List l); A fazer - Deleta toda a lista. */
