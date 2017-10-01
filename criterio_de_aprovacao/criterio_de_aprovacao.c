@@ -152,8 +152,9 @@ CRI_tpCondRet CRI_Criterio02(float G1, float G2, float G3, float G4, float* medi
 *  Função: CRI criterio 3
 *  ****/
 CRI_tpCondRet CRI_Criterio03 (float G1, float G2, float G3, float G4, float *media,int *situacao){
-	 *media =(G1 + G2 + G3)/3;
-	float maior1 = G1, maior2 = G2;
+	float maior1 = G1, maior2 = G2; 
+	*media =(G1 + G2 + G3)/3;
+	
 
 		if(maior1 < maior2 ){                             //Essa parte calcula os dois maiores valores entre G1 e G3
 		maior1 = G2;
@@ -196,8 +197,9 @@ CRI_tpCondRet CRI_Criterio03 (float G1, float G2, float G3, float G4, float *med
 *  Função: CRI criterio 4
 *  ****/
 CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *situacao){
-	 *media = (G1 + G2)/2;
-	float maior1 = G1, maior2 = G2;
+	float maior1 = G1, maior2 = G2; 
+	*media = (G1 + G2)/2;
+
 
 	    if(maior1 < maior2 ){                             //Essa parte calcula os dois maiores valores entre G1 e G3
 		maior1 = G2;
