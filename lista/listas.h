@@ -10,13 +10,17 @@
 *
 *  Projeto: Sistema Acadêmico da turma 3WB
 *  Gestor:  Grupo 4
-*  Autores: ngtgmp - Felipe Nogueira de Souza
+*  Autores:   mrol - Matheus Rodrigues de Oliveira Leal
+*             SaintL - Leonardo Abreu Santos
+*	      	  ngtgmp - Felipe Nogueira de Souza
+	          LL - Clayton Lucas Mendes Lima
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
 *       0.01   ngtgmp   10/09/2017 Início do desenvolvimento
 *		0.02   ngtgmp   21/09/2017 Implementação de mais funções
 *		0.03   ngtgmp   27/09/2017 Preparo para os testes automatizados e revisão do código
+*		0.04   ngtgmp   01/10/2017 Reparos após testes e revisão
 *
 *  $ED Descrição do módulo
 *     Este módulo implementa o módulo lista duplamente encadeada para ser utilizada pelos demais módulos do projeto "Sistema Acadêmico da turma 3wb".
@@ -138,7 +142,7 @@ LIS_tpCondRet get_val_cursor(List* l, void** val);
 *    Atualiza o parametro size para o tamanho da lista.
 *
 ***********************************************************************/
-LIS_tpCondRet list_size(List* l, unsigned int size); //retorna a quantidade de elementos na List
+LIS_tpCondRet list_size(List* l, unsigned int* size); //retorna a quantidade de elementos na List
 /***********************************************************************
 *
 *  $FC Função: LIS next
