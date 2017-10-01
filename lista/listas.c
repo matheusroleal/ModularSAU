@@ -24,7 +24,7 @@
 ***************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
-#include"listas.h"
+#include "listas.h"
 /***********************************************************************
 *
 *  $TC Tipo de dados: LIS Descritor de Lista
@@ -215,9 +215,9 @@ LIS_tpCondRet pop_cursor(List* l, void** val)
 	else
 	{
 		if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;}
-		
+
 		*val = l->cursor->val;
-	
+
 		if (l->first == l->last)
 		{
 		l->first = NULL;
@@ -240,7 +240,7 @@ LIS_tpCondRet pop_cursor(List* l, void** val)
 *  ****/
 LIS_tpCondRet get_val_cursor(List* l, void** val)
 {
-	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;} 
+	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;}
 	*val = l->cursor->val;
 	return LIS_CondRetOK;
 }/* Fim função: LIS get val cursor */
@@ -288,36 +288,3 @@ LIS_tpCondRet prev(List* l)
 	else l->cursor = l->cursor->prev;
 	return LIS_CondRetOK;
 } /* Fim função: LIS prev */
-void printNodeValue(Node* cursor)  //print para testes
-{
-	int* a = (int*)cursor->val;
-	printf("%d", *a);
-}
-
-int main (void)  // main teste1
-{
-	List* l;
-	int a[3] = {10,120,570};
-	void* b;
-	int* c;
-	
-	createList(&l);
-
-	push_back(l, &(a[0]));
-	push_front(l, &(a[1]));
-	push_back(l, &(a[2]));
-	
-	get_val_cursor(l, &b);
-	c = (int*) b;
-	next(l);
-	printNodeValue(l->cursor);
-    printf("\n%d", *c);
-	prev(l);
-	prev(l);
-	printf("\n");
-	printNodeValue(l->cursor);
-
-	system("pause");
-
-	return 0;
-}
