@@ -37,7 +37,7 @@
 *		um ponteiro para gurdar a média final do aluno e outro para guardar se foi aprovado ou não.
 *
 *  ****/
-CRI_tpCondRet CRI_Verifica_Criterio01(float G1, float G2, float *media_aluno, float media_aprovado, int *resultado ){
+CRI_tpCondRet CRI_Verifica_Criterio01(float G1, float G2, float *media_aluno, float media_aprovado, int *situacao ){
 	if(G2<3){
 		*media_aluno= (G1+(G2*3))/4;
 	}
@@ -45,11 +45,11 @@ CRI_tpCondRet CRI_Verifica_Criterio01(float G1, float G2, float *media_aluno, fl
 		*media_aluno= ((G1*2)+(G2*3))/5;
 	}
 	if((*media_aluno)>=media_aprovado){
-		*resultado=1;
+		*situacao=1;
 		return CRI_CondRetOK;
 	}
 	else {
-		*resultado=0;
+		*situacao=0;
 		return CRI_CondRetOK;
 	}
 } /* Fim função: Verifica_Criterio01 
