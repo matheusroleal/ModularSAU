@@ -70,16 +70,14 @@
       CRI_tpCondRet CondRetEsperada  ;
     /* inicializa para qualquer coisa */
 
-      float g1;
-      float g2;
-      float g3;
-      float g4;
-      float media_aprovado;
-      float media_aluno;
+      double g1;
+      double g2;
+      double g3;
+      double g4;
+      double media_aprovado;
+      double media_aluno;
       float media;
       int resultado;
-      int CondRetEsperada;
-      int CondRetObtido;
 
 
       int  NumLidos = -1 ;
