@@ -113,20 +113,6 @@ CRI_tpCondRet Criterio_4(float G1, float G2, float G3, float *media, int *situac
 *    $Assertiva de Saída: Retorna a situação e a média do Aluno
 *
 ***********************************************************************/
-CRI_tpCondRet CRI_Verifica_Criterio01(float G1, float G2, float *media_aluno, float media_aprovado, int *resultado);
+CRI_tpCondRet CRI_Verifica_Criterio01(float G1, float G2, float *media_aluno, float media_aprovado, int *situacao);
 /***********************************************************************
-*
-*  $FC Função: CRI Aplica_Credito
-*
-*  $ED Descrição da função
-*	Aplica o criterio de avaliação 
-(        desejado pelo numero do critério. 
-*
-*    $Assertiva de entrada: Recebe 3 Notas (G1,G2,G3), a media de aprovacao, e o número do criterio de avaliação 
-*
-*    $Assertiva de saída: Retorna se o aluno foi aprovado ou não e sua média final.      
-*     
-*
-***********************************************************************/
-CRI_tpCondRet CRI_Aplica_Criterio(float G1, float G2, float G3, float *media_aluno, float media_aprovado, int *resultado, int num_criterio);
-/***********************************************************************/
+***************************************************************/
