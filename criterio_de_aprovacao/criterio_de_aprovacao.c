@@ -168,7 +168,7 @@ CRI_tpCondRet CRI_Criterio03 (float G1, float G2, float G3, float G4, float *med
 		}                                              //Essa parte calcula e retorna a media final do aluno
 	if (G1 >= 3.0 && G2 >= 3.0 && G3 >= 3.0 && *media >= 5.0){
 		*situacao = 1;
-		return CRI_condRetOk;
+		return CRI_CondRetOK;
 	}
 	else  if( G4 >= 3.0){
 
@@ -176,17 +176,17 @@ CRI_tpCondRet CRI_Criterio03 (float G1, float G2, float G3, float G4, float *med
 
 
 
-	}else if(G4 < 3.0){}
+	}else if(G4 < 3.0){
         *media = ((G1 + G2 + G3 + (G4 *3)))/6;
 
 }
         if(*media >=5){
         *situacao = 1;
-        return  CRI_condRetOk;
+        return  CRI_CondRetOK;
         }
         else{
             *situacao = 0;
-        return CRI_condRetOk;
+        return CRI_CondRetOK;
         }
 
         return CRI_CondRetErroEstrutura;
@@ -214,8 +214,8 @@ CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *si
 
 
 	if(G1 >= 3.0 && G2 >= 3.0 && *media >=5.0) {                            //Essa parte calcula a media e indica a situaçao do aluno
-		*situaçao = 1;
-		return CRI_condRetOk;
+		*situacao = 1;
+		return CRI_CondRetOK;
 	}
 			else if(G1 >= 3.0 && G2>= 3.0 || ((G1 < 3.0 || G2 < 3.0) && G3 >=3.0)){
 
@@ -229,11 +229,11 @@ CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *si
 
 	if(*media >=5){
         *situacao = 1;
-        return CRI_condRetOk;
+        return CRI_CondRetOK;
         }
         else{
             *situacao = 0;
-        return CRI_condRetOk;
+        return CRI_CondRetOK;
         }
 
         return CRI_CondRetErroEstrutura;
