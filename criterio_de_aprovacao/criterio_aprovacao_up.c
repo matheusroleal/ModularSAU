@@ -59,26 +59,6 @@ CRI_tpCondRet CRI_Verifica_Criterio01(float G1, float G2, float *media_aluno, fl
 */
 /***************************************************************************
 *
-*  Inicio Função: Aplica Critério
-*		Deverá receber o número do criterio a ser aplicado, os graus, a media para aprovação,
-*	 e depois ponteiros, um para guardar sua média final e outro para guardar se foi aprovado ou não.
-*
-*  ****/
-CRI_tpCondRet CRI_Aplica_Criterio(float G1, float G2, float G3, float *media_aluno, float media_aprovado, int *resultado, int num_criterio){
-	switch(num_criterio){
-		case 1:
-			CRI_Verifica_Criterio01(G1,G2,media_aluno,media_aprovado,resultado);
-			break;
-	}
-	return CRI_CondRetOK;
-}
-/* Fim função: Aplica Critério
-*
-*		Retorna se o aluno foi aprovado ou não, e
-*		qual foi a média final dele para o critério inserido.
-*/
-/***************************************************************************
-*
 *  Função: CRI criterio 1
 *  ****/
 CRI_tpCondRet CRI_criterio1(float G1, float G2, float G3, float* media, int* situacao)
