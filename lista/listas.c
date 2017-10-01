@@ -20,11 +20,12 @@
 *       0.01   ngtgmp   10/09/2017 Início do desenvolvimento
 *		0.02   ngtgmp   21/09/2017 Implementação de mais funções
 *		0.03   ngtgmp   27/09/2017 Preparo para os testes automatizados e revisão do código
+*		0.04   ngtgmp   01/10/2017 Reparos após testes e revisão
 *
 ***************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
-#include "listas.h"
+#include"listas.h"
 /***********************************************************************
 *
 *  $TC Tipo de dados: LIS Descritor de Lista
@@ -215,9 +216,9 @@ LIS_tpCondRet pop_cursor(List* l, void** val)
 	else
 	{
 		if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;}
-
+		
 		*val = l->cursor->val;
-
+	
 		if (l->first == l->last)
 		{
 		l->first = NULL;
@@ -240,7 +241,7 @@ LIS_tpCondRet pop_cursor(List* l, void** val)
 *  ****/
 LIS_tpCondRet get_val_cursor(List* l, void** val)
 {
-	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;}
+	if(l->first == NULL) { printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n"); return LIS_CondRetListaVazia;} 
 	*val = l->cursor->val;
 	return LIS_CondRetOK;
 }/* Fim função: LIS get val cursor */
@@ -248,14 +249,17 @@ LIS_tpCondRet get_val_cursor(List* l, void** val)
 *
 *  Função: LIS list size
 *  ****/
-LIS_tpCondRet list_size(List* l, unsigned int size)
+LIS_tpCondRet list_size(List* l, unsigned int* size)
 {
-	size = 0;
 	Node* Tnode = l->first;
 	if(l->first == NULL)
 		return LIS_CondRetListaVazia;
-	while(Tnode != l->last)
-		size++;
+	*size = 0;
+	while(Tnode != NULL)
+	{
+		Tnode = Tnode->next;
+		*size = *size +1;
+	}
 	return LIS_CondRetOK;
 } /* Fim função: LIS list size */
 /***************************************************************************
