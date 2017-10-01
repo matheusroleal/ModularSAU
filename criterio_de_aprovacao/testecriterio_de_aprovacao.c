@@ -31,10 +31,8 @@
 #include <stdlib.h>
 
 #include    "tst_espc.h"
-
 #include    "generico.h"
 #include    "lerparm.h"
-
 #include    "criterio_de_aprovacao.h"
 
 /* Tabela dos nomes dos comandos de teste específicos */
@@ -68,8 +66,8 @@
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
 
-      DIS_tpCondRet CondRetObtido  ;
-      DIS_tpCondRet CondRetEsperada  ;
+      CRI_tpCondRet CondRetObtido  ;
+      CRI_tpCondRet CondRetEsperada  ;
     /* inicializa para qualquer coisa */
 
       float g1;
@@ -146,11 +144,10 @@
 
          /* Testar CRI Verifica_Criterio04 */
 
-         else if ( strcmp( ComandoTeste , OBTER_EM_CMD ) == 0 )
+         else if ( strcmp( ComandoTeste , CALCULA_CRITERIO4 ) == 0 )
          {
 
             NumLidos = LER_LerParametros( "fffi" , &g1, &g2, &g3 , &CondRetEsperada) ;
-                               &CondRetEsperada ) ;
             if ( NumLidos != 4 )
             {
                return TST_CondRetParm ;
@@ -180,5 +177,5 @@
                                     "Retorno errado ao tentar obter nome.\n" );
 
          } /* fim ativa: Testar CRI CRI_Criterio05 */
-
+}
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
