@@ -1,5 +1,5 @@
 // Script:    testecriterio_de_aprovacao.script
-// Autor:     Matheus Leal
+// Autor:     Matheus Rodrigues de Oliveira Leal
 // Data:      30/set/2017
 // Propósito: Ilustrar arquivo de script,
 //            Testa a construção de um criterio de aprovação usando parâmetros simbólicos
@@ -11,14 +11,14 @@
 =declararparm  ErrEstrutura int 1
 
 == Declarar os conteúdos dos nós
-=declararparm  g1        float  5.0
-=declararparm  g2        float  6.0
-=declararparm  g3        float  7.5
-=declararparm  g4        float  8.0
-=declararparm  media     float  5.0
+=declararparm  g1        double  5.0
+=declararparm  g2        double  6.0
+=declararparm  g3        double  7.5
+=declararparm  g4        double  8.0
+=declararparm  media     double  5.0
 
 == Testa criterio de aprovação 1
-=calcri1 g1 g2 g3 bibliografia ementa OK
+=calcri1 g1 g2 g3 OK
 
 == Testa criterio de aprovação 2
 =calcri2 g1 g2 g3 g4 OK
