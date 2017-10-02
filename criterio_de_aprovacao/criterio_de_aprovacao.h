@@ -116,6 +116,6 @@ CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *si
 *    $Assertiva de Saída: Retorna a situação e a média do Aluno
 *
 ***********************************************************************/
-CRI_tpCondRet CRI_Criterio05(float G1, float G2, float *media_aluno, int *situacao);
+CRI_tpCondRet CRI_Criterio05(float G1, float G2, float *media, int *situacao);
 /***********************************************************************
 ***************************************************************/
