@@ -244,18 +244,18 @@ CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *si
 /***************************************************************************
 *
 *  Inicio Função: CRI_Criterio05
-*		Deverá receber as notas G1, G2 do aluno, a média para a aprovação (sem prova final),
-*		um ponteiro para gurdar a média final do aluno e outro para guardar se foi aprovado ou não.
+*		Função aplica o critério 1 da PUC-RIO de acordo com Graus recebidos do Aluno.
+*		
 *
 *  ****/
-CRI_tpCondRet CRI_Criterio05(float G1, float G2, float *media_aluno, float media_aprovado, int *situacao ){
+CRI_tpCondRet CRI_Criterio05 (float G1, float G2, float *media_aluno, int *situacao ){
 	if(G2<3){
 		*media_aluno= (G1+(G2*3))/4;
 	}
 	else{
 		*media_aluno= ((G1*2)+(G2*3))/5;
 	}
-	if((*media_aluno)>=media_aprovado){
+	if((*media_aluno)>=6.0){
 		*situacao=1;
 		return CRI_CondRetOK;
 	}
