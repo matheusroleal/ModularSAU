@@ -163,13 +163,13 @@
          else if ( strcmp( ComandoTeste , CALCULA_CRITERIO5 ) == 0 )
          {
 
-            NumLidos = LER_LerParametros("fffi" , &g1, &g2, &media_aprovado , &CondRetEsperada) ;
+            NumLidos = LER_LerParametros("ffi" , &g1, &g2, &CondRetEsperada) ;
             if ( NumLidos != 4 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = CRI_Criterio05(g1, g2, &media_aluno, media_aprovado,  &resultado) ;
+            CondRetObtido = CRI_Criterio05(g1, g2, &media_aluno,  &resultado) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao tentar obter nome.\n" );
