@@ -145,6 +145,15 @@ LIS_tpCondRet get_val_cursor(List* l, void** val);
 LIS_tpCondRet list_size(List* l, unsigned int* size); //retorna a quantidade de elementos na List
 /***********************************************************************
 *
+*  $FC Função: LIS first
+*
+*  $ED Descrição da função
+*    Atualiza para o primeiro nó da lista
+*
+***********************************************************************/
+LIS_tpCondRet first(List* l);
+/***********************************************************************
+*
 *  $FC Função: LIS next
 *
 *  $ED Descrição da função
