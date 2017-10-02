@@ -262,6 +262,21 @@ LIS_tpCondRet list_size(List* l, unsigned int* size)
 	}
 	return LIS_CondRetOK;
 } /* Fim função: LIS list size */
+
+/***************************************************************************
+*
+*  Função: LIS first
+*  ****/
+LIS_tpCondRet first(List* l){
+	if(l->first == NULL) {
+		printf("\n\n <!><!><!> Lista Vazia! <!><!><!> \n\n");
+		return LIS_CondRetListaVazia;
+	}
+	l->cursor = l->first;
+	return LIS_CondRetOK;
+}
+
+
 /***************************************************************************
 *
 *  Função: LIS next
