@@ -248,14 +248,14 @@ CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *si
 *		
 *
 *  ****/
-CRI_tpCondRet CRI_Criterio05 (float G1, float G2, float *media_aluno, int *situacao ){
+CRI_tpCondRet CRI_Criterio05 (float G1, float G2, float *media, int *situacao ){
 	if(G2<3){
-		*media_aluno= (G1+(G2*3))/4;
+		*media= (G1+(G2*3))/4;
 	}
 	else{
-		*media_aluno= ((G1*2)+(G2*3))/5;
+		*media= ((G1*2)+(G2*3))/5;
 	}
-	if((*media_aluno)>=6.0){
+	if((*media)>=6.0){
 		*situacao=1;
 		return CRI_CondRetOK;
 	}
