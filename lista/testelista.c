@@ -48,6 +48,7 @@
 #define     PEGA_VALOR   "=pegaval"
 #define     DEL_LIST     "=dellist"
 #define     CLEAR_LIST   "=clearlist"
+#define     FIRST_LIST   "=firstlist"
 
 
 /*****  Código das funções exportadas pelo módulo  *****/
@@ -179,7 +180,7 @@ List *lst = NULL;
          else if ( strcmp( ComandoTeste , SIZE_LIST ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ii", ValorEsperado33,
+            NumLidos = LER_LerParametros( "ii", &ValorEsperado33,
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
@@ -261,6 +262,24 @@ List *lst = NULL;
                               "Retorno errado ao tentar atualizar o cursor para o próximo nó.\n" );
 
    } /* fim ativa: Testar limpar uma lista criada para zero nós*/
+
+   /*Testar atualizar para o primeiro nó da lista */
+
+   else if ( strcmp( ComandoTeste , FIRST_LIST ) == 0 )
+   {
+
+      NumLidos = LER_LerParametros( "i", &CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = first(lst) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao tentar atualizar o cursor para o próximo nó.\n" );
+
+   } /* fim ativa: Testar atualizar para o primeiro nó da lista*/
 
    /* Testar deletar uma lista já criada */
 

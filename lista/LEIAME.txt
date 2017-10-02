@@ -3,7 +3,7 @@
 --Apresentação
 Este texto descreve, resumidamente, o conteúdo do arquivo INF1301-lista.zip
 que contém toda a documentação e todos os módulos fonte, exemplos e utilitários utilizados
-pelo módulo disciplina em C.
+pelo módulo lista em C.
 
 --Instalação
 Dezipe o arquivo INF1301-lista.zip assegurando que sejam gerados os sub-diretórios contidos no
