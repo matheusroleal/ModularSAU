@@ -14,7 +14,7 @@
 =declararparm  NoInicio     int 3
 
 
-== Declarar os conteúdos
+== Declarar os conteudos
 =declararparm  listaTam  int  0
 
 == Criar lista
@@ -35,19 +35,19 @@
 == Pega valor do cursor
 =pegaval OK
 
-== Atualiza o cursor para o próximo nó
+== Atualiza o cursor para o proximo no
 =nextno OK
 
-== Atualiza o cursor para o nó anterior
+== Atualiza o cursor para o no anterior
 =prevno OK
 
-== Retorna a referência para o valor do último nó, e retira o nó da lista
+== Retorna a referencia para o valor do ultimo no, e retira o no da lista
 =popb OK
 
-== Retorna a referência para o valor do começo nó, e retira o nó da lista
+== Retorna a referencia para o valor do começo no, e retira o no da lista
 =popf OK
 
-== Atualiza para o primeiro nó da lista
+== Atualiza para o primeiro no da lista
 =firstlist OK
 
 == Limpa uma lista
