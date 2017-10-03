@@ -10,26 +10,25 @@
 =declararparm  OK           int 0
 =declararparm  ErrEstrutura int 1
 
-== Declarar os conteúdos dos nós
+== Declarar os conteudos para os criterios de aprovacao
 =declararparm  g1        double  5.0
 =declararparm  g2        double  6.0
 =declararparm  g3        double  7.5
 =declararparm  g4        double  8.0
-=declararparm  media     double  5.0
 
-== Testa criterio de aprovação 1
+== Testa criterio de aprovacao 1
 =calcri1 g1 g2 g3 OK
 
-== Testa criterio de aprovação 2
+== Testa criterio de aprovacao 2
 =calcri2 g1 g2 g3 g4 OK
 
-== Testa criterio de aprovação 3
+== Testa criterio de aprovacao 3
 =calcri3 g1 g2 g3 g4 OK
 
-== Testa criterio de aprovação 4
+== Testa criterio de aprovacao 4
 =calcri4 g1 g2 g3 OK
 
-== Testa criterio de aprovação 5
+== Testa criterio de aprovacao 5
 =calcri5 g1 g2 OK
 
 // fim
