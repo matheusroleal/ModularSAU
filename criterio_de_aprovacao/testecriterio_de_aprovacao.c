@@ -75,7 +75,7 @@
       double g3;
       double g4;
       double media_aprovado;
-      double media_aluno;
+      float media_aluno;
       float media;
       int resultado;
 
@@ -164,7 +164,7 @@
          {
 
             NumLidos = LER_LerParametros("ffi" , &g1, &g2, &CondRetEsperada) ;
-            if ( NumLidos != 4 )
+            if ( NumLidos != 3 )
             {
                return TST_CondRetParm ;
             } /* if */
