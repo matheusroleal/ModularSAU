@@ -21,6 +21,16 @@
 *
 *  $EIU Interface com o usuário pessoa
 *     Comandos de teste específicos para testar o módulo criterios de aprrovação:
+*     "=calcri1" <Int> <Int> <Int> <Int>
+*			- Testa criterio de aprovacao 1
+*     "=calcri2" <Int> <Int> <Int> <Int> <Int>
+*                      - Testa criterio de aprovacao 2
+*     "=calcri3"  <Int> <Int> <Int> <Int> <Int>
+*                      - Testa criterio de aprovacao 3
+*     "=calcri4" <Int> <Int> <Int> <Int> <Int>
+*                      - Testa criterio de aprovacao 4
+*     "=calcri5" <Int> <Int> <Int>
+*                      - Testa criterio de aprovacao 5
 *
 *
 *
