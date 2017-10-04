@@ -14,7 +14,7 @@
 *     Versão  Autor    Data     Observações
 *       1.00   mrol   27/09/2017 Início do desenvolvimento
 *       2.00   mrol   30/09/2017 Reestruturação de código
-
+*	3.00   mrol   04/10/2017 Atualização da documentação
 *
 *  $ED Descrição do módulo
 *     Este módulo contém as funções específicas para o teste do
