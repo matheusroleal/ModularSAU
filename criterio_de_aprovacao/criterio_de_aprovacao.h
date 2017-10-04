@@ -39,7 +39,7 @@ typedef enum
 {
 	CRI_CondRetOK = 0 ,
 		/* Executou correto */
-	CRI_CondRetErroEstrutura = 1
+	CRI_CondRetErroParametro = 1
 		/* Estrutura do Critério está errada */
 
 }CRI_tpCondRet;
