@@ -66,7 +66,7 @@ CRI_tpCondRet CRI_Criterio01(float G1, float G2, float G3, float* media, int* si
 		}
 	}
 
-	return CRI_CondRetErroEstrutura;
+	return CRI_CondRetErroParametro;
 }
 /* Fim função: CRI criterio 1 */
 /***************************************************************************
@@ -143,7 +143,7 @@ CRI_tpCondRet CRI_Criterio02(float G1, float G2, float G3, float G4, float* medi
 		}
 	}
 
-	return CRI_CondRetErroEstrutura;
+	return CRI_CondRetErroParametro;
 
 }
 /* Fim função: CRI criterio 2 */
@@ -190,7 +190,7 @@ CRI_tpCondRet CRI_Criterio03 (float G1, float G2, float G3, float G4, float *med
         return CRI_CondRetOK;
         }
 
-        return CRI_CondRetErroEstrutura;
+        return CRI_CondRetErroParametro;
 }/* Fim função: CRI criterio 3 */
 /***************************************************************************
 *
@@ -238,7 +238,7 @@ CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *si
         return CRI_CondRetOK;
         }
 
-        return CRI_CondRetErroEstrutura;
+        return CRI_CondRetErroParametro;
 
 }/* Fim função: CRI criterio 4 */
 /***************************************************************************
