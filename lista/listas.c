@@ -25,7 +25,7 @@
 ***************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
-#include"listas.h"
+#include "listas.h"
 /***********************************************************************
 *
 *  $TC Tipo de dados: LIS Descritor de Lista
