@@ -6,6 +6,6 @@ que contém toda a documentação e todos os módulos fonte, exemplos e utilitá
 pelo módulo disciplina em C.
 
 --Instalação
-Dezipe o arquivo INF1301criterio_de_aprovacao.zip assegurando que sejam gerados os sub-diretórios contidos no
+Dezipe o arquivo INF1301-criterio_de_aprovacao.zip assegurando que sejam gerados os sub-diretórios contidos no
 arquivo .zip. Isto criará toda a estrutura de diretórios utilizada. Execute o run_test.bat e
 abra o saida.txt criado após a execução.
