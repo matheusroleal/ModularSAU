@@ -8,7 +8,7 @@
 
 == Declarar as condicoes de retorno
 =declararparm  OK           int 0
-=declararparm  ErrEstrutura int 1
+=declararparm  ErrParametro int 1
 
 == Declarar os conteudos para os criterios de aprovacao
 =declararparm  g1        double  5.0
