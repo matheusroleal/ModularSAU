@@ -23,11 +23,6 @@
 *
 *  $EIU Interface com o usuário pessoa
 *     Comandos de teste específicos para testar o módulo lista:
-*     "=gerainp"        - chama a função DIS_gera_cmd( )
-*     "=gerapar" <Char> <Char> <Int> <Char> <Char>
-*                   - chama a função DIS_gera_param( <Char> <Char> <Int> <Char> <Char> )
-*                     Obs. notação: <Char> <Int> são os valores dos parâmetros
-*                     que se encontram no comando de teste.
 *
 *     "=geralist" <Int>
 *			-Criar lista
