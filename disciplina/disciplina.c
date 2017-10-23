@@ -309,3 +309,15 @@ DIS_tpCondRet DIS_insere_turma_Disciplina (Disciplina **d, Turma **t){
   return DIS_CondRetErroEstrutura;
 }
 /* Fim função: DIS insere turma para a disciplina */
+/***************************************************************************
+*
+*  Função: DIS limpa lista de turmas para a disciplina
+*  ****/
+DIS_tpCondRet DIS_limpa_turma_Disciplina (Disciplina **d){
+  if(*d != NULL){
+    LIS_tpCondRet ret = clear(*d->turmas);
+    return DIS_CondRetOK;
+  }
+  return DIS_CondRetErroEstrutura;
+}
+/* Fim função: DIS limpa lista de turmas para a disciplina */
