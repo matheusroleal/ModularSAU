@@ -28,6 +28,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "disciplina.h"
+#include "turma.h"
+#include "listas.h"
 #define MAX_NOME 25
 #define MAX_CODIGO 8
 #define MAX_BIBLIOGRAFIA 300
@@ -48,6 +50,7 @@ struct disciplina{
   int creditos;
   char bibliografia[MAX_BIBLIOGRAFIA];
   char ementa[MAX_EMENTA];
+  List *turmas;
 };
 
 /***** Protótipos das funções encapuladas no módulo *****/
@@ -252,6 +255,7 @@ DIS_tpCondRet DIS_gera_cmd(Disciplina** d)
   strcpy((*d)->nome, DIS_le_nome());
   strcpy((*d)->codigo, DIS_le_codigo());
   strcpy((*d)->ementa, DIS_le_ementa());
+  createList(&d->turmas);
 
   return DIS_CondRetDisciplinaCriada;
 }/* Fim função: DIS gera uma disciplina por input do teclado */
@@ -278,6 +282,7 @@ DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int credi
   if(sizeof(ementa)>MAX_EMENTA*sizeof(char))
 	  return DIS_CondRetParametroInvalido;
   strcpy((*d)->ementa, ementa);
+  createList((*d)->turmas);
 
   return DIS_CondRetDisciplinaCriada;
 }/* Fim função: DIS gera uma disciplina recebendo parâmetros externos */
@@ -292,3 +297,15 @@ DIS_tpCondRet DIS_deleta_Disciplina (Disciplina **d)
   return DIS_CondRetDisciplinaDeletada;
 }
 /* Fim função: DIS deleta Disciplina */
+/***************************************************************************
+*
+*  Função: DIS insere turma para a disciplina
+*  ****/
+DIS_tpCondRet DIS_insere_turma_Disciplina (Disciplina **d, Turma **t){
+  if(*d != NULL){
+    push_back(*d->turmas, *t);
+    return DIS_CondRetOK;
+  }
+  return DIS_CondRetErroEstrutura;
+}
+/* Fim função: DIS insere turma para a disciplina */

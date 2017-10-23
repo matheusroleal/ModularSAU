@@ -133,3 +133,12 @@ DIS_tpCondRet DIS_exibe(Disciplina* d);
 *
 ***********************************************************************/
 DIS_tpCondRet DIS_deleta_Disciplina (Disciplina **d);
+/***********************************************************************
+*
+*  $FC Função: DIS insere turma para a disciplina
+*
+*  $ED Descrição da função
+*    Insere uma turma para a lista da disciplina
+*
+***********************************************************************/
+DIS_tpCondRet DIS_insere_turma_Disciplina (Disciplina **d, Turma **t);
