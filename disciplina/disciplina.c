@@ -301,7 +301,7 @@ DIS_tpCondRet DIS_deleta_Disciplina (Disciplina **d)
 *
 *  Função: DIS insere turma para a disciplina
 *  ****/
-DIS_tpCondRet DIS_insere_turma_Disciplina (Disciplina **d, Turma **t){
+DIS_tpCondRet DIS_insere_turma (Disciplina **d, Turma **t){
   if(*d != NULL){
     push_back(*d->turmas, *t);
     return DIS_CondRetOK;
@@ -313,11 +313,28 @@ DIS_tpCondRet DIS_insere_turma_Disciplina (Disciplina **d, Turma **t){
 *
 *  Função: DIS limpa lista de turmas para a disciplina
 *  ****/
-DIS_tpCondRet DIS_limpa_turma_Disciplina (Disciplina **d){
+DIS_tpCondRet DIS_limpa_turma(Disciplina **d){
   if(*d != NULL){
     LIS_tpCondRet ret = clear(*d->turmas);
     return DIS_CondRetOK;
   }
   return DIS_CondRetErroEstrutura;
+}
+/* Fim função: DIS limpa lista de turmas para a disciplina */
+/***************************************************************************
+*
+*  Função: DIS limpa lista de turmas para a disciplina
+*  ****/
+DIS_tpCondRet DIS_exibe_todas_turmas(Disciplina **d){
+  Turma *turma = NULL;
+  first((*d)->turmas);
+  while( (*d)->turmas ){
+    if(get_val_cursor((*d)->turmas, (void**) &turma) == LIS_CondRetListaVazia){
+      return DIS_CondRetErroEstrutura;
+    }
+    TUR_ExibeTurma(turma);
+    next((*d)->turmas);
+  }
+  return DIS_CondRetOK;
 }
 /* Fim função: DIS limpa lista de turmas para a disciplina */

@@ -53,6 +53,15 @@
 == Obtem bibliografia
 =obterbib bibliografiaB OK
 
+== Insere lista a lista de turmas
+=insereturma OK
+
+== Exibe lista de turmas
+=limpaturma OK
+
+== Deleta lista de turmas
+=exibeturma OK
+
 == Destroi a disciplina
 =destruir DisDeletada
 

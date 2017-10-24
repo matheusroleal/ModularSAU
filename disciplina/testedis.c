@@ -48,7 +48,14 @@
 *     "=obterbib" <Struct Disciplina> <Char>
 *                      - chama a função DIS_get_bibliografia
 *
-*     "=destroi"    - chama a função ARV_DestruirArvore( )
+*     "=destroi" <Struct Disciplina>
+*                      - chama a função DIS_deleta_Disciplina( )
+*     "=insereturma" <Struct Disciplina> <Struct Turma>
+*                      - chama a função DIS_insere_turma()
+*     "=limpaturma" <Struct Disciplina>
+*                      - chama a função DIS_limpa_turma()
+*     "=exibeturma" <Struct Disciplina>
+*                      - chama a função DIS_exibe_todas_turmas()
 *
 ***************************************************************************/
 
@@ -57,10 +64,9 @@
 #include <stdlib.h>
 
 #include    "tst_espc.h"
-
 #include    "generico.h"
 #include    "lerparm.h"
-
+#include    "turma.h"
 #include    "disciplina.h"
 
 /* Tabela dos nomes dos comandos de teste específicos */
@@ -74,6 +80,10 @@
 #define     OBTER_COD_CMD       "=obtercod"
 #define     OBTER_BIB_CMD       "=obterbib"
 #define     DESTROI_CMD         "=destruir"
+#define     INSERE_TURMA_DIS    "=insereturma"
+#define     LIMPA_TURMA_DIS     "=limpaturma"
+#define     EXIBE_TURMA_DIS     "=exibeturma"
+
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -95,6 +105,7 @@
 ***********************************************************************/
 
 Disciplina *dis=NULL;
+Turma *tur=NULL;
 
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
@@ -118,6 +129,7 @@ Disciplina *dis=NULL;
       int ValorEsperado33;
 	    int ValorObtido33;
 
+      TUR_CriaTurma(&turma,"33WB",9,13,"Quarta",50);
 
       TST_tpCondRet Ret ;
 
@@ -267,8 +279,61 @@ Disciplina *dis=NULL;
                                     "Retorno errado ao obter bibliografia.\n" );
          } /* fim ativa: DIS Destruir disciplina */
 
-      return TST_CondRetNaoConhec ;
+   /* Testar DIS Insere turma a lista de turmas */
 
-   } /* Fim função: TDIS Efetuar operações de teste específicas para disciplina */
+      else if ( strcmp( ComandoTeste , INSERE_TURMA_DIS ) == 0 )
+      {
+         NumLidos = LER_LerParametros( "i",
+                            &CondRetEsperada ) ;
+         if ( NumLidos != 1 )
+         {
+            return TST_CondRetParm ;
+         } /* if */
+
+         CondRetObtido = DIS_insere_turma(&dis, &turma) ;
+
+         return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                 "Retorno errado ao obter bibliografia.\n" );
+      } /* fim ativa: DIS Destruir disciplina */
+
+
+/* Testar DIS limpa a lista de turmas */
+
+   else if ( strcmp( ComandoTeste , LIMPA_TURMA_DIS ) == 0 )
+   {
+      NumLidos = LER_LerParametros( "i",
+                         &CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = DIS_limpa_turma(&dis) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao obter bibliografia.\n" );
+   } /* fim ativa: DIS Destruir disciplina */
+
+
+/* Testar DIS exibe turma a lista de turmas */
+
+   else if ( strcmp( ComandoTeste , EXIBE_TURMA_DIS ) == 0 )
+   {
+      NumLidos = LER_LerParametros( "i",
+                         &CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = DIS_exibe_todas_turmas(&dis) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao obter bibliografia.\n" );
+   } /* fim ativa: DIS Destruir disciplina */
+
+return TST_CondRetNaoConhec ;
+
+} /* Fim função: DIS exibe turma a lista de turmas */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
