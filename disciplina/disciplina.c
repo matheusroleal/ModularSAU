@@ -270,7 +270,7 @@ DIS_tpCondRet DIS_gera_cmd(Disciplina** d)
   strcpy((*d)->nome, DIS_le_nome());
   strcpy((*d)->codigo, DIS_le_codigo());
   strcpy((*d)->ementa, DIS_le_ementa());
-  createList(&d->turmas);
+  createList((*d)->turmas);
 
   return DIS_CondRetDisciplinaCriada;
 }/* Fim função: DIS gera uma disciplina por input do teclado */
