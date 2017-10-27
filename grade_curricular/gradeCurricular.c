@@ -67,7 +67,7 @@ static GradeCurricular *grc;
 *  Fun��o: GRC Criar Lista de Corpo Docente
 *  ****/
 
-GRC_tpCondRet GRC_cria(){
+GRC_tpCondRet GRC_cria(void){
 	grc = (GradeCurricular*) malloc(sizeof(GradeCurricular));
 	createList(&grc->parDisciplinas);
 	return GRC_CondRetOk;
@@ -133,7 +133,7 @@ GRC_tpCondRet GRC_mostraPreRequisitos(ParDisciplina *parD){
 *  Fun��o: GRC Mostra Atual
 *  ****/
 
-GRC_tpCondRet GRC_mostraAtual(){
+GRC_tpCondRet GRC_mostraAtual(void){
 	ParDisciplina *parD = NULL;
 	if(get_val_cursor(grc->parDisciplinas, (void**) &parD)== LIS_CondRetListaVazia) return GRC_CondRetGradeCurricularVazia;
 	DIS_exibe(parD->disciplina);
@@ -146,7 +146,7 @@ GRC_tpCondRet GRC_mostraAtual(){
  *  Fun��o: GRC Mostra Todos Professores
  *  ****/
 
-GRC_tpCondRet GRC_mostraTodas(){
+GRC_tpCondRet GRC_mostraTodas(void){
 	ParDisciplina *parD = NULL;
 	first(grc->parDisciplinas);
 	do{
@@ -162,7 +162,7 @@ GRC_tpCondRet GRC_mostraTodas(){
  *  Fun��o: GRC Limpa Lista
  *  ****/
 
-GRC_tpCondRet GRC_limpa(){
+GRC_tpCondRet GRC_limpa(void){
 	ParDisciplina *parD = NULL;
 	while(pop_back(grc->parDisciplinas, (void**) &parD)==LIS_CondRetOK){
 		DIS_deleta_Disciplina(&parD->disciplina);
@@ -177,7 +177,7 @@ GRC_tpCondRet GRC_limpa(){
  *  Fun��o: GRC Retira da Lista
  *  ****/
 
-GRC_tpCondRet GRC_retira(){
+GRC_tpCondRet GRC_retira(void){
 	ParDisciplina *parD = NULL;
 	if(pop_cursor(grc->parDisciplinas, (void**) &parD) == LIS_CondRetListaVazia) return GRC_CondRetGradeCurricularVazia;
 	DIS_deleta_Disciplina(&parD->disciplina);
@@ -191,7 +191,7 @@ GRC_tpCondRet GRC_retira(){
  *  Fun��o: GRC Libera
  *  ****/
 
-GRC_tpCondRet GRC_libera(){
+GRC_tpCondRet GRC_libera(void){
 	GRC_limpa();
 	del(grc->parDisciplinas);
 	return GRC_CondRetOk;
@@ -282,48 +282,75 @@ GRC_tpCondRet GRC_removePreRequisitos(){
 
  /***************************************************************************
  *
- *  Fun��o: GRC Consulta RG
+ *  Fun��o: GRC Consulta Nome
  *  ****/
 GRC_tpCondRet GRC_consultaNome(char *nome){
 	ParDisciplina *parD = NULL;
 	char *nomeTemp = NULL;
 	/* Recuperando disciplina da lista */
 	if(get_val_cursor(grc->parDisciplinas, (void**) &parD)== LIS_CondRetListaVazia) return GRC_CondRetGradeCurricularVazia;
-	DIS_get_nome(parD->disciplina, &nomeTemp);
+	DIS_get_nome(parD->disciplina, nomeTemp);
 	strcpy(nome, nomeTemp);
 	free(nomeTemp);
 	return GRC_CondRetOk;
-}/* Fim fun��o: GRC Consulta RG */
+}/* Fim fun��o: GRC Consulta Nome */
 
  /***************************************************************************
  *
- *  Fun��o: GRC Consulta CPF
+ *  Fun��o: GRC Consulta Codigo
  *  ****/
-GRC_tpCondRet GRC_consultaCodigo(char *cpf){
+GRC_tpCondRet GRC_consultaCodigo(char *codigo){
+	ParDisciplina *parD = NULL;
+	char *codigoTemp = NULL;
+	/* Recuperando disciplina da lista */
+	if(get_val_cursor(grc->parDisciplinas, (void**) &parD)== LIS_CondRetListaVazia) return GRC_CondRetGradeCurricularVazia;
+	DIS_get_codigo(parD->disciplina, codigoTemp);
+	strcpy(codigo, codigoTemp);
+	free(codigoTemp);
 	return GRC_CondRetOk;
-}/* Fim fun��o: GRC Consulta CPF*/
+}/* Fim fun��o: GRC Consulta Codigo*/
 
  /***************************************************************************
  *
- *  Fun��o: GRC Consulta Matricula
+ *  Fun��o: GRC Consulta Credito
  *  ****/
 GRC_tpCondRet GRC_consultaCreditos(int *creditos){
+	ParDisciplina *parD = NULL;
+	int credTemp;
+	/* Recuperando disciplina da lista */
+	if(get_val_cursor(grc->parDisciplinas, (void**) &parD)== LIS_CondRetListaVazia) return GRC_CondRetGradeCurricularVazia;
+	DIS_get_creditos(parD->disciplina, &credTemp);
+	*creditos = credTemp;
 	return GRC_CondRetOk;
-}/* Fim fun��o: GRC Consulta Matricula*/
+}/* Fim fun��o: GRC Consulta Credito*/
 
  /***************************************************************************
  *
- *  Fun��o: GRC Consulta Email
+ *  Fun��o: GRC Consulta Bibliografia
  *  ****/
 GRC_tpCondRet GRC_consultaBibliografia(char *bibliografia){
+	ParDisciplina *parD = NULL;
+	char *biblioTemp = NULL;
+	/* Recuperando disciplina da lista */
+	if(get_val_cursor(grc->parDisciplinas, (void**) &parD)== LIS_CondRetListaVazia) return GRC_CondRetGradeCurricularVazia;
+	DIS_get_bibliografia(parD->disciplina, &biblioTemp);
+	strcpy(bibliografia, biblioTemp);
+	free(biblioTemp);
 	return GRC_CondRetOk;
-}/* Fim fun��o: GRC Consulta Email*/
+}/* Fim fun��o: GRC Consulta Bibliografia*/
 
 
  /***************************************************************************
  *
- *  Fun��o: GRC Consulta Telefone
+ *  Fun��o: GRC Consulta Ementa
  *  ****/
 GRC_tpCondRet GRC_consultaEmenta(char *ementa){
+	ParDisciplina *parD = NULL;
+	char *EmentaTemp = NULL;
+	/* Recuperando disciplina da lista */
+	if(get_val_cursor(grc->parDisciplinas, (void**) &parD)== LIS_CondRetListaVazia) return GRC_CondRetGradeCurricularVazia;
+	DIS_get_ementa(parD->disciplina, EmentaTemp);
+	strcpy(ementa, EmentaTemp);
+	free(EmentaTemp);
 	return GRC_CondRetOk;
-}/* Fim fun��o: GRC Consulta Telefone*/
+}/* Fim fun��o: GRC Consulta Ementa*/
