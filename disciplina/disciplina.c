@@ -30,6 +30,7 @@
 #include "disciplina.h"
 #include "turma.h"
 #include "listas.h"
+#include "criterio_de_aprovacao.h"
 #define MAX_NOME 25
 #define MAX_CODIGO 8
 #define MAX_BIBLIOGRAFIA 300
@@ -53,11 +54,24 @@ struct disciplina{
   List *turmas;
 };
 
-/***** Protótipos das funções encapuladas no módulo *****/
+/***** Protótipos das funções encapsuladas no módulo *****/
 static char* DIS_le_codigo(void);
 static int DIS_le_creditos(void);
 static char* DIS_le_nome(void);
 static char *DIS_le_ementa(void);
+
+/***** Ponteiros para funções de critério de aprovação *****/
+CRI_tpCondRet(*criterio1)(float, float, float, float*, int*);
+CRI_tpCondRet(*criterio2)(float, float, float, float, float*, int*);
+CRI_tpCondRet(*criterio3)(float, float, float, float, float*, int*);
+CRI_tpCondRet(*criterio4)(float, float, float, float*, int*);
+CRI_tpCondRet(*criterio5)(float, float, float*, int*);
+criterio1 = &CRI_Criterio01;
+criterio2 = &CRI_Criterio02;
+criterio3 = &CRI_Criterio03;
+criterio4 = &CRI_Criterio04;
+criterio5 = &CRI_Criterio05;
+
 /*****  Código das funções exportadas pelo módulo  *****/
 /***************************************************************************
 *
