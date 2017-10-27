@@ -36,6 +36,19 @@
 #define MAX_BIBLIOGRAFIA 300
 #define MAX_EMENTA 300
 #define MIN_CREDITOS 1
+
+/***** Ponteiros para funções de critério de aprovação *****/
+CRI_tpCondRet(*criterio1)(float, float, float, float*, int*);
+CRI_tpCondRet(*criterio2)(float, float, float, float, float*, int*);
+CRI_tpCondRet(*criterio3)(float, float, float, float, float*, int*);
+CRI_tpCondRet(*criterio4)(float, float, float, float*, int*);
+CRI_tpCondRet(*criterio5)(float, float, float*, int*);
+criterio1 = &CRI_Criterio01;
+criterio2 = &CRI_Criterio02;
+criterio3 = &CRI_Criterio03;
+criterio4 = &CRI_Criterio04;
+criterio5 = &CRI_Criterio05;
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: DIS Descritor de Disciplina
@@ -59,18 +72,6 @@ static char* DIS_le_codigo(void);
 static int DIS_le_creditos(void);
 static char* DIS_le_nome(void);
 static char *DIS_le_ementa(void);
-
-/***** Ponteiros para funções de critério de aprovação *****/
-CRI_tpCondRet(*criterio1)(float, float, float, float*, int*);
-CRI_tpCondRet(*criterio2)(float, float, float, float, float*, int*);
-CRI_tpCondRet(*criterio3)(float, float, float, float, float*, int*);
-CRI_tpCondRet(*criterio4)(float, float, float, float*, int*);
-CRI_tpCondRet(*criterio5)(float, float, float*, int*);
-criterio1 = &CRI_Criterio01;
-criterio2 = &CRI_Criterio02;
-criterio3 = &CRI_Criterio03;
-criterio4 = &CRI_Criterio04;
-criterio5 = &CRI_Criterio05;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 /***************************************************************************
