@@ -43,6 +43,8 @@ typedef enum
 		/* Estrutura do Critério está errada */
 
 }CRI_tpCondRet;
+
+typedef CRI_tpCondRet (*CRI_funcCriterio)(float, float, float, float, float*, int*);
 /***********************************************************************
 *
 *  $FC Função: CRI criterio 1
@@ -57,7 +59,7 @@ typedef enum
 *  $Acertiva de Saída: Retorna situação e média do Aluno
 *
 ***********************************************************************/
-CRI_tpCondRet CRI_Criterio01(float G1, float G2, float G3, float* media, int* situacao);
+CRI_tpCondRet CRI_Criterio01(float G1, float G2, float G3, float G4, float* media, int* situacao);
 /***********************************************************************
 *
 *  $FC Função: CRI criterio 2
@@ -102,7 +104,7 @@ CRI_tpCondRet CRI_Criterio03 (float G1, float G2, float G3, float G4, float *med
 *  $Acertiva de Saída: Retorna situação e média do Aluno
 *
 ***********************************************************************/
-CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *situacao);
+CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float G4, float *media, int *situacao);
 /***********************************************************************
 *
 *  $FC Função: CRI Verifica_Criterio01
@@ -116,6 +118,6 @@ CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *si
 *    $Assertiva de Saída: Retorna a situação e a média do Aluno
 *
 ***********************************************************************/
-CRI_tpCondRet CRI_Criterio05(float G1, float G2, float *media, int *situacao);
+CRI_tpCondRet CRI_Criterio05(float G1, float G2, float G3, float G4, float *media, int *situacao);
 /***********************************************************************
 ***************************************************************/

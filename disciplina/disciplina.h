@@ -24,6 +24,7 @@
 *     Ao iniciar a execução do programa não existe DISiplinas.
 *     Uma disciplina deverá ter um critério de avaliação, que será um código que se *refere a uma forma de calcular a média final para poder determinar se um aluno *está aprovado ou não.
 ***************************************************************************/
+#include "turma.h"
 typedef struct disciplina Disciplina;
 /***********************************************************************
 *
@@ -46,7 +47,7 @@ typedef struct disciplina Disciplina;
      /* Faltou memória ao alocar dados */
      DIS_CondRetCreditoNegativo = 5,
 		 /* Creditos negativo fornecido */
-     DIS_CondRetOKEstrutura = 6
+     DIS_CondRetOKEstrutura = 6,
      /* Estrutura da Disciplina está correta */
      DIS_CondRetParametroInvalido = 7
 	  /* Erro no parametro da disciplina */
@@ -114,7 +115,7 @@ DIS_tpCondRet DIS_gera_cmd(Disciplina** d);
 *    DIS gera uma disciplina recebendo parâmetros externos
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa);
+DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa, int critAprov);
 /***********************************************************************
 *
 *  $FC Função: DIS exibe disciplina
@@ -160,3 +161,13 @@ DIS_tpCondRet DIS_limpa_turma(Disciplina **d);
 *
 ***********************************************************************/
 DIS_tpCondRet DIS_exibe_todas_turmas(Disciplina **d);
+/***************************************************************************
+*
+*  $FC Função: DIS retornar media e situação do aluno
+*
+*  $ED Descrição da função
+*    retorna a media e a situação do aluno
+*
+*	*****/
+
+DIS_tpCondRet DIS_situacaoAluno(Disciplina* disc,float G1,float G2,float G3,float G4, float* media, int*situacao);
