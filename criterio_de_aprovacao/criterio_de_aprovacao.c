@@ -22,6 +22,7 @@
 *     0.02 pg/SaintL/LL  30/09/2017 Merge dos três integrantes
 *     0.03    mrol  01/10/2017  Uniformização da interface das funções e
 *                               de todas as condições de retorno.
+*	  0.04 ngtgmp 28/10/2017  Integração com o modulo Disciplina
 *
 ***************************************************************************/
 #include <string.h>
@@ -37,7 +38,7 @@
 *
 *  Função: CRI criterio 1
 *  ****/
-CRI_tpCondRet CRI_Criterio01(float G1, float G2, float G3, float* media, int* situacao)
+CRI_tpCondRet CRI_Criterio01(float G1, float G2, float G3, float G4, float* media, int* situacao)
 {
 	if(media !=NULL && situacao != NULL){
 
@@ -200,7 +201,7 @@ CRI_tpCondRet CRI_Criterio03 (float G1, float G2, float G3, float G4, float *med
 *
 *  Função: CRI criterio 4
 *  ****/
-CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *situacao){
+CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float G4, float *media, int *situacao){
 	if(media !=NULL && situacao != NULL){
 		float maior1 = G1, maior2 = G2; 
 		*media = (G1 + G2)/2;
@@ -253,7 +254,7 @@ CRI_tpCondRet CRI_Criterio04(float G1, float G2, float G3, float *media, int *si
 *		
 *
 *  ****/
-CRI_tpCondRet CRI_Criterio05 (float G1, float G2, float *media, int *situacao ){
+CRI_tpCondRet CRI_Criterio05 (float G1, float G2, float G3, float G4, float *media, int *situacao ){
 	if(media !=NULL && situacao != NULL){
 		if(G2<3){
 			*media= (G1+(G2*3))/4;
