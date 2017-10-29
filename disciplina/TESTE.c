@@ -17,7 +17,11 @@ int main(void)
 	DIS_gera_param(&disc, "modular", "1213", 2, "muita coisa", "coisas problematicas", 2);
 	printf("chega aqui");
 	DIS_situacaoAluno(disc, G1, G2, G3, G4, &media, &situacao);
-	printf("\n A media eh: %f. Situacao:%d", media, situacao);
+	printf("\n A media eh: %f. Situacao:", media);
+	if(situacao == 1)
+		printf("aprovado");
+	else
+		printf("reprovado");
 	DIS_exibe(disc);
 	return 0;
 }
