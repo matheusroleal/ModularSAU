@@ -432,17 +432,4 @@ DIS_tpCondRet DIS_situacaoAluno(Disciplina* disc,float G1,float G2,float G3,floa
 	return disc->criAprov(G1, G2, G3, G4, media, situacao);
 }
 
-    © 2017 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Help
-
-    Contact GitHub
-    API
-    Training
-    Shop
-    Blog
-    About
 
