@@ -188,6 +188,23 @@ int DIS_le_critAprov(void)
 }/* Fim função: DIS obter bibliografia */
 /***************************************************************************
 *
+*  Função: DIS altera bibliografia
+*  ****/
+ DIS_tpCondRet DIS_altera_bibliografia(Disciplina* dis, char* bibliografia) {
+	if(dis->biliografia)
+	{
+		if(bibliografia == NULL)
+		{
+			printf("Parâmetro bibliografia nulo.\n");
+      			return DIS_CondRetParametroInvalido;
+		}
+		strcpy(dis->bibliografia,bibliografia);
+		return DIS_CondRetOK;
+	}	
+	return DIS_CondRetErroEstrutura;
+}/* Fim função: DIS altera bibliografia */
+/***************************************************************************
+*
 *  Função: DIS obter codigo
 *  ****/
 DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo)
@@ -260,6 +277,23 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 	}
 	return DIS_CondRetErroEstrutura;
 }/* Fim função: DIS get creditos */
+/***************************************************************************
+*
+*  Função: DIS altera creditos
+*  ****/
+ DIS_tpCondRet DIS_altera_creditos (Disciplina* dis, int creditos) {
+	if(dis->creditos)
+	{
+		if(creditos == NULL)
+		{
+			printf("Parâmetro bibliografia nulo.\n");
+      			return DIS_CondRetParametroInvalido;
+		}
+		dis->creditos=creditos
+		return DIS_CondRetOK;
+	}	
+	return DIS_CondRetErroEstrutura;
+}/* Fim função: DIS altera creditos */
 /*************************************************************************
 *  ngtgmp
 *
@@ -397,3 +431,18 @@ DIS_tpCondRet DIS_situacaoAluno(Disciplina* disc,float G1,float G2,float G3,floa
 {
 	return disc->criAprov(G1, G2, G3, G4, media, situacao);
 }
+
+    © 2017 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    API
+    Training
+    Shop
+    Blog
+    About
+
