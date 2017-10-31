@@ -167,7 +167,6 @@ int DIS_le_critAprov(void)
 	}while(criterio<1 || criterio>5);
 	return criterio;	
 }
-
 /***************************************************************************
 *
 *  Função: DIS obter bibliografia
@@ -309,6 +308,21 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 	}	
 	return DIS_CondRetErroEstrutura;
 }/* Fim função: DIS altera creditos */
+/***************************************************************************
+*
+*  Função: DIS altera criterio
+*  ****/
+Dis_tpCondRet Dis_altera_criterio(Disciplina *dis,CRI_funcCriterio criterio){
+	if(dis->creditos){
+		if(*criterio == NULL){
+			printf("parametro criterio nulo\n");
+			return DIS_CondRetParametroInvalido;
+		}
+		dis->criAprov = criterio;
+		return DIS_CondRetOK;
+	}
+	return DIS_CondRetErroEstrutura;
+}/* Fim função: DIS altera criterio */
 /*************************************************************************
 *  ngtgmp
 *
