@@ -437,8 +437,8 @@ DIS_tpCondRet DIS_deleta_Disciplina (Disciplina **d)
 *  ****/
 DIS_tpCondRet DIS_insere_turma (Disciplina **d, Turma **t){
   if(*d != NULL){
-    push_back((*d)->turmas, *t);
-    return DIS_CondRetOK;
+   push_back((*d)->turmas, (void * )*t);
+   return DIS_CondRetOK;
   }
   return DIS_CondRetErroEstrutura;
 }
@@ -457,7 +457,7 @@ DIS_tpCondRet DIS_limpa_turma(Disciplina **d){
 /* Fim função: DIS limpa lista de turmas para a disciplina */
 /***************************************************************************
 *
-*  Função: DIS limpa lista de turmas para a disciplina
+*  Função: DIS exibe lista de turmas para a disciplina
 *  ****/
 DIS_tpCondRet DIS_exibe_todas_turmas(Disciplina **d){
   Turma *turma;
@@ -480,7 +480,7 @@ DIS_tpCondRet DIS_exibe_todas_turmas(Disciplina **d){
 
   return DIS_CondRetOK;
 }
-/* Fim função: DIS limpa lista de turmas para a disciplina */
+/* Fim função: DIS exibe lista de turmas para a disciplina */
 DIS_tpCondRet DIS_situacaoAluno(Disciplina* disc,float G1,float G2,float G3,float G4,float* media,int* situacao)
 {
 	return disc->criAprov(G1, G2, G3, G4, media, situacao);
