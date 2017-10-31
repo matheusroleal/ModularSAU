@@ -64,6 +64,15 @@ typedef struct disciplina Disciplina;
 DIS_tpCondRet DIS_get_creditos(Disciplina* dis, int* creditos);
 /***********************************************************************
 *
+*  $FC Função: DIS altera creditos
+*
+*  $ED Descrição da função
+*    Altera os creditos de uma disciplina.
+*
+***********************************************************************/
+DIS_tpCondRet DIS_altera_creditos(Disciplina* dis, int creditos);
+/***********************************************************************
+*
 *  $FC Função: DIS obter nome
 *
 *  $ED Descrição da função
@@ -91,10 +100,20 @@ DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo);
 DIS_tpCondRet DIS_get_bibliografia(Disciplina* dis, char** bibliografia);
 /***********************************************************************
 *
+*  $FC Função: DIS altera bibliografia
+*
+*  $ED Descrição da função
+*    Altera a biliografia de uma disciplina.
+*
+***********************************************************************/
+DIS_tpCondRet DIS_altera_bibliografia(Disciplina* dis, char* bibliografia);
+/***********************************************************************
+*
 *  $FC Função: DIS obter ementa
 *
 *  $ED Descrição da função
 *    Retorna a ementa
+*
 *
 ***********************************************************************/
 DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa);
@@ -169,5 +188,4 @@ DIS_tpCondRet DIS_exibe_todas_turmas(Disciplina **d);
 *    retorna a media e a situação do aluno
 *
 *	*****/
-
 DIS_tpCondRet DIS_situacaoAluno(Disciplina* disc,float G1,float G2,float G3,float G4, float* media, int*situacao);
