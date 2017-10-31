@@ -119,6 +119,24 @@ DIS_tpCondRet DIS_altera_bibliografia(Disciplina* dis, char* bibliografia);
 DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa);
 /***********************************************************************
 *
+*  $FC Função: DIS altera ementa
+*
+*  $ED Descrição da função
+*    Altera a ementa da disciplina.
+*
+***********************************************************************/
+DIS_tpCondRet Dis_altera_ementa(Disciplina *dis, char *ementa);
+/***********************************************************************
+*
+*  $FC Função: DIS altera criterio
+*
+*  $ED Descrição da função
+*    Altera o criterio de aprovação de uma disciplina.
+*
+***********************************************************************/
+Dis_tpCondRet Dis_altera_criterio(Disciplina *dis,CRI_funcCriterio criterio);
+/***********************************************************************
+*
 *  $FC Função: DIS obter por meio do teclado
 *
 *  $ED Descrição da função
