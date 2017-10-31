@@ -114,13 +114,17 @@ int main (void)
 			case AlteraEmen:
 			{
 				if(Dis_altera_ementa(d, DIS_le_ementa())== DIS_CondRetOK)
-					printf("Disciplina exibida com sucesso");
+					printf("Disciplina exibida com sucesso\n");
 				else
-					printf("Condicao de retorno anormal, incapaz de exibir disciplina.");
+					printf("Condicao de retorno anormal, incapaz de exibir disciplina.\n");
 				break;
 			}	
-				   case AlteraCri:
-				   if(d, )
+			case AlteraCri:
+				   if(Dis_alt_Criterio(d) == DIS_CondRetOK)
+				   	printf("Disciplina exibida com sucesso");
+				else
+					printf("Condicao de retorno anormal, incapaz de exibir disciplina.\n");
+				break;
 			default:
 			{
 				printf("Acao incorreta");
