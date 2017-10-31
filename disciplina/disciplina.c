@@ -163,7 +163,7 @@ int DIS_le_critAprov(void)
 	int criterio=0;
 	do{
 	printf("Digite um criterio de aprovacao valido(de 1 a 5):\n");
-	scanf("%d", criterio);
+	scanf("%d", &criterio);
 	}while(criterio<1 || criterio>5);
 	return criterio;	
 }
@@ -312,17 +312,33 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 *
 *  Função: DIS altera criterio
 *  ****/
-Dis_tpCondRet Dis_altera_criterio(Disciplina *dis,CRI_funcCriterio criterio){
-	if(dis->creditos){
-		if(*criterio == NULL){
-			printf("parametro criterio nulo\n");
-			return DIS_CondRetParametroInvalido;
-		}
-		dis->criAprov = criterio;
+Dis_tpCondRet Dis_alt_Criterio(Disciplina *dis){
+    if(dis->criterio){
+	switch(DIS_le_critAprov())
+  {
+	case 1:
+		d->criAprov = CRI_Criterio01;
 		return DIS_CondRetOK;
-	}
-	return DIS_CondRetErroEstrutura;
-}/* Fim função: DIS altera criterio */
+	case 2:
+		d->criAprov = CRI_Criterio02;
+		return DIS_CondRetOK;
+	case 3:
+		d->criAprov = CRI_Criterio03;
+		return DIS_CondRetOK;
+	case 4:
+		d->criAprov = CRI_Criterio04;
+		return DIS_CondRetOK;
+	case 5:
+		d->criAprov = CRI_Criterio05;
+		return DIS_CondRetOK;
+  }
+
+
+    }	
+
+return DIS_CondRetErroEstrutura;
+}
+/* Fim função: DIS altera criterio */
 /*************************************************************************
 *  ngtgmp
 *
