@@ -1,3 +1,4 @@
+
 /***************************************************************************
 *
 *  $MCI Módulo de definição: Módulo interfaceDisciplina
@@ -36,11 +37,18 @@ typedef enum {
          DestroiDis,
                /* Destroi disciplina */
 			   
-		 ExibeDis,
-			   /*Exibe a disciplina*/
+				 ExibeDis,
+			   			/*Exibe a disciplina*/
+
+				 AlteraBibli,
+							/* Altera uma Bibliografia */
+
+				 AlteraCred,
+							/* Altera o numero de creditos */						
 			   
          AcaoTerminar = 99
                /* Terminar programa */
+				 
 
    } IDIS_Acao ;
    
@@ -56,6 +64,8 @@ int main (void)
             printf("\n %d Criar Disciplina", CriaDis ) ;
             printf("\n %d Destruir Disciplina" , DestroiDis    ) ;
             printf("\n %d Exibir" , ExibeDis  ) ;
+						printf("\n %d Altera Bibliografia", AlteraBibli );
+						printf("\n %d Altera Creditos", AlteraCred );
             printf("\n %d Terminar" , AcaoTerminar    ) ;
          /* Validar a opcao fornecida */
             printf( "\n\nEscolha a opcao :  " ) ;
@@ -91,6 +101,10 @@ int main (void)
 				printf("Encerrando o programa");
 				exit(0);
 			}
+			case AlteraCred:
+			{
+				if(DIS_altera_creditos(d)
+			}
 			default:
 			{
 				printf("Acao incorreta");
@@ -100,3 +114,5 @@ int main (void)
 	}
 	return 0;
 }
+
+
