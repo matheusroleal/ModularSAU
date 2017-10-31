@@ -261,6 +261,21 @@ DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa)
 }/* Fim função: DIS obter ementa */
 /***************************************************************************
 *
+*  Função: DIS altera ementa
+*  ****/
+DIS_tpCondRet Dis_altera_ementa(Disciplina *dis, char *ementa){
+	if(dis->ementa){
+		if(ementa == NULL){
+			printf("Parametro ementa nulo\n");
+			return DIS_CondRetParametroInvalido;	
+		}
+		dis->ementa = c;
+		return DIS_CondRetOK;
+	}
+	return DIS_CondRetErroEstrutura;
+}/* Fim função: DIS altera ementa */
+/***************************************************************************
+*
 *  Função: DIS get creditos
 *  ****/
 DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
