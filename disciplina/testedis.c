@@ -56,6 +56,10 @@
 *                      - chama a função DIS_limpa_turma()
 *     "=exibeturma" <Struct Disciplina>
 *                      - chama a função DIS_exibe_todas_turmas()
+*     "=alteracred" <Struct Disciplina> <Char>
+*                      - chama a função DIS_altera_creditos()
+*     "=alterabib" <Struct Disciplina> <Char>
+*                      - chama a função DIS_altera_bibliografia()
 *
 ***************************************************************************/
 
@@ -83,6 +87,8 @@
 #define     INSERE_TURMA_DIS    "=insereturma"
 #define     LIMPA_TURMA_DIS     "=limpaturma"
 #define     EXIBE_TURMA_DIS     "=exibeturma"
+#define     ALTERA_BIB_DIS      "=alterabib"
+#define     ALTERA_CRED_DIS      "=alteracred"
 
 
 /*****  Código das funções exportadas pelo módulo  *****/
@@ -276,7 +282,7 @@ Turma *tur=NULL;
             CondRetObtido = DIS_deleta_Disciplina(&dis) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao obter bibliografia.\n" );
+                                    "Retorno errado ao deletar disciplina.\n" );
          } /* fim ativa: DIS Destruir disciplina */
 
    /* Testar DIS Insere turma a lista de turmas */
@@ -293,7 +299,7 @@ Turma *tur=NULL;
          CondRetObtido = DIS_insere_turma(&dis, &turma) ;
 
          return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                 "Retorno errado ao obter bibliografia.\n" );
+                                 "Retorno errado ao inserir lista de turmas.\n" );
       } /* fim ativa: DIS Destruir disciplina */
 
 
@@ -311,7 +317,7 @@ Turma *tur=NULL;
       CondRetObtido = DIS_limpa_turma(&dis) ;
 
       return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                              "Retorno errado ao obter bibliografia.\n" );
+                              "Retorno errado ao limpar lista de turmas.\n" );
    } /* fim ativa: DIS Destruir disciplina */
 
 
@@ -329,11 +335,44 @@ Turma *tur=NULL;
       CondRetObtido = DIS_exibe_todas_turmas(&dis) ;
 
       return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                              "Retorno errado ao obter bibliografia.\n" );
+                              "Retorno errado ao exibir lista de turmas.\n" );
    } /* fim ativa: DIS Destruir disciplina */
+
+   /* Testar DIS alterar credito de disciplina */
+
+   else if ( strcmp( ComandoTeste , ALTERA_CRED_DIS ) == 0 )
+   {
+      NumLidos = LER_LerParametros( "si",&ValorDado3Creditos, &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = DIS_altera_creditos(&dis,&ValorDado3Creditos) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao alterar creditos.\n" );
+   } /* fim ativa: DIS alterar credito de disciplina */
+	   
+
+   /* Testar DIS alterar bibliografia de disciplina */
+
+   else if ( strcmp( ComandoTeste , ALTERA_BIB_DIS ) == 0 )
+   {
+      NumLidos = LER_LerParametros( "si",&ValorDado4Bib, &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = DIS_altera_bibliografia(&dis,&ValorDado4Bib) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao alterar creditos.\n" );
+   } /* fim ativa: DIS alterar bibliografia de disciplina */
 
 return TST_CondRetNaoConhec ;
 
-} /* Fim função: DIS exibe turma a lista de turmas */
+} /* Fim função:  TDIS Efetuar operações de teste específicas para disciplina */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
