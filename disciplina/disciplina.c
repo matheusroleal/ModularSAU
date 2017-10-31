@@ -460,15 +460,24 @@ DIS_tpCondRet DIS_limpa_turma(Disciplina **d){
 *  Função: DIS limpa lista de turmas para a disciplina
 *  ****/
 DIS_tpCondRet DIS_exibe_todas_turmas(Disciplina **d){
-  Turma *turma = NULL;
-  first((*d)->turmas);
-  while( (*d)->turmas ){
-    if(get_val_cursor((*d)->turmas, (void**) &turma) == LIS_CondRetListaVazia){
-      return DIS_CondRetErroEstrutura;
-    }
-    TUR_ExibeTurma(turma);
-    next((*d)->turmas);
+  Turma *turma;
+  unsigned int size ;
+  LIS_tpCondRet ret ;
+
+  ret = list_size( (*d)->turmas, &size ) ;
+  if ( ret == LIS_CondRetListaVazia ){
+	return DIS_CondRetErroEstrutura;
   }
+
+  first( (*d)->turmas ) ;
+  get_val_cursor( (*d)->turmas,( void ** )&turma );
+
+  while ( ret != LIS_CondRetCursorNoFinal ){
+	TUR_ExibeTurma( turma ) ;
+	ret = next( (*d)->turmas ) ;
+	get_val_cursor( (*d)->turmas, (void ** )&turma );
+  }
+
   return DIS_CondRetOK;
 }
 /* Fim função: DIS limpa lista de turmas para a disciplina */
