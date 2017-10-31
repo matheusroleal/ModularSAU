@@ -44,7 +44,11 @@ typedef enum {
 							/* Altera uma Bibliografia */
 
 				 AlteraCred,
-							/* Altera o numero de creditos */						
+							/* Altera o numero de creditos */	
+				 AlteraEmen,
+							/*Altera a ementa de uma disciplina*/
+				 AlteraCri,
+							/*Altera o criterio de uma disciplina*/
 			   
          AcaoTerminar = 99
                /* Terminar programa */
@@ -64,8 +68,10 @@ int main (void)
             printf("\n %d Criar Disciplina", CriaDis ) ;
             printf("\n %d Destruir Disciplina" , DestroiDis    ) ;
             printf("\n %d Exibir" , ExibeDis  ) ;
-						printf("\n %d Altera Bibliografia", AlteraBibli );
+			  			printf("\n %d Altera Bibliografia", AlteraBibli );
 						printf("\n %d Altera Creditos", AlteraCred );
+		printf("\n %d Altera a ementa", AlteraEmen);
+		printf("\n Altera o criterio", AlteraCri);
             printf("\n %d Terminar" , AcaoTerminar    ) ;
          /* Validar a opcao fornecida */
             printf( "\n\nEscolha a opcao :  " ) ;
@@ -105,6 +111,16 @@ int main (void)
 			{
 				if(DIS_altera_creditos(d)
 			}
+			case AlteraEmen:
+			{
+				if(Dis_altera_ementa(d, DIS_le_ementa())== DIS_CondRetOK)
+					printf("Disciplina exibida com sucesso");
+				else
+					printf("Condicao de retorno anormal, incapaz de exibir disciplina.");
+				break;
+			}	
+				   case AlteraCri:
+				   if(d, )
 			default:
 			{
 				printf("Acao incorreta");
