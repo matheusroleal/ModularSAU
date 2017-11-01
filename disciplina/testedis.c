@@ -56,10 +56,16 @@
 *                      - chama a função DIS_limpa_turma()
 *     "=exibeturma" <Struct Disciplina>
 *                      - chama a função DIS_exibe_todas_turmas()
-*     "=alteracred" <Struct Disciplina> <Char>
+*     "=exibeturma" <Struct Disciplina>
+*                      - chama a função DIS_exibe_todas_turmas()
+*     "=alteracred" <Struct Disciplina> <Int>
 *                      - chama a função DIS_altera_creditos()
 *     "=alterabib" <Struct Disciplina> <Char>
 *                      - chama a função DIS_altera_bibliografia()
+*     "=alteractrapv" <Struct Disciplina> <Int>
+*                      - chama a função DIS_altera_criterio()
+*     "=alteraementa" <Struct Disciplina> <Char>
+*                      - chama a função DIS_altera_ementa()
 *
 ***************************************************************************/
 
@@ -70,7 +76,7 @@
 #include    "tst_espc.h"
 #include    "generico.h"
 #include    "lerparm.h"
-#include    "turma.h"
+//#include    "turma.h"
 #include    "disciplina.h"
 
 /* Tabela dos nomes dos comandos de teste específicos */
@@ -88,8 +94,9 @@
 #define     LIMPA_TURMA_DIS     "=limpaturma"
 #define     EXIBE_TURMA_DIS     "=exibeturma"
 #define     ALTERA_BIB_DIS      "=alterabib"
-#define     ALTERA_CRED_DIS      "=alteracred"
-
+#define     ALTERA_CRED_DIS     "=alteracred"
+#define     ALTERA_CRIAPV_DIS   "=alteractrapv"
+#define     ALTERA_EMENTA_DIS   "=alteraementa"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -109,9 +116,10 @@
 *     Ver TST_tpCondRet definido em TST_ESPC.H
 *
 ***********************************************************************/
+#define MAX_TUR 5
 
+Turma *turma[MAX_TUR] = { NULL, NULL, NULL, NULL, NULL } ;
 Disciplina *dis=NULL;
-Turma *tur=NULL;
 
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
@@ -128,29 +136,29 @@ Turma *tur=NULL;
       int ValorDado3Creditos;
       char ValorDado4Bib[300];
       char ValorDado5Ementa[300];
+	  int ValorCriterioAPV;
 
       int  NumLidos = -1 ;
       char *ValorObtido1;
-	    char *ValorEsperado1;
+	  char *ValorEsperado1;
       int ValorEsperado33;
-	    int ValorObtido33;
+	  int ValorObtido33;
+	  int index = 0 ;
 
-      TUR_CriaTurma(&turma,"33WB",9,13,"Quarta",50);
-
-      TST_tpCondRet Ret ;
+      TUR_CriaTurma(turma+index,"33WB",9,13,"Quarta",50);
 
       /* Testar DIS Gerar discipina por parametros externos */
 
          if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ssissi" , &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa , &CondRetEsperada ) ;
-            if ( NumLidos != 6 )
+            NumLidos = LER_LerParametros( "ssissii" , &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa ,&ValorCriterioAPV, &CondRetEsperada ) ;
+            if ( NumLidos != 7 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_gera_param( &dis, ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
+            CondRetObtido = DIS_gera_param( &dis, ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa, ValorCriterioAPV) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
@@ -282,7 +290,7 @@ Turma *tur=NULL;
             CondRetObtido = DIS_deleta_Disciplina(&dis) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao deletar disciplina.\n" );
+                                    "Retorno errado ao obter bibliografia.\n" );
          } /* fim ativa: DIS Destruir disciplina */
 
    /* Testar DIS Insere turma a lista de turmas */
@@ -296,10 +304,10 @@ Turma *tur=NULL;
             return TST_CondRetParm ;
          } /* if */
 
-         CondRetObtido = DIS_insere_turma(&dis, &turma) ;
+         CondRetObtido = DIS_insere_turma(&dis, turma+index) ;
 
          return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                 "Retorno errado ao inserir lista de turmas.\n" );
+                                 "Retorno errado ao obter bibliografia.\n" );
       } /* fim ativa: DIS Destruir disciplina */
 
 
@@ -317,7 +325,7 @@ Turma *tur=NULL;
       CondRetObtido = DIS_limpa_turma(&dis) ;
 
       return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                              "Retorno errado ao limpar lista de turmas.\n" );
+                              "Retorno errado ao obter bibliografia.\n" );
    } /* fim ativa: DIS Destruir disciplina */
 
 
@@ -335,20 +343,21 @@ Turma *tur=NULL;
       CondRetObtido = DIS_exibe_todas_turmas(&dis) ;
 
       return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                              "Retorno errado ao exibir lista de turmas.\n" );
+                              "Retorno errado ao obter bibliografia.\n" );
    } /* fim ativa: DIS Destruir disciplina */
 
+   
    /* Testar DIS alterar credito de disciplina */
 
    else if ( strcmp( ComandoTeste , ALTERA_CRED_DIS ) == 0 )
    {
-      NumLidos = LER_LerParametros( "si",&ValorDado3Creditos, &CondRetEsperada ) ;
+      NumLidos = LER_LerParametros( "ii",&ValorDado3Creditos, &CondRetEsperada ) ;
       if ( NumLidos != 2 )
       {
          return TST_CondRetParm ;
       } /* if */
 
-      CondRetObtido = DIS_altera_creditos(&dis,&ValorDado3Creditos) ;
+      CondRetObtido = DIS_altera_creditos(dis,ValorDado3Creditos) ;
 
       return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao alterar creditos.\n" );
@@ -365,14 +374,45 @@ Turma *tur=NULL;
          return TST_CondRetParm ;
       } /* if */
 
-      CondRetObtido = DIS_altera_bibliografia(&dis,&ValorDado4Bib) ;
+      CondRetObtido = DIS_altera_bibliografia(dis,ValorDado4Bib) ;
 
       return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao alterar creditos.\n" );
    } /* fim ativa: DIS alterar bibliografia de disciplina */
 
+   /* Testar DIS alterar criterio de aprovação de disciplina */
+
+   else if ( strcmp( ComandoTeste , ALTERA_CRIAPV_DIS ) == 0 )
+   {
+      NumLidos = LER_LerParametros( "ii",&ValorCriterioAPV, &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = DIS_altera_criterio(dis,ValorCriterioAPV) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao alterar criterio de aprovação.\n" );
+   } /* fim ativa: DIS alterar criterio de aprovação de disciplina */
+
+   /* Testar DIS alterar ementa de disciplina */
+   else if ( strcmp( ComandoTeste , ALTERA_EMENTA_DIS ) == 0 )
+   {
+      NumLidos = LER_LerParametros( "si",&ValorDado5Ementa, &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+         return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = DIS_altera_ementa(dis,ValorDado5Ementa) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                              "Retorno errado ao alterar ementa.\n" );
+   } /* fim ativa: DIS alterar ementa de disciplina */
+   
 return TST_CondRetNaoConhec ;
 
-} /* Fim função:  TDIS Efetuar operações de teste específicas para disciplina */
+} /* Fim função: DIS exibe turma a lista de turmas */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
