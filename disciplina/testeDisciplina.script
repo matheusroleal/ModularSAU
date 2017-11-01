@@ -23,6 +23,10 @@
 =declararparm  bibliografia  string "teste_biblio"
 =declararparm  ementa        string "ementa_teste"
 =declararparm  codigo        string "inf1301"
+=declararparm  creditoB      int    1
+=declararparm  criterio      int    5
+=declararparm  ementaC		 string "ementa_teste2"
+=declararparm  bibliografiaC string "teste_biblio2"
 =declararparm  ementaB       string "\0"
 =declararparm  nomeB         string "\0"
 =declararparm  bibliografiaB string "\0"
@@ -33,7 +37,7 @@
 =recuperar
 
 == Criar disciplina por parametro
-=gerapar nome codigo creditoA bibliografia ementa DisCriada
+=gerapar nome codigo creditoA bibliografia ementa creditoA DisCriada
 
 == Exibe disciplina
 =exibe OK
@@ -53,14 +57,29 @@
 == Obtem bibliografia
 =obterbib bibliografiaB OK
 
+== Altera bibliografia
+=alterabib bibliografiaC OK
+
+== Altera creditos 
+=alteracred creditoB OK
+
+== Altera ementa
+=alteraementa ementaC OK
+
+== Altera criterio 
+=alteractrapv criterio OK
+
+== Exibe disciplina
+=exibe OK
+
 == Insere lista a lista de turmas
 =insereturma OK
 
 == Exibe lista de turmas
-=limpaturma OK
+=exibeturma OK
 
 == Deleta lista de turmas
-=exibeturma OK
+=limpaturma OK
 
 == Destroi a disciplina
 =destruir DisDeletada
