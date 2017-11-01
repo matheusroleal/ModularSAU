@@ -301,7 +301,7 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
  DIS_tpCondRet DIS_altera_creditos (Disciplina* dis, int creditos) {
 	if(dis->creditos)
 	{
-		if(creditos == NULL)
+		if(creditos <= 0)
 		{
 			printf("Parâmetro bibliografia nulo.\n");
       			return DIS_CondRetParametroInvalido;
