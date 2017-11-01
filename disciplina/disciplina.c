@@ -20,11 +20,14 @@
 *       0.01 mrol     30/08/2017  Início do desenvolvimento
 *       0.02 ngtgmp   01/09/2017  $Des.
 *       0.03 mrol     03/09/2017  $Des. Funções básicas implementadas e funcionando
-*		0.04 Leonardo 04/09/2017  $Des. Função delete
-*		0.05 todos    05/09/2017  Correções gerais
-*		0.05 ngtgmp   08/09/2017  Aumentando a segurança do código - vazamentos de memória nos testes
-*		0.06 ngtgmp   27/08/2017  Inicio de integração com o módulo Critério de Aprovação
-*	    0.07 ngtgmp   28/08/2017  Conclusão da integração com Critério de Aprovação
+*	0.04 Leonardo 04/09/2017  $Des. Função delete
+*	0.05 todos    05/09/2017  Correções gerais
+*	0.05 ngtgmp   08/09/2017  Aumentando a segurança do código - vazamentos de memória nos testes
+*	0.06 ngtgmp   27/09/2017  Inicio de integração com o módulo Critério de Aprovação
+*	0.07 ngtgmp   28/09/2017  Conclusão da integração com Critério de Aprovação
+*       0.08 mrol     26/10/2017   Adicionar funções de lista de turmas
+*	0.09 LL       31/10/2017  Adicionar funções de alterar 
+
 ***************************************************************************/
 #include <string.h>
 #include <stdio.h>
