@@ -20,6 +20,7 @@
 *     Versão  Autor    Data      Observações
 *		0.01  ngtgmp   01/10/2017 Inicio do desenvolvimento
 *		0.02  ngtgmp   02/10/2017 Funções implementadas e rodando sem defeitos aparentes
+* 	0.03	LL		01/11/2017 Funções altera criterio e ementa implementadas
 ***************************************************************************/
 #include <string.h>
 #include <stdio.h>
@@ -120,7 +121,7 @@ int main (void)
 				break;
 			}	
 			case AlteraCri:
-				   if(Dis_alt_Criterio(d) == DIS_CondRetOK)
+				   if(DIS_altera_criterio(d,DIS_le_creditos()) == DIS_CondRetOK)
 				   	printf("Disciplina exibida com sucesso");
 				else
 					printf("Condicao de retorno anormal, incapaz de exibir disciplina.\n");
