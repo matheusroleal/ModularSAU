@@ -125,7 +125,7 @@ DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa);
 *    Altera a ementa da disciplina.
 *
 ***********************************************************************/
-DIS_tpCondRet Dis_altera_ementa(Disciplina *dis, char *ementa);
+DIS_tpCondRet DIS_altera_ementa(Disciplina *dis, char *ementa);
 /***********************************************************************
 *
 *  $FC Função: DIS altera criterio
@@ -134,7 +134,7 @@ DIS_tpCondRet Dis_altera_ementa(Disciplina *dis, char *ementa);
 *    Altera o criterio de aprovação de uma disciplina.
 *
 ***********************************************************************/
-Dis_tpCondRet Dis_altera_criterio(Disciplina *dis,CRI_funcCriterio criterio);
+DIS_tpCondRet DIS_altera_criterio(Disciplina *d, int critAprov);
 /***********************************************************************
 *
 *  $FC Função: DIS obter por meio do teclado
