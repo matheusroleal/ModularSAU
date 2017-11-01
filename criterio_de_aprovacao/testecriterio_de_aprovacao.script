@@ -1,0 +1,34 @@
+// Script:    testecriterio_de_aprovacao.script
+// Autor:     Matheus Rodrigues de Oliveira Leal
+// Data:      30/set/2017
+// Propósito: Ilustrar arquivo de script,
+//            Testa a construção de um criterio de aprovação usando parâmetros simbólicos
+//            Verifica se as operações modificaram corretamente as referências
+//
+
+== Declarar as condicoes de retorno
+=declararparm  OK           int 0
+=declararparm  ErrParametro int 1
+
+== Declarar os conteudos para os criterios de aprovacao
+=declararparm  g1        double  5.0
+=declararparm  g2        double  6.0
+=declararparm  g3        double  7.5
+=declararparm  g4        double  8.0
+
+== Testa criterio de aprovacao 1
+=calcri1 g1 g2 g3 OK
+
+== Testa criterio de aprovacao 2
+=calcri2 g1 g2 g3 g4 OK
+
+== Testa criterio de aprovacao 3
+=calcri3 g1 g2 g3 g4 OK
+
+== Testa criterio de aprovacao 4
+=calcri4 g1 g2 g3 OK
+
+== Testa criterio de aprovacao 5
+=calcri5 g1 g2 OK
+
+// fim

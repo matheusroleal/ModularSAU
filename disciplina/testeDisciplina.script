@@ -1,0 +1,87 @@
+// Script:    testeDisciplina.script
+// Autor:     Matheus Leal
+// Data:      6/set/2017
+// Propósito: Ilustrar arquivo de script,
+//            Testa a construção de uma disciplina usando parâmetros simbólicos
+//            Verifica se as operações modificaram corretamente as referências
+//
+
+== Declarar as condicoes de retorno
+=declararparm  OK           int 0
+=declararparm  ErrEstrutura int 1
+=declararparm  DisCriada    int 2
+=declararparm  DisDeletada  int 3
+=declararparm  Memoria      int 4
+=declararparm  CredNegativo int 5
+=declararparm  OkEstrutura  int 6
+=declararparm  ParInvalido  int 7
+
+== Declarar os conteúdos dos nós
+=declararparm  creditoC      int  0
+=declararparm  nome          string "ALUNO"
+=declararparm  creditoA      int    2
+=declararparm  bibliografia  string "teste_biblio"
+=declararparm  ementa        string "ementa_teste"
+=declararparm  codigo        string "inf1301"
+=declararparm  creditoB      int    1
+=declararparm  criterio      int    5
+=declararparm  ementaC		 string "ementa_teste2"
+=declararparm  bibliografiaC string "teste_biblio2"
+=declararparm  ementaB       string "\0"
+=declararparm  nomeB         string "\0"
+=declararparm  bibliografiaB string "\0"
+=declararparm  codigoB       string "\0"
+
+== Tentar exibir disciplina inexistente
+=exibe OK
+=recuperar
+
+== Criar disciplina por parametro
+=gerapar nome codigo creditoA bibliografia ementa creditoA DisCriada
+
+== Exibe disciplina
+=exibe OK
+
+== Obtem credito
+=obtercre creditoC OK
+
+== Obtem nome
+=obternome nomeB OK
+
+== Obtem ementa
+=obterem ementaB OK
+
+== Obtem codigo
+=obtercod codigoB OK
+
+== Obtem bibliografia
+=obterbib bibliografiaB OK
+
+== Altera bibliografia
+=alterabib bibliografiaC OK
+
+== Altera creditos 
+=alteracred creditoB OK
+
+== Altera ementa
+=alteraementa ementaC OK
+
+== Altera criterio 
+=alteractrapv criterio OK
+
+== Exibe disciplina
+=exibe OK
+
+== Insere lista a lista de turmas
+=insereturma OK
+
+== Exibe lista de turmas
+=exibeturma OK
+
+== Deleta lista de turmas
+=limpaturma OK
+
+== Destroi a disciplina
+=destruir DisDeletada
+
+// fim

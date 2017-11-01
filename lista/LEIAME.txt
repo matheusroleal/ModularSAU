@@ -1,0 +1,11 @@
+---------------------------------------------Leia.me-----------------------------------------------
+
+--Apresentação
+Este texto descreve, resumidamente, o conteúdo do arquivo INF1301-lista.zip
+que contém toda a documentação e todos os módulos fonte, exemplos e utilitários utilizados
+pelo módulo lista em C.
+
+--Instalação
+Dezipe o arquivo INF1301-lista.zip assegurando que sejam gerados os sub-diretórios contidos no
+arquivo .zip. Isto criará toda a estrutura de diretórios utilizada. Execute o run_test.bat e
+abra o saida.txt criado após a execução.
