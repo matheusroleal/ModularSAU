@@ -193,7 +193,7 @@ int DIS_le_critAprov(void)
 *  Função: DIS altera bibliografia
 *  ****/
  DIS_tpCondRet DIS_altera_bibliografia(Disciplina* dis, char* bibliografia) {
-	if(dis->biliografia)
+	if(dis->bibliografia)
 	{
 		if(bibliografia == NULL)
 		{
@@ -265,13 +265,13 @@ DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa)
 *
 *  Função: DIS altera ementa
 *  ****/
-DIS_tpCondRet Dis_altera_ementa(Disciplina *dis, char *ementa){
+DIS_tpCondRet DIS_altera_ementa(Disciplina *dis, char *ementa){
 	if(dis->ementa){
 		if(ementa == NULL){
 			printf("Parametro ementa nulo\n");
 			return DIS_CondRetParametroInvalido;	
 		}
-		dis->ementa = c;
+		strcpy(dis->ementa, ementa);
 		return DIS_CondRetOK;
 	}
 	return DIS_CondRetErroEstrutura;
@@ -306,7 +306,7 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 			printf("Parâmetro bibliografia nulo.\n");
       			return DIS_CondRetParametroInvalido;
 		}
-		dis->creditos=creditos
+		dis->creditos=creditos;
 		return DIS_CondRetOK;
 	}	
 	return DIS_CondRetErroEstrutura;
@@ -315,31 +315,27 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 *
 *  Função: DIS altera criterio
 *  ****/
-Dis_tpCondRet Dis_alt_Criterio(Disciplina *dis){
-    if(dis->criterio){
-	switch(DIS_le_critAprov())
-  {
-	case 1:
-		d->criAprov = CRI_Criterio01;
-		return DIS_CondRetOK;
-	case 2:
-		d->criAprov = CRI_Criterio02;
-		return DIS_CondRetOK;
-	case 3:
-		d->criAprov = CRI_Criterio03;
-		return DIS_CondRetOK;
-	case 4:
-		d->criAprov = CRI_Criterio04;
-		return DIS_CondRetOK;
-	case 5:
-		d->criAprov = CRI_Criterio05;
-		return DIS_CondRetOK;
-  }
-
-
+DIS_tpCondRet DIS_altera_criterio(Disciplina *d, int critAprov){
+    if(d->criAprov){
+		switch(critAprov){
+		case 1:
+			d->criAprov = CRI_Criterio01;
+			return DIS_CondRetOK;
+		case 2:
+			d->criAprov = CRI_Criterio02;
+			return DIS_CondRetOK;
+		case 3:
+			d->criAprov = CRI_Criterio03;
+			return DIS_CondRetOK;
+		case 4:
+			d->criAprov = CRI_Criterio04;
+			return DIS_CondRetOK;
+		case 5:
+			d->criAprov = CRI_Criterio05;
+			return DIS_CondRetOK;
+		}
     }	
-
-return DIS_CondRetErroEstrutura;
+	return DIS_CondRetErroEstrutura;
 }
 /* Fim função: DIS altera criterio */
 /*************************************************************************
@@ -488,5 +484,4 @@ DIS_tpCondRet DIS_situacaoAluno(Disciplina* disc,float G1,float G2,float G3,floa
 {
 	return disc->criAprov(G1, G2, G3, G4, media, situacao);
 }
-
 
