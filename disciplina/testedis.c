@@ -1,7 +1,7 @@
 /***************************************************************************
 *  $MCI Módulo de implementação: Módulo de teste específico
 *
-*  Arquivo gerado:              TESTE.C
+*  Arquivo gerado:              testedis.c
 *  Letras identificadoras:      TDIS
 *
 *  Nome da base de software:    Exemplo de teste automatizado
@@ -14,6 +14,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*       4.00   mrol  31/10/2017 Adicionar funções de altera
 *       3.00   mrol  08/09/2017 Uniformização da interface das funções e
 *                               de todas as condições de retorno.
 *       2.00   pg   06/09/2017 Eliminação de código duplicado, reestruturação
@@ -413,6 +414,6 @@ Disciplina *dis=NULL;
    
 return TST_CondRetNaoConhec ;
 
-} /* Fim função: DIS exibe turma a lista de turmas */
+} /* Fim função:TDIS Efetuar operações de teste específicas para disciplina */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
