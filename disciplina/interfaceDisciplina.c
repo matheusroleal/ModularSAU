@@ -61,7 +61,8 @@ int main (void)
 {
 	Disciplina* d;
 	int acao = AcaoErro;
-	
+	int cri=0;
+	char* ementa;
 	while(1)
 	{  /* Selecionar a ação*/
          /* Exibir menu de opcoes*/
@@ -114,15 +115,21 @@ int main (void)
 			}
 			case AlteraEmen:
 			{
-				if(Dis_altera_ementa(d, DIS_le_ementa())== DIS_CondRetOK)
-					printf("Disciplina exibida com sucesso\n");
+				ementa = (char *)calloc(300, sizeof(char));
+  				if(ementa == NULL)  { exit(1);  }
+  				printf("Digite a ementa\n");
+  				scanf(" %300[^\n]s", ementa);
+				if(Dis_altera_ementa(d, ementa)== DIS_CondRetOK)
+					printf("Disciplina alterada com sucesso\n");
 				else
 					printf("Condicao de retorno anormal, incapaz de exibir disciplina.\n");
 				break;
 			}	
 			case AlteraCri:
-				   if(DIS_altera_criterio(d,DIS_le_creditos()) == DIS_CondRetOK)
-				   	printf("Disciplina exibida com sucesso");
+				   printf("Digite um criterio de aprovacao valido(de 1 a 5):\n");
+				   scanf("%d", &cri);
+				   if(DIS_altera_criterio(d, cri) == DIS_CondRetOK)
+				   	printf("Disciplina alterada com sucesso");
 				else
 					printf("Condicao de retorno anormal, incapaz de exibir disciplina.\n");
 				break;
