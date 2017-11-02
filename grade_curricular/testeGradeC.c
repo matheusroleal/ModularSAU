@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: Módulo de teste específico
+*  $MCI MÃ³dulo de implementaÃ§Ã£o: MÃ³dulo de teste especÃ­fico
 *
 *  Arquivo gerado:              testeGradeC.C
 *  Letras identificadoras:      TGRADC
@@ -9,33 +9,33 @@
 *  Gestor:  DI/PUC-Rio
 *  Autores: Matheus Rodrigues de Oliveira Leal - mrol
 *
-*  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*       1.00   mrol   23/10/2017 Início do desenvolvimento
-*       2.00   mrol   24/10/2017 Adicionadas mais funções para teste
+*  $HA HistÃ³rico de evoluÃ§Ã£o:
+*     VersÃ£o  Autor    Data     ObservaÃ§Ãµes
+*       1.00   mrol   23/10/2017 InÃ­cio do desenvolvimento
+*       2.00   mrol   24/10/2017 Adicionadas mais funÃ§Ãµes para teste
 *
-*  $ED Descrição do módulo
-*     Este módulo contém as funções específicas para o teste do
-*     módulo grade currícular. Ilustra como redigir um interpretador de comandos
-*     de teste específicos utilizando o arcabouço de teste para C.
+*  $ED DescriÃ§Ã£o do mÃ³dulo
+*     Este mÃ³dulo contÃ©m as funÃ§Ãµes especÃ­ficas para o teste do
+*     mÃ³dulo grade currÃ­cular. Ilustra como redigir um interpretador de comandos
+*     de teste especÃ­ficos utilizando o arcabouÃ§o de teste para C.
 *
-*  $EIU Interface com o usuário pessoa
-*     Comandos de teste específicos para testar o módulo grade currícular:
+*  $EIU Interface com o usuÃ¡rio pessoa
+*     Comandos de teste especÃ­ficos para testar o mÃ³dulo grade currÃ­cular:
 *
 *     "=" <Char> <Char> <Int> <Char> <Char>
-*                   - chama a função GRC_cadastra( <Char> <Char> <Int> <Char> <Char> )
-*                     Obs. notação: <Char> <Int> são os valores dos parâmetros
+*                   - chama a funÃ§Ã£o GRC_cadastra( <Char> <Char> <Int> <Char> <Char> )
+*                     Obs. notaÃ§Ã£o: <Char> <Int> sÃ£o os valores dos parÃ¢metros
 *                     que se encontram no comando de teste.
 *     "=obtercre" <INT>
-*                      - chama a função GRC_consultaCreditos
+*                      - chama a funÃ§Ã£o GRC_consultaCreditos
 *     "=obterem" <Char>
-*                      - chama a função GRC_consultaEmenta
+*                      - chama a funÃ§Ã£o GRC_consultaEmenta
 *     "=obternome"<Char>
-*                      - chama a função GRC_consultaNome
+*                      - chama a funÃ§Ã£o GRC_consultaNome
 *     "=obtercod" <Char>
-*                      - chama a função GRC_consultaCodigo
+*                      - chama a funÃ§Ã£o GRC_consultaCodigo
 *     "=obterbib" <Char>
-*                      - chama a função GRC_consultaBibiliografia
+*                      - chama a funÃ§Ã£o GRC_consultaBibiliografia
 *
 ***************************************************************************/
 
@@ -48,7 +48,7 @@
 #include    "lerparm.h"
 #include    "gradeCurricular.h"
 
-/* Tabela dos nomes dos comandos de teste específicos */
+/* Tabela dos nomes dos comandos de teste especÃ­ficos */
 
 #define     GERA_PAR_DIS_CMD   "=geradis"
 #define     CONSULTA_CRE       "=obtercre"
@@ -58,26 +58,26 @@
 #define     CONSULTA_BIB       "=obterbib"
 #define     INSERE_PRE_REQUISITO "=inserepr"
 #define	    REMOVE_PRE_REQUISITO "=removepr"
-#define	    BUSCA_CODIGO	 "=buscacod"
-#define	    CRIA_GRC	 	 "=criagrc"
-#define	    MOSTRA_DIS_GRC	 "=mostradisgrc"
-#define	    MOSTRA_GRC	 	 "=mostragrc"
+#define	    BUSCA_CODIGO		"=buscacod"
+#define	    CRIA_GRC	 		"=criagrc"
+#define	    MOSTRA_DIS_GRC		"=mostradisgrc"
+#define	    MOSTRA_GRC	 		 "=mostragrc"
 #define	    LIMPA_GRC	         "=limpagrc"
 #define	    LIBERA_GRC	         "=liberagrc"
 #define	    REMOVE_DIS_GRC	 "=removedisgrc"
 
-/*****  Código das funções exportadas pelo módulo  *****/
+/*****  CÃ³digo das funÃ§Ãµes exportadas pelo mÃ³dulo  *****/
 
 
 /***********************************************************************
 *
-*  $FC Função: TDIS Efetuar operações de teste específicas para grade currícular
+*  $FC FunÃ§Ã£o: TDIS Efetuar operaÃ§Ãµes de teste especÃ­ficas para grade currÃ­cular
 *
-*  $ED Descrição da função
-*     Efetua os diversos comandos de teste específicos para o módulo
-*     grade currícular sendo testado.
+*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*     Efetua os diversos comandos de teste especÃ­ficos para o mÃ³dulo
+*     grade currÃ­cular sendo testado.
 *
-*  $EP Parâmetros
+*  $EP ParÃ¢metros
 *     $P ComandoTeste - String contendo o comando
 *
 *  $FV Valor retornado
@@ -121,7 +121,7 @@
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = GRC_cadastra( ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
+            CondRetObtido = GRC_cadastra( ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa, 1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
@@ -147,6 +147,25 @@
 
          } /* fim ativa: Testar GRC consulta de creditos */
 
+		 	/* Testar GRC consulta de bibliografia */
+         else if ( strcmp( ComandoTeste , CONSULTA_BIB ) == 0 )
+         {
+
+            NumLidos = LER_LerParametros( "si" , &ValorEsperado1 ,
+                               &CondRetEsperada ) ;
+            if ( NumLidos != 2 )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            CondRetObtido = GRC_consultaBibliografia( ValorEsperado1 ) ;
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao tentar obter bibliografia.\n" );
+
+         } /* fim ativa: Testar GRC consulta de bibliografia */
+
+
       /* Testar GRC consulta de ementa */
 
          else if ( strcmp( ComandoTeste , CONSULTA_EM ) == 0 )
@@ -159,7 +178,7 @@
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = GRC_consultaEmenta(&ValorObtido1);
+            CondRetObtido = GRC_consultaEmenta(ValorEsperado1);
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao tentar obter ementa." );
@@ -168,7 +187,7 @@
 
       /* Testar GRC consulta de nome */
 
-         else if ( strcmp( ComandoTeste , OBTER_NOME_CMD ) == 0 )
+         else if ( strcmp( ComandoTeste , CONSULTA_NOME ) == 0 )
          {
 
             NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
@@ -178,7 +197,7 @@
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = GRC_consultaNome( &ValorObtido1  ) ;
+            CondRetObtido = GRC_consultaNome( ValorEsperado1  ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao tentar obter nome.\n" );
@@ -196,7 +215,7 @@
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = GRC_consultaCodigo( &ValorObtido1 ) ;
+            CondRetObtido = GRC_consultaCodigo( ValorEsperado1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao tentar obter codigo.\n" );
@@ -214,7 +233,7 @@
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = GRC_buscaPorCodigo( &ValorObtido1 ) ;
+            CondRetObtido = GRC_buscaPorCodigo( ValorEsperado1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao tentar obter codigo.\n" );
@@ -232,7 +251,7 @@
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = GRC_inserePreRequisito( &ValorObtido1 ) ;
+            CondRetObtido = GRC_inserePreRequisito( ValorEsperado1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao tentar obter codigo.\n" );
@@ -256,23 +275,7 @@
 
          } /* fim ativa: Testar GRC remove por codigo pre requesito */
 
-	/* Testar GRC consulta de bibliografia */
-         else if ( strcmp( ComandoTeste , CONSULTA_BIB ) == 0 )
-         {
 
-            NumLidos = LER_LerParametros( "si" , &ValorEsperado1 ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
-
-            CondRetObtido = GRC_consultaBibiliografia( &ValorObtido1 ) ;
-
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter bibliografia.\n" );
-
-         } /* fim ativa: Testar GRC consulta de bibliografia */
 
 	/* Testar GRC cria grade curricular */
          else if ( strcmp( ComandoTeste , CRIA_GRC ) == 0 )
@@ -326,7 +329,7 @@
          } /* fim ativa: Testar GRC mostra todas as disciplinas de grade curricular */
 
 	/* Testar GRC retira disciplina atual de grade curricular */
-         else if ( strcmp( ComandoTeste , RETIRA_DIS_GRC ) == 0 )
+         else if ( strcmp( ComandoTeste , REMOVE_DIS_GRC ) == 0 )
          {
 
             NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
@@ -343,7 +346,7 @@
          } /* fim ativa: Testar GRC retira disciplina atual de grade curricular */
 
 	/* Testar GRC limpa disciplina atual de grade curricular */
-         else if ( strcmp( ComandoTeste , LIMPA_DIS_GRC ) == 0 )
+         else if ( strcmp( ComandoTeste , LIBERA_GRC ) == 0 )
          {
 
             NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
@@ -375,5 +378,6 @@
                                     "Retorno errado ao tentar obter codigo.\n" );
 
          } /* fim ativa: Testar GRC libera disciplina atual de grade curricular */
-
-/********** Fim do módulo de implementação: Módulo de teste específico **********/
+	return TST_CondRetNaoConhec ;
+/********** Fim do mÃ³dulo de implementaÃ§Ã£o: MÃ³dulo de teste especÃ­fico **********/
+}
