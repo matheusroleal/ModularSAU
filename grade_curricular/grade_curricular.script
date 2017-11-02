@@ -14,20 +14,44 @@
 =declararparm  IDcriado			int 4
 =declararparm  FormatoInvalido	int 5
 
+=declararparm  nome          string "ALUNO"
+=declararparm  creditoA      int    2
+=declararparm  bibliografia  string "teste_biblio"
+=declararparm  ementa        string "ementa_teste"
+=declararparm  codigo        string "inf1301"
+=declararparm  codigoB       string "inf1010"
+=declararparm  ementaC       string "\0"
+=declararparm  nomeC         string "\0"
+=declararparm  bibliografiaC string "\0"
+=declararparm  codigoC       string "\0",
+=declararparm  creditoc      int    0
+
 == Verifica a criacao da grade
-=criagrc GRC_cria OK
+=criagrc OK
 
 ==Verifica o cadastro de ParDisciplina em grade curricular
-=geradis 'nome1' '1234' 1 'wtver' 'wtver' OK
+=geradis nome codigo creditoA bibliografia ementa OK
 
 ==Verifica a insercao de um preresquisito
-=inserepr '4321' OK
+=inserepr codigoB OK
+
+==Verifica se os creditos foram obtidos
+=obtercre creditoc OK
+
+==Verifica se a ementa foi obtida
+=obterem ementaC OK
+
+==Verifica se o nome foi obtido 
+=obternome nomeC OK
+
+==Verifica se o codigo foi obtido
+=obtercod codigoC OK
 
 ==Verifica o cadastro de ParDisciplina em grade curricular
-=geradis 'nome2' '4321' 1 'wtver' 'wtver' OK
+=geradis nome codigoB creditoA bibliografia ementa OK
 
 ==Verifica a insercao de um preresquisito
-=inserepr '1234' OK
+=inserepr codigo OK
 
 ==Verifica se a funcao mostra os prerequisitos do par atual
 =mostradisgrc OK
@@ -36,25 +60,10 @@
 =mostragrc OK
 
 ==Verifica se o codigo foi encontrado
-=buscacod '1234' OK
-
-==Verifica se os creditos foram obtidos
-=obtercre OK
-
-==Verifica se a ementa foi obtida
-=obterem OK
-
-==Verifica se o nome foi obtido 
-=obternome OK
-
-==Verifica se o codigo foi obtido
-=obtercod OK
+=buscacod codigo OK
 
 ==Verifica se a bibliografia foi obtida
-=obterbib OK
-
-==Verifica se houve a remocao de todos prerequisito do par atual
-=removepr OK
+=obterbib bibliografiaC OK
 
 ==Verifica a limpeza total da lista
 =limpagrc OK
