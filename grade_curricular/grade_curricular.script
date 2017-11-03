@@ -33,9 +33,6 @@
 ==Verifica o cadastro de ParDisciplina em grade curricular
 =geradis nome codigo credito bibliografia ementa criterio OK
 
-==Verifica a insercao de um preresquisito
-=inserepr codigoB OK
-
 ==Verifica se os creditos foram obtidos
 =obtercre creditoB OK
 
@@ -55,7 +52,7 @@
 =geradis nome codigoB credito bibliografia ementa OK
 
 ==Verifica a insercao de um preresquisito
-=inserepr codigo OK
+=inserepr codigoB OK
 
 ==Verifica se o codigo foi encontrado
 =buscacod codigo OK
