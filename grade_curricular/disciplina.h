@@ -1,153 +1,472 @@
 /***************************************************************************
 *
-*  $MCD Módulo de definição: Módulo Disciplina
+*  $MCD Módulo de definição: Módulo Grade Curricular 
 *
-*  Arquivo gerado:              Disciplina.h
-*  Letras identificadoras:      DIS
+*  Arquivo gerado:              gradeCurricular.h
+*  Letras identificadoras:      GRC
 *
-*  Nome da base de software:
-*  Arquivo da base de software:
+*  Nome da base de software:    Módulo Grade Curricular
 *
-*  Projeto: Sistema Acadêmico da turma 3WB
-*  Gestor:  Grupo 4
-*  Autores: mrol - Matheus Rodrigues de Oliveira Leal
+*  Projeto: Disciplina INF 1301
+*  Gestor:  Grupo 1, Grupo 4
+*  Autores: Bruce Marcellino, BM Grupo 1.
+*			Rodrigo Pumar, RP, Grupo 1.
+*			Matheus Rodrigues de Oliveira Leal, mrol , Grupo 4.
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*       0.01   mrol   30/08/2017 Início do desenvolvimento
+*     Versão	Autor	Data		  Observações
+*		0.30    RP	    27/10/2017	  Documentação adicionada
+*		0.20	mrol	27/10/2017	  Funções de consulta adicionadas
+*       0.10    BM	    07/10/2017	  Inicio do desenvolvimento 
 *
 *  $ED Descrição do módulo
-*     Este módulo implementa um conjunto simples de funções para criar e
-*      explorar as DISiplinas do sistema acadêmico.
-*     Uma disciplina deverá ter um código que a identifica.
-*     A cada momento o módulo admite no máximo uma única Disciplina.
-*     Ao iniciar a execução do programa não existe DISiplinas.
-*     Uma disciplina deverá ter um critério de avaliação, que será um código que se *refere a uma forma de calcular a média final para poder determinar se um aluno *está aprovado ou não.
+*	  Este módulo implementa um conjunto de funções para criar e manipular uma lista de disciplinas de informatica, ou seja, uma Grade Curricular de uma Universidade de Informática.
+*     Ao iniciar a execução do programa não existe nenhuma instância de Grade Curricular.
+*     Ao chamar a função criar, uma Grade Curricular vazia é criada, precisando assim ter Instâncias de Disciplinas já cadastrados.
+*     Nenhuma funcao deste modulo deve ser chamada antes da GRC_cria();
+*	  Deve-se usar a função libera para que a memória alocada seja liberada.
+*	  Passar argumentos inválidos como 0 ou "" podem causar erro de formato (GRC_CondRetFormatoInvalido).
+*     Esse módulo utiliza funções auxiliares para manipulação de Instâncias de Disciplinas (disciplina.h)
+*
 ***************************************************************************/
-typedef struct disciplina Disciplina;
+
+#ifndef GRADECURRICULAR_H
+#define GRADECURRICULAR_H
+
 /***********************************************************************
 *
-*  $TC Tipo de dados: DIS ConDISoes de retorno
+*  $TC Tipo de dados: GRC Condições de retorno
 *
+*  $ED Descrição do tipo
+*     Condições de retorno
 *
 ***********************************************************************/
 
-   typedef enum {
-     DIS_CondRetOK = 0 ,
-       /* Executou correto */
+typedef enum{
+	GRC_CondRetOk,
+		/* Condicao de Retorno OK, usada quando a função executa corretamente */
+	GRC_CondRetNaoHaMemoria,
+		/* Condicao de Retorno Nao Ha Memoria, usada quando a memoria do sistema nao apresenta mais espaco */ 
+	GRC_CondRetGradeCurricularVazia,
+		/* Condicao de Retorno Grade Curricular Vazia, usada quando a lista de Instância de Disciplinas, ou seja o Grade Curricular, está vazia */ 
+	GRC_CondRetDisciplinaNaoEncontrada, 
+		/* Condicao de Retorno Disciplina Não Encontrada, usada quando o Disciplina não é encontrado numa busca ou quando a lista está vazia quando percorrida */ 
+	GRC_CondRetIdJaCriado,
+		/* Condicao de Retorno Id Já Criado, usada quando existe outra Instância de Disciplina na Grade Curricular com o mesmo código */ 
+	GRC_CondRetFormatoInvalido 
+		/* Condicao de Retorno Formato Inválido, usada quando os parâmetros de uma certa função não estão de acordo com o que é esperado pelas funções auxiliares */ 
+} GRC_tpCondRet;
 
-     DIS_CondRetErroEstrutura = 1 ,
-      /* Estrutura da Disciplina está errada */
-     DIS_CondRetDisciplinaCriada = 2,
-     /* Estrutura da Disciplina está criada */
-     DIS_CondRetDisciplinaDeletada = 3,
-     /* Estrutura da Disciplina está deletada */
-     DIS_CondRetFaltouMemoria = 4 ,
-     /* Faltou memória ao alocar dados */
-     DIS_CondRetCreditoNegativo = 5,
-		 /* Creditos negativo fornecido */
-     DIS_CondRetOKEstrutura = 6
-     /* Estrutura da Disciplina está correta */
-     DIS_CondRetParametroInvalido = 7
-	  /* Erro no parametro da disciplina */
 
-   }DIS_tpCondRet;
+//TODO Inserir comentario
+typedef GRC_tpCondRet (*GRC_alteraInt)(int);
+typedef GRC_tpCondRet (*GRC_alteraString)(char*);
+
+
 /***********************************************************************
 *
-*  $FC Função: DIS obter creditos
+*  $FC Função: GRC Cria
 *
 *  $ED Descrição da função
-*    Retorna o creditos.
+*     Cria uma instância vazia de Grade Curricular
+*
+*  $EP Parâmetros --
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*
+*  Assertiva de Entrada: 
+*		-A função cria ainda não foi chamada.
+*                    
+*  Assertiva de Saída: 
+*		-Uma instância de Grade Curricular (Lista de Disciplinas) é criada
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_creditos(Disciplina* dis, int* creditos);
+
+GRC_tpCondRet GRC_cria();
+
 /***********************************************************************
 *
-*  $FC Função: DIS obter nome
+*  $FC Função: GRC Cadastra
 *
 *  $ED Descrição da função
-*    Retorna o nome.
+*     Cadastra um Disciplina em Grade Curricular com os dados passados
+*
+*  $EP Parâmetros 
+*     $P nome - Nome do Disciplina que deseja cadastrar no Grade Curricular
+*     $P codigo - Código do Disciplina que deseja cadastrar no Grade Curricular
+*     $P creditos - Quantidade de Créditos da Disciplina
+*     $P Bibliografia - Bibliografia da Disciplina
+*     $P Ementa - Ementa da Disciplina
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*     GRC_CondRetIdJaCriado - Caso o Código da Disciplina que deseja cadastrar já esteja cadastrado nessa instância de Grade Curricular.
+*	  GRC_CondRetNaoHaMemoria - Caso não haja memória suficiente para cadastrar a Disciplina na Grade Curricular
+*     GRC_CondRetFormatoInvalido - Caso o formato dos parâmetros não esteja de acordo com o esperado pelo modulo Disciplina
+*
+*  Assertiva de Entrada: 
+*		-O Grade Curricular já foi instanciado
+*                    
+*  Assertiva de Saída: 
+*		-Uma Instância de Disciplina é cadastrada na Grade Curricular
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_nome(Disciplina* dis, char** nome);
+
+GRC_tpCondRet GRC_cadastra(char* nome, char* codigo, int creditos, char* bibliografia, char* ementa,int criterio);
+
 /***********************************************************************
 *
-*  $FC Função: DIS obter codigo
+*  $FC Função: GRC Mostra Atual
 *
 *  $ED Descrição da função
-*    Retorna o codigo.
+*     Mostra a atual Instância de Disciplinas presentes na Grade Curricular
+*
+*  $EP Parâmetros --
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*     GRC_CondRetGradeCurricularVazia - Caso a Instância de Grade Curricular esteja vázia
+*
+*  Assertiva de Entrada: 
+*		-A Grade Curricular foi instanciada
+*		-Se Grade Curricular não esta vazia então instancia atual é valida.
+*                    
+*  Assertiva de Saída: 
+*       -É necessário que a Função DIS_exibe e GRC_mostraPreRequisitos tenha suas assertivas de entrada e saida corretamente implementadas
+*		-Mostra-se no Prompt de Comando a atual Instância de Disciplina selecionada e seus correspondentes pre-requisitos.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo);
+
+GRC_tpCondRet GRC_mostraAtual();
+
 /***********************************************************************
 *
-*  $FC Função: DIS obter bibliografia
+*  $FC Função: GRC Mostra Todos
 *
 *  $ED Descrição da função
-*    Retorna a bibliografia
+*     Mostra todas as Instância de Disciplinas presentes na Grade Curricular
+*
+*  $EP Parâmetros --
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*     GRC_CondRetGradeCurricularVazia - Caso a Instância de Grade Curricular esteja vázia
+*
+*  Assertiva de Entrada: 
+*		-A Grade Curricular já foi instanciada através da função cria
+*		-Se Grade Curricular não esta vazia então instancia atual é valida.
+*                    
+*  Assertiva de Saída: 
+*       -É necessário que a Função DIS_exibe e GRC_mostraPreRequisitos tenha suas assertivas de entrada e saida corretamente implementadas
+*		-Mostra-se no Prompt de Comando todas as Instância de Disciplina e seus correspondentes pre-requisitos.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_bibliografia(Disciplina* dis, char** bibliografia);
+
+GRC_tpCondRet GRC_mostraTodas();
+
 /***********************************************************************
 *
-*  $FC Função: DIS obter ementa
+*  $FC Função: GRC Retira
 *
 *  $ED Descrição da função
-*    Retorna a ementa
+*     Retira a atual Instância de Disciplina presente na Grade Curricular
+*
+*  $EP Parâmetros --
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*     GRC_CondRetGradeCurricularVazia - Caso a Instância de Grade Curricular esteja vazia
+*
+*  Assertiva de Entrada: 
+*		-A Grade Curricular já foi instanciada através da função cria
+*                    
+*  Assertiva de Saída: 
+*		-A atual Instância de Disciplina é retirada da Grade Curricular
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa);
+
+GRC_tpCondRet GRC_retira();
+
 /***********************************************************************
 *
-*  $FC Função: DIS obter por meio do teclado
+*  $FC Função: GRC Limpa
 *
 *  $ED Descrição da função
-*    Função: DIS gera uma disciplina por input do teclado
+*     Limpa a Grade Curricular retirando todas as Instâncias de Disciplinas presentes
+*
+*  $EP Parâmetros --
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*                    
+*  Assertiva de Saída: 
+*		-Todas as Instâncias de Disciplinas são retiradas da Grade Curricular
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_gera_cmd(Disciplina** d);
+
+GRC_tpCondRet GRC_limpa();
+
 /***********************************************************************
 *
-*  $FC Função: DIS gera por meio de parametros
+*  $FC Função: GRC Libera
 *
 *  $ED Descrição da função
-*    DIS gera uma disciplina recebendo parâmetros externos
+*     Libera o espaço de memoria que está sendo usado para guardar as informações referentes a Grade Curricular 
+*
+*  $EP Parâmetros --
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*  Assertiva de Saída: 
+*		-O espaço de memoria associado ao Grade Curricular é liberado
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa);
+
+GRC_tpCondRet GRC_libera();
+
 /***********************************************************************
 *
-*  $FC Função: DIS exibe disciplina
+*  $FC Função: GRC Busca por Codigo
 *
 *  $ED Descrição da função
-*    DIS exibe os parametros de disciplina
+*     Busca no Grade Curricular (Lista de Disciplinas) um Professor pelo codigo
+*
+*  $EP Parâmetros
+*     
+*     $P codigo - Código da disciplina que deseja buscar na Grade Curricular
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*     GRC_CondRetDisciplinaNaoEncontrada - Instância de Disciplina desejada não encontrada em Grade Curricular
+*     GRC_CondRetGradeCurricularVazia - Caso a Grade Curricular apontada esteja vazio 
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*                    
+*  Assertiva de Saída: 
+*		-O cursor passa a aponta para uma Disciplina que armazena aquele código
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_exibe(Disciplina* d);
+
+GRC_tpCondRet GRC_buscaPorCodigo(char *chave);
+
+
 /***********************************************************************
 *
-*  $FC Função: DIS deleta Disciplina
+*  $FC Função: GRC Insere Pre-Requisito
 *
 *  $ED Descrição da função
-*    Deleta disciplina recebida como parâmetro
+*     Insere na Discplina atual um novo pré-requisito,sendo este uma Disciplina já existente.
+*
+*  $EP Parâmetros
+*     $P codigoPre - Código da disciplina que deseja inserir como pre-requisito na disciplina atual
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*     GRC_CondRetDisciplinaNaoEncontrada - Codigo de Disciplina que tentamos adicionar como pre-requisito não se encontra na Grade Curricular
+*     GRC_CondRetGradeCurricularVazia - Caso o Grade Curricular apontada esteja vazia
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*		- O cursor aponta para disciplina para qual deseja se adicionar um pre-requisito
+*                    
+*  Assertiva de Saída: 
+*		- Caso o codigo da diciplina passada como exista na grade curricular, este condigo de disciplina é adicionada a lista de prerequisitos para a disciplina atual.
+*		- Caso o contrário, a disciplina não tem pre-requisito adicionado.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_deleta_Disciplina (Disciplina **d);
+
+GRC_tpCondRet GRC_inserePreRequisito(char *codigoPre);
+
 /***********************************************************************
 *
-*  $FC Função: DIS insere turma para a disciplina
+*  $FC Função: GRC Remove Pre-requisitos
 *
 *  $ED Descrição da função
-*    Insere uma turma para a lista da disciplina
+*     Remove da Discplina atual todos pré-requisito.
+*				
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*     GRC_CondRetGradeCurricularVazia - Caso o Grade Curricular apontada esteja vazia
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*		- O cursor aponta para disciplina para qual deseja se remover todos os pre-requisitos
+*                    
+*  Assertiva de Saída: 
+*		- Agora diciplina atual não possui pre-requisitos.
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_insere_turma_Disciplina (Disciplina **d, Turma **t);
+
+GRC_tpCondRet GRC_removePreRequisitos();
+
+
 /***********************************************************************
 *
-*  $FC Função: DIS limpa lista de turmas para a disciplina
+*  $FC Função: GRC Consulta Nome
 *
 *  $ED Descrição da função
-*    Limpa a lista de turmas da disciplina
+*     Consulta o Nome da instância de Disciplina selecionada naquele momento
+*
+*  $EP Parâmetros     
+*     $P nome - Cadeia de caracteres que receberá o nome da Disciplina selecionada, por referência
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk 
+*     GRC_CondRetGradeCurricularVazia - Caso a Grade Curricular apontada esteja vazia
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*		-O ponteiro para a cadeia possui pelo menos o limite estabelecido no modulo Disciplina como tamanho da string
+*		-O ponteiro para nome é valido
+*                    
+*  Assertiva de Saída: 
+*	    -É necessário que a Função DIS_get_nome tenha suas assertivas de entrada e saida corretamente implementadas
+*       -Caso isso ocorra o conteudo do ponteiro para nome será preenchido com o nome valido da Disciplina em questão
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_limpa_turma_Disciplina (Disciplina **d);
+
+GRC_tpCondRet GRC_consultaNome(char *nome);
+
+/***********************************************************************
+*
+*  $FC Função: GRC Consulta Codigo
+*
+*  $ED Descrição da função
+*     Consulta o Codigo da instância de Disciplina selecionada naquele momento
+*
+*  $EP Parâmetros     
+*     $P codigo - Cadeia de caracteres que receberá o Código da Disciplina selecionada, por referência
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk
+*     GRC_CondRetGradeCurricularVazia - Caso a Grade Curricular apontada esteja vazia 
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*		-O ponteiro para a cadeia possui pelo menos o limite estabelecido no modulo Disciplina como tamanho da string
+*		-O ponteiro para codigo é valido
+*                    
+*  Assertiva de Saída: 
+*	    -É necessário que a Função DIS_get_codigo tenha suas assertivas de entrada e saida corretamente implementadas
+*       -Caso isso ocorra o conteudo do ponteiro para nome será preenchido com o codigo valido da Disciplina em questão
+*
+***********************************************************************/
+
+GRC_tpCondRet GRC_consultaCodigo(char *codigo);
+
+/***********************************************************************
+*
+*  $FC Função: GRC Consulta Creditos
+*
+*  $ED Descrição da função
+*     Consulta o numero de Creditos da instância de Disciplina selecionada naquele momento
+*
+*  $EP Parâmetros     
+*     $P creditos - Inteiro que receberá o número de creditos da Disciplina selecionada, por referência
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk
+*     GRC_CondRetGradeCurricularVazia - Caso a Grade Curricular apontada esteja vazia 
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*		- O ponteiro para o inteiro creditos é valido
+*                    
+*  Assertiva de Saída: 
+*	    - É necessário que a Função DIS_get_creditos tenha suas assertivas de entrada e saida corretamente implementadas
+*       - Caso isso ocorra o conteudo do ponteiro para creditos será preenchido com um numero de creditos valido da Disciplina em questão
+*
+***********************************************************************/
+
+GRC_tpCondRet GRC_consultaCreditos(int *creditos);
+
+/***********************************************************************
+*
+*  $FC Função: GRC Consulta Bibliografia
+*
+*  $ED Descrição da função
+*     Consulta a Bibliografia da instância de Disciplina selecionada naquele momento
+*
+*  $EP Parâmetros     
+*     $P bibliografia - Cadeia de caracteres que receberá o Código da Disciplina selecionada, por referência
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk
+*     GRC_CondRetGradeCurricularVazia - Caso a Grade Curricular apontada esteja vazia 
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*		- O ponteiro para a cadeia possui pelo menos o limite estabelecido no modulo Disciplina como tamanho da string
+*		- O ponteiro para bibliografia é valido
+*                    
+*  Assertiva de Saída: 
+*	    -É necessário que a Função DIS_get_bibliografia tenha suas assertivas de entrada e saida corretamente implementadas
+*       -Caso isso ocorra o conteudo do ponteiro para bibliografia será preenchido com uma bibliografia valida da Disciplina em questão
+*
+***********************************************************************/
+
+GRC_tpCondRet GRC_consultaBibliografia(char *bibiliografia); 
+
+/***********************************************************************
+*
+*  $FC Função: GRC Consulta Ementa
+*
+*  $ED Descrição da função
+*     Consulta a Ementa da instância de Ementa selecionada naquele momento
+*
+*  $EP Parâmetros     
+*     $P ementa - Cadeia de caracteres que receberá a Ementa da Disciplina selecionada, por referência
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk
+*     GRC_CondRetGradeCurricularVazia - Caso a Grade Curricular apontada esteja vazia 
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*		- O ponteiro para a cadeia possui pelo menos o limite estabelecido no modulo Disciplina como tamanho da string
+*		- O ponteiro para ementa é valido
+*                    
+*  Assertiva de Saída: 
+*	    -É necessário que a Função DIS_get_ementa tenha suas assertivas de entrada e saida corretamente implementadas
+*       -Caso isso ocorra o conteudo do ponteiro para ementa será preenchido com uma ementa valida da Disciplina em questão
+*
+***********************************************************************/
+
+GRC_tpCondRet GRC_consultaEmenta(char *ementa);
+
+/***********************************************************************
+*
+*  $FC Função: GRC Devolve a Disciplina do cursor atual
+*
+*  $ED Descrição da função
+*     Passa por referência a Disciplina do cursor atual na lista de Pares Disciplina Prerequisito
+*
+*  $EP Parâmetros     
+*     $P Disc - referência para Disciplina*
+*						
+*  $FV Valor retornado
+*     GRC_CondRetOk
+*     GRC_CondRetGradeCurricularVazia - Caso a Grade Curricular apontada esteja vazia 
+*
+*  Assertiva de Entrada: 
+*		- A Grade Curricular já foi instanciada através da função cria
+*		- O ponteiro para Disciplina* é valido
+*                    
+*  Assertiva de Saída: 
+*       -O conteudo referenciado por void** Disc é atualizado
+*
+***********************************************************************/
+
+GRC_tpCondRet GRC_devolveDisc(void** Disc);
+
+#endif
+
+/***********************************************************************/
