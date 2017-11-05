@@ -76,7 +76,7 @@ static int converte_criterio(Disciplina* d);
 *  ****/
 DIS_tpCondRet DIS_exibe(Disciplina* d)
 {
-  int criterio = 1;
+  int criterio = converte_criterio(d);
   if (d != NULL)
   {
     printf("\nNOME: %s \n CODIGO: %s \n CREDITOS: %d \n BIBLIOGRAFIA: %s \n EMENTA: %s \n CRITERIO: %d\n",d->nome, d->codigo, d->creditos, d->bibliografia,d->ementa, criterio);
