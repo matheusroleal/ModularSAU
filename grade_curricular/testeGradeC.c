@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI MÛdulo de implementaÁ„o: MÛdulo de teste especÌfico
+*  $MCI M√≥dulo de implementa√ß√£o: M√≥dulo de teste espec√≠fico
 *
 *  Arquivo gerado:              testeGradeC.C
 *  Letras identificadoras:      TGRADC
@@ -9,33 +9,52 @@
 *  Gestor:  DI/PUC-Rio
 *  Autores: Matheus Rodrigues de Oliveira Leal - mrol
 *
-*  $HA HistÛrico de evoluÁ„o:
-*     Vers„o  Autor    Data     ObservaÁıes
-*       1.00   mrol   23/10/2017 InÌcio do desenvolvimento
-*       2.00   mrol   24/10/2017 Adicionadas mais funÁıes para teste
+*  $HA Hist√≥rico de evolu√ß√£o:
+*     Vers√£o  Autor    Data     Observa√ß√µes
+*       1.00   mrol   23/10/2017 In√≠cio do desenvolvimento
+*       2.00   mrol   24/10/2017 Adicionadas mais fun√ß√µes para teste
+*       3.00   mrol   2/11/2017 Fun√ß√µes para teste com busca de codigo refeitas
 *
-*  $ED DescriÁ„o do mÛdulo
-*     Este mÛdulo contÈm as funÁıes especÌficas para o teste do
-*     mÛdulo grade currÌcular. Ilustra como redigir um interpretador de comandos
-*     de teste especÌficos utilizando o arcabouÁo de teste para C.
+*  $ED Descri√ß√£o do m√≥dulo
+*     Este m√≥dulo cont√©m as fun√ß√µes espec√≠ficas para o teste do
+*     m√≥dulo grade curr√≠cular. Ilustra como redigir um interpretador de comandos
+*     de teste espec√≠ficos utilizando o arcabou√ßo de teste para C.
 *
-*  $EIU Interface com o usu·rio pessoa
-*     Comandos de teste especÌficos para testar o mÛdulo grade currÌcular:
+*  $EIU Interface com o usu√°rio pessoa
+*     Comandos de teste espec√≠ficos para testar o m√≥dulo grade curr√≠cular:
 *
-*     "=" <Char> <Char> <Int> <Char> <Char>
-*                   - chama a funÁ„o GRC_cadastra( <Char> <Char> <Int> <Char> <Char> )
-*                     Obs. notaÁ„o: <Char> <Int> s„o os valores dos par‚metros
+*     "=geradis" <Char> <Char> <Int> <Char> <Char>
+*                   - chama a fun√ß√£o GRC_cadastra( <Char> <Char> <Int> <Char> <Char> )
+*                     Obs. nota√ß√£o: <Char> <Int> s√£o os valores dos par√¢metros
 *                     que se encontram no comando de teste.
 *     "=obtercre" <INT>
-*                      - chama a funÁ„o GRC_consultaCreditos
+*                      - chama a fun√ß√£o GRC_consultaCreditos
 *     "=obterem" <Char>
-*                      - chama a funÁ„o GRC_consultaEmenta
+*                      - chama a fun√ß√£o GRC_consultaEmenta
 *     "=obternome"<Char>
-*                      - chama a funÁ„o GRC_consultaNome
+*                      - chama a fun√ß√£o GRC_consultaNome
 *     "=obtercod" <Char>
-*                      - chama a funÁ„o GRC_consultaCodigo
+*                      - chama a fun√ß√£o GRC_consultaCodigo
 *     "=obterbib" <Char>
-*                      - chama a funÁ„o GRC_consultaBibiliografia
+*                      - chama a fun√ß√£o GRC_consultaBibiliografia
+*     "=inserepr" <Char>
+*                      - chama a fun√ß√£o GRC_inserePreRequisito
+*     "=buscacod" <Char>
+*                      - chama a fun√ß√£o GRC_buscaPorCodigo
+*     "=removepr"
+*                      - chama a fun√ß√£o GRC_removePreRequisitos
+*     "=criagrc"
+*                      - chama a fun√ß√£o GRC_cria
+*     "=mostradisgrc"
+*                      - chama a fun√ß√£o GRC_mostraAtual
+*     "=mostragrc"
+*                      - chama a fun√ß√£o GRC_mostraTodas
+*     "=liberagrc"
+*                      - chama a fun√ß√£o GRC_libera
+*     "=limpagrc"
+*                      - chama a fun√ß√£o GRC_limpa
+*     "=removedisgrc"
+*                      - chama a fun√ß√£o GRC_retira
 *
 ***************************************************************************/
 
@@ -43,41 +62,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include    "tst_espc.h"
-#include    "generico.h"
-#include    "lerparm.h"
-#include    "gradeCurricular.h"
+#include "tst_espc.h"
+#include "generico.h"
+#include "lerparm.h"
+#include "gradeCurricular.h"
 
-/* Tabela dos nomes dos comandos de teste especÌficos */
+/* Tabela dos nomes dos comandos de teste espec√≠ficos */
 
-#define     GERA_PAR_DIS_CMD   "=geradis"
-#define     CONSULTA_CRE       "=obtercre"
-#define     CONSULTA_EM        "=obterem"
-#define     CONSULTA_NOME      "=obternome"
-#define     CONSULTA_COD       "=obtercod"
-#define     CONSULTA_BIB       "=obterbib"
+#define     GERA_PAR_DIS_CMD     "=geradis"
+#define     CONSULTA_CRE         "=obtercre"
+#define     CONSULTA_EM          "=obterem"
+#define     CONSULTA_NOME        "=obternome"
+#define     CONSULTA_COD         "=obtercod"
+#define     CONSULTA_BIB         "=obterbib"
 #define     INSERE_PRE_REQUISITO "=inserepr"
 #define	    REMOVE_PRE_REQUISITO "=removepr"
-#define	    BUSCA_CODIGO	 "=buscacod"
-#define	    CRIA_GRC	 	 "=criagrc"
-#define	    MOSTRA_DIS_GRC	 "=mostradisgrc"
-#define	    MOSTRA_GRC	 	 "=mostragrc"
-#define	    LIMPA_GRC	         "=limpagrc"
+#define	    BUSCA_CODIGO		     "=buscacod"
+#define	    CRIA_GRC	 		       "=criagrc"
+#define	    MOSTRA_DIS_GRC		   "=mostradisgrc"
+#define	    MOSTRA_GRC	 		     "=mostragrc"
+#define	    LIMPA_GRC	           "=limpagrc"
 #define	    LIBERA_GRC	         "=liberagrc"
-#define	    REMOVE_DIS_GRC	 "=removedisgrc"
+#define	    REMOVE_DIS_GRC	     "=removedisgrc"
 
-/*****  CÛdigo das funÁıes exportadas pelo mÛdulo  *****/
+/*****  C√≥digo das fun√ß√µes exportadas pelo m√≥dulo  *****/
 
 
 /***********************************************************************
 *
-*  $FC FunÁ„o: TDIS Efetuar operaÁıes de teste especÌficas para grade currÌcular
+*  $FC Fun√ß√£o: TDIS Efetuar opera√ß√µes de teste espec√≠ficas para grade curr√≠cular
 *
-*  $ED DescriÁ„o da funÁ„o
-*     Efetua os diversos comandos de teste especÌficos para o mÛdulo
-*     grade currÌcular sendo testado.
+*  $ED Descri√ß√£o da fun√ß√£o
+*     Efetua os diversos comandos de teste espec√≠ficos para o m√≥dulo
+*     grade curr√≠cular sendo testado.
 *
-*  $EP Par‚metros
+*  $EP Par√¢metros
 *     $P ComandoTeste - String contendo o comando
 *
 *  $FV Valor retornado
@@ -85,295 +104,300 @@
 *
 ***********************************************************************/
 
-   TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
-   {
+TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
+{
 
-      GRC_tpCondRet CondRetObtido  ;
-      GRC_tpCondRet CondRetEsperada  ;
-                                      /* inicializa para qualquer coisa */
+  GRC_tpCondRet CondRetObtido  ;
+  GRC_tpCondRet CondRetEsperada  ;
+  /* inicializa para qualquer coisa */
+
+  //char ValorEsperado;
+  char ValorDado1Nome[25];
+  char ValorDado2Codigo[8];
+  int  ValorDado3Creditos;
+  char ValorDado4Bib[300];
+  char ValorDado5Ementa[300];
+  int  ValorDado6Criterio;
+
+  int  NumLidos = -1 ;
+  char ValorDado7Codigo[8];
+  char ValorDado8Codigo[8];
+  char *ValorEsperado1;
+  int ValorEsperado33;
 
 
+  TST_tpCondRet Ret ;
 
-      //char ValorEsperado;
-      char ValorDado1Nome[25];
-      char ValorDado2Codigo[8];
-      int ValorDado3Creditos;
-      char ValorDado4Bib[300];
-      char ValorDado5Ementa[300];
+  /* Testar GRC cadastra discipina por parametros externos */
 
-      int  NumLidos = -1 ;
-      char *ValorObtido1;
-	  char *ValorEsperado1;
-      int ValorEsperado33;
-	  int ValorObtido33;
+  if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
+  {
 
+    NumLidos = LER_LerParametros( "ssissii" , &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa, &ValorDado6Criterio , &CondRetEsperada ) ;
+    if ( NumLidos != 7 )
+    {
+      return TST_CondRetParm ;
+    } /* if */
 
-      TST_tpCondRet Ret ;
+    CondRetObtido = GRC_cadastra( ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa, ValorDado6Criterio ) ;
 
-      /* Testar GRC cadastra discipina por parametros externos */
+    return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+      "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
 
-         if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
-         {
+    } /* fim ativa: Testar GRC cadastra disciplina por parametros externos */
 
-            NumLidos = LER_LerParametros( "ssissi" , &ValorDado1Nome, &ValorDado2Codigo, &ValorDado3Creditos , &ValorDado4Bib, &ValorDado5Ementa , &CondRetEsperada ) ;
-            if ( NumLidos != 6 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+    /* Testar GRC consulta de creditos */
 
-            CondRetObtido = GRC_cadastra( ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
+    else if ( strcmp( ComandoTeste , CONSULTA_CRE ) == 0 )
+    {
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
+      NumLidos = LER_LerParametros( "ii" , &ValorEsperado33 ,
+      &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-         } /* fim ativa: Testar GRC cadastra disciplina por parametros externos */
+      CondRetObtido = GRC_consultaCreditos(&ValorEsperado33) ;
 
-      /* Testar GRC consulta de creditos */
+      return TST_CompararInt ( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter creditos.\n" );
 
-         else if ( strcmp( ComandoTeste , CONSULTA_CRE ) == 0 )
-         {
+    } /* fim ativa: Testar GRC consulta de creditos */
 
-            NumLidos = LER_LerParametros( "ii" , &ValorEsperado33 ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+      /* Testar GRC consulta de bibliografia */
+    else if ( strcmp( ComandoTeste , CONSULTA_BIB ) == 0 )
+    {
 
-            CondRetObtido = GRC_consultaCreditos( &ValorObtido33 ) ;
+      NumLidos = LER_LerParametros( "si" , &ValorEsperado1 ,
+      &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-			return TST_CompararInt ( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter creditos.\n" );
+      CondRetObtido = GRC_consultaBibliografia(ValorEsperado1) ;
 
-         } /* fim ativa: Testar GRC consulta de creditos */
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter bibliografia.\n" );
+
+    } /* fim ativa: Testar GRC consulta de bibliografia */
+
 
       /* Testar GRC consulta de ementa */
 
-         else if ( strcmp( ComandoTeste , CONSULTA_EM ) == 0 )
-         {
+    else if ( strcmp( ComandoTeste , CONSULTA_EM ) == 0 )
+    {
 
-            NumLidos = LER_LerParametros( "si" ,  &ValorEsperado1 ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+      NumLidos = LER_LerParametros( "si" ,  &ValorEsperado1 ,
+      &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-            CondRetObtido = GRC_consultaEmenta(&ValorObtido1);
+      CondRetObtido = GRC_consultaEmenta(ValorEsperado1);
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter ementa." );
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter ementa." );
 
-         } /* fim ativa: Testar GRC consulta de ementa */
+    } /* fim ativa: Testar GRC consulta de ementa */
 
       /* Testar GRC consulta de nome */
 
-         else if ( strcmp( ComandoTeste , OBTER_NOME_CMD ) == 0 )
-         {
+    else if ( strcmp( ComandoTeste , CONSULTA_NOME ) == 0 )
+    {
 
-            NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+      NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
+      &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-            CondRetObtido = GRC_consultaNome( &ValorObtido1  ) ;
+      CondRetObtido = GRC_consultaNome(ValorEsperado1) ;
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter nome.\n" );
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter nome.\n" );
 
-         } /* fim ativa: Testar GRC consulta de nome */
-	/* Testar GRC consulta de codigo */
+    } /* fim ativa: Testar GRC consulta de nome */
 
-         else if ( strcmp( ComandoTeste , CONSULTA_COD ) == 0 )
-         {
+      /* Testar GRC consulta de codigo */
 
-            NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+    else if ( strcmp( ComandoTeste , CONSULTA_COD ) == 0 )
+    {
 
-            CondRetObtido = GRC_consultaCodigo( &ValorObtido1 ) ;
+      NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
+      &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      CondRetObtido = GRC_consultaCodigo(ValorEsperado1) ;
 
-         } /* fim ativa: Testar GRC consulta de codigo */
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-	/* Testar GRC busca por codigo */
-         else if ( strcmp( ComandoTeste , BUSCA_CODIGO ) == 0 )
-         {
+    } /* fim ativa: Testar GRC consulta de codigo */
 
-            NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+      /* Testar GRC busca por codigo */
+    else if ( strcmp( ComandoTeste , BUSCA_CODIGO ) == 0 )
+    {
 
-            CondRetObtido = GRC_buscaPorCodigo( &ValorObtido1 ) ;
+      NumLidos = LER_LerParametros( "si", &ValorDado7Codigo ,
+      &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      CondRetObtido = GRC_buscaPorCodigo(ValorDado7Codigo) ;
 
-         } /* fim ativa: Testar GRC busca por codigo */
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-	/* Testar GRC insere todos pre requesito*/
-         else if ( strcmp( ComandoTeste , INSERE_PRE_REQUISITO ) == 0 )
-         {
+    } /* fim ativa: Testar GRC busca por codigo */
 
-            NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+                /* Testar GRC insere todos pre requesito*/
+    else if ( strcmp( ComandoTeste , INSERE_PRE_REQUISITO ) == 0 )
+    {
 
-            CondRetObtido = GRC_inserePreRequisito( &ValorObtido1 ) ;
+      NumLidos = LER_LerParametros( "si", &ValorDado8Codigo ,
+      &CondRetEsperada ) ;
+      if ( NumLidos != 2 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      CondRetObtido = GRC_inserePreRequisito(ValorDado8Codigo) ;
 
-         } /* fim ativa: Testar GRC insere por codigo pre requesito */
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-	/* Testar GRC remove todos pre requesito*/
-         else if ( strcmp( ComandoTeste , REMOVE_PRE_REQUISITO ) == 0 )
-         {
+    } /* fim ativa: Testar GRC insere por codigo pre requesito */
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+        /* Testar GRC remove todos pre requesito*/
+    else if ( strcmp( ComandoTeste , REMOVE_PRE_REQUISITO ) == 0 )
+    {
 
-            CondRetObtido = GRC_removePreRequisitos() ;
+      NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      CondRetObtido = GRC_removePreRequisitos() ;
 
-         } /* fim ativa: Testar GRC remove por codigo pre requesito */
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-	/* Testar GRC consulta de bibliografia */
-         else if ( strcmp( ComandoTeste , CONSULTA_BIB ) == 0 )
-         {
+    } /* fim ativa: Testar GRC remove por codigo pre requesito */
 
-            NumLidos = LER_LerParametros( "si" , &ValorEsperado1 ,
-                               &CondRetEsperada ) ;
-            if ( NumLidos != 2 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+        /* Testar GRC cria grade curricular */
 
-            CondRetObtido = GRC_consultaBibiliografia( &ValorObtido1 ) ;
+    else if ( strcmp( ComandoTeste , CRIA_GRC ) == 0 )
+    {
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter bibliografia.\n" );
+      NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-         } /* fim ativa: Testar GRC consulta de bibliografia */
+      CondRetObtido = GRC_cria() ;
 
-	/* Testar GRC cria grade curricular */
-         else if ( strcmp( ComandoTeste , CRIA_GRC ) == 0 )
-         {
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+    } /* fim ativa: Testar GRC cria grade curricular */
 
-            CondRetObtido = GRC_cria() ;
+      /* Testar GRC mostra disciplina atual de grade curricular */
+    else if ( strcmp( ComandoTeste , MOSTRA_DIS_GRC ) == 0 )
+    {
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-         } /* fim ativa: Testar GRC cria grade curricular */
+      CondRetObtido = GRC_mostraAtual() ;
 
-	/* Testar GRC mostra disciplina atual de grade curricular */
-         else if ( strcmp( ComandoTeste , MOSTRA_DIS_GRC ) == 0 )
-         {
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+    } /* fim ativa: Testar GRC mostra disciplina atual de grade curricular */
 
-            CondRetObtido = GRC_mostraAtual() ;
+        /* Testar GRC mostra todas as disciplinas de grade curricular */
+    else if ( strcmp( ComandoTeste , MOSTRA_GRC ) == 0 )
+    {
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-         } /* fim ativa: Testar GRC mostra disciplina atual de grade curricular */
+      CondRetObtido = GRC_mostraTodas() ;
 
-	/* Testar GRC mostra todas as disciplinas de grade curricular */
-         else if ( strcmp( ComandoTeste , MOSTRA_GRC ) == 0 )
-         {
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+    } /* fim ativa: Testar GRC mostra todas as disciplinas de grade curricular */
 
-            CondRetObtido = GRC_mostraTodas() ;
+        /* Testar GRC retira disciplina atual de grade curricular */
+    else if ( strcmp( ComandoTeste , REMOVE_DIS_GRC ) == 0 )
+    {
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-         } /* fim ativa: Testar GRC mostra todas as disciplinas de grade curricular */
+      CondRetObtido = GRC_retira() ;
 
-	/* Testar GRC retira disciplina atual de grade curricular */
-         else if ( strcmp( ComandoTeste , RETIRA_DIS_GRC ) == 0 )
-         {
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+    } /* fim ativa: Testar GRC retira disciplina atual de grade curricular */
 
-            CondRetObtido = GRC_retira() ;
+    /* Testar GRC limpa disciplina atual de grade curricular */
+    else if ( strcmp( ComandoTeste , LIMPA_GRC ) == 0 )
+    {
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-         } /* fim ativa: Testar GRC retira disciplina atual de grade curricular */
+      CondRetObtido = GRC_limpa() ;
 
-	/* Testar GRC limpa disciplina atual de grade curricular */
-         else if ( strcmp( ComandoTeste , LIMPA_DIS_GRC ) == 0 )
-         {
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+    } /* fim ativa: Testar GRC limpa disciplina atual de grade curricular */
 
-            CondRetObtido = GRC_limpa() ;
+    /* Testar GRC libera disciplina atual de grade curricular */
+    else if ( strcmp( ComandoTeste , LIBERA_GRC ) == 0 )
+    {
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
+      NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
 
-         } /* fim ativa: Testar GRC limpa disciplina atual de grade curricular */
+      CondRetObtido = GRC_libera() ;
 
-	/* Testar GRC libera disciplina atual de grade curricular */
-         else if ( strcmp( ComandoTeste , LIBERA_GRC ) == 0 )
-         {
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
 
-            NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
-            if ( NumLidos != 1 )
-            {
-               return TST_CondRetParm ;
-            } /* if */
+    } /* fim ativa: Testar GRC libera disciplina atual de grade curricular */
 
-            CondRetObtido = GRC_libera() ;
+  return TST_CondRetNaoConhec ;
+}/* Fim fun√ß√£o:TGRADC Efetuar opera√ß√µes de teste espec√≠ficas para grade curricular */
 
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao tentar obter codigo.\n" );
-
-         } /* fim ativa: Testar GRC libera disciplina atual de grade curricular */
-
-/********** Fim do mÛdulo de implementaÁ„o: MÛdulo de teste especÌfico **********/
+/********** Fim do m√≥dulo de implementa√ß√£o: M√≥dulo de teste espec√≠fico **********/

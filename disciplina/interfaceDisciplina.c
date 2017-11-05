@@ -20,6 +20,7 @@
 *     Versão  Autor    Data      Observações
 *		0.01  ngtgmp   01/10/2017 Inicio do desenvolvimento
 *		0.02  ngtgmp   02/10/2017 Funções implementadas e rodando sem defeitos aparentes
+* 	0.03	LL		01/11/2017 Funções altera criterio e ementa implementadas
 ***************************************************************************/
 #include <string.h>
 #include <stdio.h>
@@ -60,7 +61,8 @@ int main (void)
 {
 	Disciplina* d;
 	int acao = AcaoErro;
-	
+	int cri=0;
+	char* ementa;
 	while(1)
 	{  /* Selecionar a ação*/
          /* Exibir menu de opcoes*/
@@ -113,15 +115,21 @@ int main (void)
 			}
 			case AlteraEmen:
 			{
-				if(Dis_altera_ementa(d, DIS_le_ementa())== DIS_CondRetOK)
-					printf("Disciplina exibida com sucesso\n");
+				ementa = (char *)calloc(300, sizeof(char));
+  				if(ementa == NULL)  { exit(1);  }
+  				printf("Digite a ementa\n");
+  				scanf(" %300[^\n]s", ementa);
+				if(Dis_altera_ementa(d, ementa)== DIS_CondRetOK)
+					printf("Disciplina alterada com sucesso\n");
 				else
 					printf("Condicao de retorno anormal, incapaz de exibir disciplina.\n");
 				break;
 			}	
 			case AlteraCri:
-				   if(Dis_alt_Criterio(d) == DIS_CondRetOK)
-				   	printf("Disciplina exibida com sucesso");
+				   printf("Digite um criterio de aprovacao valido(de 1 a 5):\n");
+				   scanf("%d", &cri);
+				   if(DIS_altera_criterio(d, cri) == DIS_CondRetOK)
+				   	printf("Disciplina alterada com sucesso");
 				else
 					printf("Condicao de retorno anormal, incapaz de exibir disciplina.\n");
 				break;
