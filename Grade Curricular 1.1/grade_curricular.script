@@ -1,0 +1,78 @@
+// Script:    testeGradeCurricular.script
+// Autor:     Felipe Nogueira de Souza
+// Data:      31/10/2017
+// Propósito: Ilustrar arquivo de script,
+//            Testa a construção de uma grade curricular
+//			  Não verifica se as operações modificaram corretamente as referências
+//
+
+== Declarar as condicoes de retorno
+=declararparm  OK          		 int 0
+=declararparm  Memoria     		 int 1
+=declararparm  Vazia      		 int 2
+=declararparm  nEncontrada  	 int 3
+=declararparm  IDcriado			   int 4
+=declararparm  FormatoInvalido int 5
+
+=declararparm  nome          string "ALUNO"
+=declararparm  codigo        string "inf1301"
+=declararparm  criterio      int    1
+=declararparm  bibliografia  string "teste_biblio"
+=declararparm  ementa        string "ementa_teste"
+=declararparm  credito       int    2
+=declararparm  codigoB       string "inf1010"
+=declararparm  ementaB       string "\0"
+=declararparm  nomeB         string "\0"
+=declararparm  bibliografiaB string "\0"
+=declararparm  creditoB      int    0
+=declararparm  codigoC       string "\0",
+
+== Verifica a criacao da grade
+=criagrc OK
+
+==Verifica o cadastro de ParDisciplina em grade curricular
+=geradis nome codigo credito bibliografia ementa criterio OK
+
+==Verifica se os creditos foram obtidos
+=obtercre creditoB OK
+
+==Verifica se a ementa foi obtida
+=obterem ementaB OK
+
+==Verifica se o nome foi obtido
+=obternome nomeB OK
+
+==Verifica se o codigo foi obtido
+=obtercod codigoC OK
+
+==Verifica se a bibliografia foi obtida
+=obterbib bibliografiaB OK
+
+==Verifica o cadastro de ParDisciplina em grade curricular
+=geradis nome codigoB credito bibliografia ementa OK
+
+==Verifica a insercao de um preresquisito
+=inserepr codigoB OK
+
+==Verifica se o codigo foi encontrado
+=buscacod codigo OK
+
+==Verifica se a funcao mostra os prerequisitos do par atual
+=mostradisgrc OK
+
+==Verifica se mostra todos os prerequisitos de todos os pares disciplina prerequisitos
+=mostragrc OK
+
+==Verificar remover todos pre requesito
+=removepr OK
+
+==Verificar retirar disciplina atual de grade curricular
+=removedisgrc OK
+
+==Verifica a limpeza total da lista
+=limpagrc OK
+
+==Verifica se a lista foi deletada com sucesso
+=liberagrc OK
+
+//fim
