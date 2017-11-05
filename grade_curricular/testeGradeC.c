@@ -55,6 +55,8 @@
 *                      - chama a função GRC_limpa
 *     "=removedisgrc"
 *                      - chama a função GRC_retira
+*     "=getdisc" <Disciplina>
+*                      - chama a função GRC_devolveDisc
 *
 ***************************************************************************/
 
@@ -84,6 +86,7 @@
 #define	    LIMPA_GRC	           "=limpagrc"
 #define	    LIBERA_GRC	         "=liberagrc"
 #define	    REMOVE_DIS_GRC	     "=removedisgrc"
+#define		OBTEM_DISC			"=getdisc"	
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -103,6 +106,7 @@
 *     Ver TST_tpCondRet definido em TST_ESPC.H
 *
 ***********************************************************************/
+ void *dis;
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
 {
@@ -396,6 +400,23 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         "Retorno errado ao tentar obter codigo.\n" );
 
     } /* fim ativa: Testar GRC libera disciplina atual de grade curricular */
+	
+	/* Testar GRC Devolve a Disciplina do cursor atual */
+	else if ( strcmp( ComandoTeste , OBTEM_DISC ) == 0 )
+    {
+
+      NumLidos = LER_LerParametros( "i",&CondRetEsperada ) ;
+      if ( NumLidos != 1 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = GRC_devolveDisc(&dis) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
+
+    } /* fim ativa: Testar GRC Devolve a Disciplina do cursor atual */
 
   return TST_CondRetNaoConhec ;
 }/* Fim função:TGRADC Efetuar operações de teste específicas para grade curricular */
