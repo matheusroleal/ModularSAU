@@ -49,7 +49,7 @@
 =obterbib bibliografiaB OK
 
 ==Verifica o cadastro de ParDisciplina em grade curricular
-=geradis nome codigoB credito bibliografia ementa OK
+=geradis nome codigoB credito bibliografia ementa criterio OK
 
 ==Verifica a insercao de um preresquisito
 =inserepr codigoB OK
@@ -59,6 +59,9 @@
 
 ==Verifica se a funcao mostra os prerequisitos do par atual
 =mostradisgrc OK
+
+==Verifica se a obtem a disciplina atual
+=getdisc OK
 
 ==Verifica se mostra todos os prerequisitos de todos os pares disciplina prerequisitos
 =mostragrc OK
