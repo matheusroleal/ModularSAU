@@ -1,7 +1,7 @@
 /***************************************************************************
 *  $MCI Módulo de implementação: Módulo de teste específico
 *
-*  Arquivo gerado:              TESTE.C
+*  Arquivo gerado:              testedis.C
 *  Letras identificadoras:      TDIS
 *
 *  Nome da base de software:    Exemplo de teste automatizado
