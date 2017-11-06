@@ -31,6 +31,11 @@
 =declararparm  nomeB         string "\0"
 =declararparm  bibliografiaB string "\0"
 =declararparm  codigoB       string "\0"
+=declararparm  g1        double  5.0
+=declararparm  g2        double  6.0
+=declararparm  g3        double  7.5
+=declararparm  g4        double  8.0
+
 
 == Tentar exibir disciplina inexistente
 =exibe OK
@@ -71,6 +76,9 @@
 
 == Exibe disciplina
 =exibe OK
+
+==Obtem a sitacao do aluno
+=obtemstu g1 g2 g3 g4 OK
 
 == Insere lista a lista de turmas
 =insereturma OK
