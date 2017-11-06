@@ -1,7 +1,7 @@
 /***************************************************************************
 *  $MCI Módulo de implementação: Módulo de teste específico
 *
-*  Arquivo gerado:              testedis.c
+*  Arquivo gerado:              TESTE.C
 *  Letras identificadoras:      TDIS
 *
 *  Nome da base de software:    Exemplo de teste automatizado
@@ -14,7 +14,6 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*       4.00   mrol  31/10/2017 Adicionar funções de altera
 *       3.00   mrol  08/09/2017 Uniformização da interface das funções e
 *                               de todas as condições de retorno.
 *       2.00   pg   06/09/2017 Eliminação de código duplicado, reestruturação
@@ -67,6 +66,8 @@
 *                      - chama a função DIS_altera_criterio()
 *     "=alteraementa" <Struct Disciplina> <Char>
 *                      - chama a função DIS_altera_ementa()
+*     "=obtemstu" <Struct Disciplina> <Char>
+*                      - chama a função DIS_situacaoAluno()
 *
 ***************************************************************************/
 
@@ -98,6 +99,7 @@
 #define     ALTERA_CRED_DIS     "=alteracred"
 #define     ALTERA_CRIAPV_DIS   "=alteractrapv"
 #define     ALTERA_EMENTA_DIS   "=alteraementa"
+#define		OBTEM_STU_ALUNO		"=obtemstu"
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -145,6 +147,13 @@ Disciplina *dis=NULL;
       int ValorEsperado33;
 	  int ValorObtido33;
 	  int index = 0 ;
+	  double g1;
+      double g2;
+      double g3;
+      double g4;
+      float media;
+      int resultado;
+
 
       TUR_CriaTurma(turma+index,"33WB",9,13,"Quarta",50);
 
@@ -411,9 +420,26 @@ Disciplina *dis=NULL;
       return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                               "Retorno errado ao alterar ementa.\n" );
    } /* fim ativa: DIS alterar ementa de disciplina */
+
+   		/* Testar DIS exibe situação de aluno nessa disciplina */
+	else if ( strcmp( ComandoTeste , OBTEM_STU_ALUNO ) == 0 )
+    {
+
+      NumLidos = LER_LerParametros( "ffffi", &g1, &g2, &g3, &g4,&CondRetEsperada ) ;
+      if ( NumLidos != 5 )
+      {
+        return TST_CondRetParm ;
+      } /* if */
+
+      CondRetObtido = DIS_situacaoAluno(dis,g1, g2, g3, g4, &media, &resultado) ;
+
+      return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+        "Retorno errado ao tentar obter codigo.\n" );
+
+    } /* fim ativa: Testar DIS exibe situação de aluno nessa disciplina */
    
 return TST_CondRetNaoConhec ;
 
-} /* Fim função:TDIS Efetuar operações de teste específicas para disciplina */
+} /* Fim função: DIS exibe turma a lista de turmas */
 
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
