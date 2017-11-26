@@ -26,7 +26,7 @@
 *	0.06 ngtgmp   27/09/2017  Inicio de integração com o módulo Critério de Aprovação
 *	0.07 ngtgmp   28/09/2017  Conclusão da integração com Critério de Aprovação
 *       0.08 mrol     26/10/2017   Adicionar funções de lista de turmas
-*	0.09 LL       31/10/2017  Adicionar funções de alterar 
+*	0.09 LL       31/10/2017  Adicionar funções de alterar
 
 ***************************************************************************/
 #include <string.h>
@@ -77,6 +77,9 @@ static int converte_criterio(Disciplina* d);
 DIS_tpCondRet DIS_exibe(Disciplina* d)
 {
   int criterio = converte_criterio(d);
+  #ifdef _DEBUG
+   assert( d != NULL ) ;
+  #endif
   if (d != NULL)
   {
     printf("\nNOME: %s \n CODIGO: %s \n CREDITOS: %d \n BIBLIOGRAFIA: %s \n EMENTA: %s \n CRITERIO: %d\n",d->nome, d->codigo, d->creditos, d->bibliografia,d->ementa, criterio);
@@ -190,13 +193,16 @@ int DIS_le_critAprov(void)
 	printf("Digite um criterio de aprovacao valido(de 1 a 5):\n");
 	scanf("%d", &criterio);
 	}while(criterio<1 || criterio>5);
-	return criterio;	
+	return criterio;
 }
 /***************************************************************************
 *
 *  Função: DIS obter bibliografia
 *  ****/
  DIS_tpCondRet DIS_get_bibliografia(Disciplina* dis, char** bibliografia) {
+  #ifdef _DEBUG
+    assert( dis != NULL ) ;
+  #endif
 	if (dis->bibliografia)
 	{
 		*bibliografia = (char*) calloc(MAX_BIBLIOGRAFIA, sizeof(char));
@@ -215,6 +221,9 @@ int DIS_le_critAprov(void)
 *  Função: DIS altera bibliografia
 *  ****/
  DIS_tpCondRet DIS_altera_bibliografia(Disciplina* dis, char* bibliografia) {
+   #ifdef _DEBUG
+     assert( dis != NULL ) ;
+   #endif
 	if(dis->bibliografia)
 	{
 		if(bibliografia == NULL)
@@ -224,7 +233,7 @@ int DIS_le_critAprov(void)
 		}
 		strcpy(dis->bibliografia,bibliografia);
 		return DIS_CondRetOK;
-	}	
+	}
 	return DIS_CondRetErroEstrutura;
 }/* Fim função: DIS altera bibliografia */
 /***************************************************************************
@@ -233,6 +242,9 @@ int DIS_le_critAprov(void)
 *  ****/
 DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo)
 {
+  #ifdef _DEBUG
+    assert( dis != NULL ) ;
+  #endif
 	if (dis->codigo)
 	{
 		*codigo = (char*) calloc (MAX_CODIGO, sizeof(char));
@@ -252,6 +264,9 @@ DIS_tpCondRet DIS_get_codigo(Disciplina* dis, char** codigo)
 *  ****/
 DIS_tpCondRet DIS_get_nome(Disciplina* dis, char** nome)
 {
+  #ifdef _DEBUG
+    assert( dis != NULL ) ;
+  #endif
   if(dis->nome){
    *nome = (char*) calloc (MAX_NOME, sizeof(char));
    if(nome == NULL)
@@ -270,6 +285,9 @@ DIS_tpCondRet DIS_get_nome(Disciplina* dis, char** nome)
 *  ****/
 DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa)
 {
+  #ifdef _DEBUG
+    assert( dis != NULL ) ;
+  #endif
   if(dis->ementa)
   {
 	*ementa = (char*) calloc (MAX_EMENTA, sizeof(char));
@@ -288,10 +306,13 @@ DIS_tpCondRet DIS_get_ementa(Disciplina* dis, char** ementa)
 *  Função: DIS altera ementa
 *  ****/
 DIS_tpCondRet DIS_altera_ementa(Disciplina *dis, char *ementa){
+  #ifdef _DEBUG
+    assert( dis != NULL ) ;
+  #endif
 	if(dis->ementa){
 		if(ementa == NULL){
 			printf("Parametro ementa nulo\n");
-			return DIS_CondRetParametroInvalido;	
+			return DIS_CondRetParametroInvalido;
 		}
 		strcpy(dis->ementa, ementa);
 		return DIS_CondRetOK;
@@ -304,6 +325,9 @@ DIS_tpCondRet DIS_altera_ementa(Disciplina *dis, char *ementa){
 *  ****/
 DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 {
+  #ifdef _DEBUG
+    assert( dis != NULL ) ;
+  #endif
 	if(dis->creditos)
 	{
 		if(dis->creditos<MIN_CREDITOS)
@@ -321,6 +345,9 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 *  Função: DIS altera creditos
 *  ****/
  DIS_tpCondRet DIS_altera_creditos (Disciplina* dis, int creditos) {
+   #ifdef _DEBUG
+     assert( dis != NULL ) ;
+   #endif
 	if(dis->creditos)
 	{
 		if(creditos <= 0)
@@ -338,6 +365,9 @@ DIS_tpCondRet DIS_get_creditos (Disciplina* dis, int *creditos)
 *  Função: DIS altera criterio
 *  ****/
 DIS_tpCondRet DIS_altera_criterio(Disciplina *d, int critAprov){
+    #ifdef _DEBUG
+      assert( d != NULL ) ;
+    #endif
     if(d->criAprov){
 		switch(critAprov){
 		case 1:
@@ -356,7 +386,7 @@ DIS_tpCondRet DIS_altera_criterio(Disciplina *d, int critAprov){
 			d->criAprov = CRI_Criterio05;
 			return DIS_CondRetOK;
 		}
-    }	
+    }
 	return DIS_CondRetErroEstrutura;
 }
 /* Fim função: DIS altera criterio */
@@ -403,6 +433,9 @@ DIS_tpCondRet DIS_gera_cmd(Disciplina** d)
 *  ****/
 DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa, int critAprov)
 {
+  #ifdef _DEBUG
+    assert( (*d) != NULL ) ;
+  #endif
   (*d) = (Disciplina*) calloc(1,sizeof(Disciplina));
   if((*d) == NULL)
 		return DIS_CondRetFaltouMemoria;
@@ -447,6 +480,9 @@ DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int credi
 *  ****/
 DIS_tpCondRet DIS_deleta_Disciplina (Disciplina **d)
 {
+  #ifdef _DEBUG
+    assert( (*d) != NULL ) ;
+  #endif
 	*d = NULL;
 	free(*d);
   return DIS_CondRetDisciplinaDeletada;
@@ -457,6 +493,9 @@ DIS_tpCondRet DIS_deleta_Disciplina (Disciplina **d)
 *  Função: DIS insere turma para a disciplina
 *  ****/
 DIS_tpCondRet DIS_insere_turma (Disciplina **d, Turma **t){
+  #ifdef _DEBUG
+    assert( (*d) != NULL ) ;
+  #endif
   if(*d != NULL){
    push_back((*d)->turmas, (void * )*t);
    return DIS_CondRetOK;
@@ -469,6 +508,9 @@ DIS_tpCondRet DIS_insere_turma (Disciplina **d, Turma **t){
 *  Função: DIS limpa lista de turmas para a disciplina
 *  ****/
 DIS_tpCondRet DIS_limpa_turma(Disciplina **d){
+  #ifdef _DEBUG
+    assert( (*d) != NULL ) ;
+  #endif
   if(*d != NULL){
     LIS_tpCondRet ret = clear((*d)->turmas);
     return DIS_CondRetOK;
@@ -484,7 +526,9 @@ DIS_tpCondRet DIS_exibe_todas_turmas(Disciplina **d){
   Turma *turma;
   unsigned int size ;
   LIS_tpCondRet ret ;
-
+  #ifdef _DEBUG
+    assert( (*d) != NULL ) ;
+  #endif
   ret = list_size( (*d)->turmas, &size ) ;
   if ( ret == LIS_CondRetListaVazia ){
 	return DIS_CondRetErroEstrutura;
@@ -504,6 +548,9 @@ DIS_tpCondRet DIS_exibe_todas_turmas(Disciplina **d){
 /* Fim função: DIS exibe lista de turmas para a disciplina */
 DIS_tpCondRet DIS_situacaoAluno(Disciplina* disc,float G1,float G2,float G3,float G4,float* media,int* situacao)
 {
+  #ifdef _DEBUG
+    assert( disc != NULL ) ;
+  #endif
 	disc->criAprov(G1, G2, G3, G4, media, situacao);
 	return DIS_CondRetOK;
 }
