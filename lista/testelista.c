@@ -75,6 +75,8 @@
 #define     CLEAR_LIST   "=clearlist"
 #define     FIRST_LIST   "=firstlist"
 
+/* os comandos a seguir somente operam em modo _DEBUG */
+#define VER_MEMORIA_CMD "=verificarmemoria" ;
 
 /*****  Código das funções exportadas pelo módulo  *****/
 
@@ -324,7 +326,20 @@ List *lst = NULL;
 
    } /* fim ativa: Testar deletar uma lista já criada */
 
-      return TST_CondRetNaoConhec ;
+  /* Verificar vazamento de memória */
+  #ifdef _DEBUG
 
-   } /* Fim função: TLIS Efetuar operações de teste específicas para lista */
+   else if ( strcmp( ComandoTeste , VER_MEMORIA_CMD ) == 0 )
+   {
+
+      CED_ExibirTodosEspacos( CED_ExibirTodos ) ;
+
+      return TST_CondRetOK ;
+
+   } /* fim ativa: Verificar vazamento de memória */
+  #endif
+
+  return TST_CondRetNaoConhec ;
+
+} /* Fim função: TLIS Efetuar operações de teste específicas para lista */
 /********** Fim do módulo de implementação: Módulo de teste específico **********/
