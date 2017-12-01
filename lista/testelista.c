@@ -60,6 +60,11 @@
 #include    "lerparm.h"
 #include    "listas.h"
 
+#ifdef _DEBUG
+	#include   "cespdin.h"
+	#include   "IdTiposEspaco.def"
+#endif
+
 /* Tabela dos nomes dos comandos de teste específicos */
 
 #define     GERA_LIST    "=geralist"
