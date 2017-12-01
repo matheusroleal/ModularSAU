@@ -25,7 +25,11 @@
 ***************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
+
+#define LISTA_OWN
 #include "listas.h"
+#undef LISTA_OWN
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: LIS Descritor de Lista
@@ -37,6 +41,21 @@
 ***********************************************************************/
 struct node
 {
+  #ifdef _DEBUG
+
+  	List pCabeca ;
+  	/* Ponteiro para cabeca
+  	*
+  	*$ED Descrição
+  	*   Todos os nós da lista devem apontar para a respectiva cabeça.
+  	*   Esse ponteiro corresponde a um identificador da lista para fins
+  	*   de verificação da integridade. */
+
+  	char Tipo ;
+  	/* Tipo do elemento */
+
+  #endif
+
 	struct node* next;	//Aponta para o próximo nó
 	struct node* prev;  //Aponta para o nó anterior
 	void* val;			//Aponta para variável val
@@ -55,12 +74,41 @@ struct list
 	Node* first;  //Aponta para o primeiro nó
 	Node* last;	  //Aponta para o último nó
 	Node* cursor; //Aponta para o nó cursor
+
+  #ifdef _DEBUG
+    char Tipo ;
+    /* Tipo do elemento */
+  #endif
 };
+
+/*****  Dados encapsulados no módulo  *****/
+#ifdef _DEBUG
+
+static char EspacoLixo[ 256 ] =
+	"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" ;
+/* Espaço de dados lixo usado ao testar */
+
+#endif
 /***************************************************************************
 *
 *  Função: LIS create list
 *  ****/
-LIS_tpCondRet createList(List** l){ (*l) = (List*) calloc(1, sizeof(List)); if(!l) return LIS_CondRetFaltouMemoria; (*l)->first = NULL; (*l)->last = NULL; (*l)->cursor = NULL; return LIS_CondRetOK; }
+LIS_tpCondRet createList(List** l){
+	(*l) = (List*) calloc(1, sizeof(List));
+	if(!l)
+		return LIS_CondRetFaltouMemoria;
+
+	(*l)->first = NULL;
+	(*l)->last = NULL;
+	(*l)->cursor = NULL;
+
+  #ifdef _DEBUG
+  	(*l)->Tipo = LIS_TipoEspacoCabeca;
+  	CED_DefinirTipoEspaco(pLista , LIS_TipoEspacoCabeca) ;
+  #endif
+
+	return LIS_CondRetOK;
+}
 /* Fim função: LIS create lista */
 /***************************************************************************
 *
@@ -110,6 +158,13 @@ LIS_tpCondRet push_back(List* l, void* val)
 		return LIS_CondRetFaltouMemoria;
 	Nnode->val = val;
 	Nnode->next = NULL;
+
+  #ifdef _DEBUG
+	   Nnode->pCabeca = (*l);
+     Nnode->Tipo = LIS_TipoEspacoNo;
+	   CED_DefinirTipoEspaco(pElem , LIS_TipoEspacoNo) ;
+  #endif
+
 	if(l->first == NULL)//Se a lista estiver vazia, primeiro nó = último nó = nó cursor.
 	{
 		l->first = Nnode;
@@ -122,7 +177,7 @@ LIS_tpCondRet push_back(List* l, void* val)
 		l->last->next = Nnode;
 	}
 	l->last = Nnode;
-	return LIS_CondRetOK;
+  return LIS_CondRetOK;
 } /* Fim função: LIS push back */
 /***************************************************************************
 *
@@ -131,11 +186,25 @@ LIS_tpCondRet push_back(List* l, void* val)
 LIS_tpCondRet push_front(List* l, void* val)
 {
 	Node* Nnode;
+
+  #ifdef _DEBUG
+      void * PonteiroVoid = NULL ;
+      int TipoEspaco = -1 ;
+      int Retorno = -1 ;
+  #endif
+
 	Nnode = (Node*) calloc(1, sizeof(Node));
 	if(!Nnode)
 		return LIS_CondRetFaltouMemoria;
 	Nnode->val = val;
 	Nnode->prev = NULL;
+
+  #ifdef _DEBUG
+	   Nnode->pCabeca = (*l);
+     Nnode->Tipo = LIS_TipoEspacoNo;
+	   CED_DefinirTipoEspaco(pElem , LIS_TipoEspacoNo) ;
+  #endif
+
 	if(l->first == NULL)
 	{
 		l->last = Nnode;
@@ -148,6 +217,18 @@ LIS_tpCondRet push_front(List* l, void* val)
 		l->first->prev = Nnode;
 	}
 	l->first = Nnode;
+
+  #ifdef _DEBUG
+      PonteiroVoid = (void *)(*l) ;
+      TipoEspaco = CED_ObterTipoEspaco(PonteiroVoid) ;
+
+      PonteiroVoid = (void *)Nnode ;
+      CED_DefinirTipoEspaco(PonteiroVoid, TipoEspaco) ;
+
+      PonteiroVoid = (void *)val ;
+      Retorno = CED_DefinirTipoEspaco(PonteiroVoid, TipoEspaco) ;
+  #endif
+
 	return LIS_CondRetOK;
 } /* Fim função: LIS push front */
 /***************************************************************************
@@ -225,9 +306,9 @@ LIS_tpCondRet pop_cursor(List* l, void** val)
 			/* Lista Vazia! */
 			return LIS_CondRetListaVazia;
 		}
-		
+
 		*val = l->cursor->val;
-	
+
 		if (l->first == l->last)
 		{
 		l->first = NULL;
@@ -253,7 +334,7 @@ LIS_tpCondRet get_val_cursor(List* l, void** val)
 	if(l->first == NULL) {
 		/* Lista Vazia! */
 		return LIS_CondRetListaVazia;
-	} 
+	}
 	*val = l->cursor->val;
 	return LIS_CondRetOK;
 }/* Fim função: LIS get val cursor */
@@ -327,7 +408,6 @@ LIS_tpCondRet prev(List* l)
 } /* Fim função: LIS prev */
 
 #ifdef _DEBUG
-
 /***************************************************************************
 *
 *  Função: ARV  &Verificar um nó de estrutura
@@ -359,36 +439,35 @@ LIS_tpCondRet prev(List* l)
 
 		if ( pNoParm->cursor != pNoParm->first && pNoParm->cursor->prev == NULL )
 		{
-			return LIS_CondRetErroEstrutura ; 
+			return LIS_CondRetErroEstrutura ;
 		}
 
 	  /* Verificar se é nó próximo se o nó não for o último */
 
 		if ( pNoParm->cursor != pNoParm->last && pNoParm->cursor->next == NULL )
 		{
-			return LIS_CondRetErroEstrutura ; 
+			return LIS_CondRetErroEstrutura ;
 		}
 
 	  /* Verificar se é o primeiro nó */
- 
+
 		if ( pNoParm->first == NULL )
 		{
-			return LIS_CondRetErroEstrutura ; 
+			return LIS_CondRetErroEstrutura ;
 		}
 
 	  /* Verificar se é o último nó */
- 
+
 		if ( pNoParm->last == NULL )
 		{
-			return LIS_CondRetErroEstrutura ; 
+			return LIS_CondRetErroEstrutura ;
 		}
 
-		// Teriamos ainda que verificar se os nós apontam para lixo? 
+		// Teriamos ainda que verificar se os nós apontam para lixo?
 
 #endif
 
 #ifdef _DEBUG
-
 /***************************************************************************
 *
 *  Função: ARV  &Deturpar lista
@@ -406,7 +485,7 @@ void LIS_Deturpar( void * pListParm ,
 
       pList = ( List * )( pListParm ) ;
 
-	  switch ( ModoDeturpar ) 
+	  switch ( ModoDeturpar )
 	  {
 
 	  /* Anula ponteiro corrente */
@@ -441,7 +520,7 @@ void LIS_Deturpar( void * pListParm ,
             break ;
 
          } /* fim ativa: Anula ponteiro inicial */
-		 
+
 	/* Anula próximo ponteiro */
 
          case DeturpaNextNulo :
@@ -466,4 +545,4 @@ void LIS_Deturpar( void * pListParm ,
 	  }
 		 // Não sabemos se temos que utilizar o Modo Deturpador
 }
-
+#endif

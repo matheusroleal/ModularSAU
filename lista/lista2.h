@@ -1,3 +1,5 @@
+#if ! defined( LISTA_ )
+#define LISTA_
 /***************************************************************************
 *
 *  $MCD Módulo de definição: Módulo Lista
@@ -27,6 +29,18 @@
 *	  Uma lista(list) contém um cabeçalho, com um nó apontanto para o primeiro item da lista, um apontando para o último e outro apontando para o nó cursor.
 *	  Nós(node(s)) são estrutura contendo o próximo nó e o anterior (duplamente encadeada) e contém um ponteiro para um valor (void*)
 ***************************************************************************/
+#if defined( LISTA_OWN )
+   #define LISTA_EXT
+#else
+   #define LISTA_EXT extern
+#endif
+
+#ifdef _DEBUG
+   #include   "conta.h"
+   #include   "cespdin.h"
+   #include "IdTiposEspaco.def"
+   #include    "generico.h"
+#endif
 
 typedef struct node Node;
 
@@ -157,7 +171,7 @@ LIS_tpCondRet pop_front(List* l, void** val);
 *  $FC Função: LIS pop cursor
 *
 *  $ED Descrição da função
-*    Remove o nó cursor da lista e retorna a referência para seu valor. 
+*    Remove o nó cursor da lista e retorna a referência para seu valor.
 *	 Caso o nó cursor seja o último nó, o cursor se torna o anterior, caso seja o primeiro
 *	 o cursor se torna o seguinte. Em qualquer outro caso o cursor se torna o próximo.
 *
@@ -208,3 +222,66 @@ LIS_tpCondRet next(List* l);//atualiza o cursor para o próximo nó
 *
 ***********************************************************************/
 LIS_tpCondRet prev(List* l);//atualiza o cursor para o nó anterior
+/***********************************************************************
+*
+*  $FC Função: LIS Deturpar Lista
+*
+*  $ED Descrição da função
+*     Provoca uma determinada falha numa lista.
+*     Serve como controle de teste da função LIS_VerificarLista
+*
+*  $EP Parâmetros
+*     pListParm   - Ponteiro para a cabeça da lista a ser deturpada
+*     ModoDeturpar     - Ação de deturpação (ver definição de LIS_tpModosDeturpacao)
+*
+*  $FV Valor retornado
+*     LIS_CondRetOk
+*     LIS_CondRetListaInexistente
+*     LIS_CondRetCorrenteIndefinido - caso não se tenha chamado a função
+*                                      LIS_AvancarElementoCorrente antes de
+*									   uma ação que deturpe um elemento da lista
+*     LIS_CondRetAcaoDeturpInexistente
+*
+***********************************************************************/
+
+#ifdef _DEBUG
+
+   LIS_tpCondRet LIS_DeturparLista( void * pListParm , LIS_tpModosDeturpacao ModoDeturpar ) ;
+
+#endif
+
+/***********************************************************************
+*
+*  $FC Função: LIS Verificar No de Lista
+*
+*  $ED Descrição da função
+*     Avalia se um no de uma lista está estruturalmente correta.
+*     Retorna o primeiro erro encontrado.
+*
+*  $EP Parâmetros
+*     pNoParm    - Ponteiro para no da lista a ser verificada
+*
+*  $FV Valor retornado
+*     Verificar os valores retornados citados anteriormente.
+*     Apenas o primeiro erro é retornado.
+*     A prioridade de retorno segue a ordem da declaração, então
+*         LIS_Verificar_ListaValida só é retornado se não for
+*         encontrada nenhuma das condições de erro anteriores.
+*     No caso de erros relativos à elementos, todos os elementos são
+*         avaliados e, somente após a passagem por todos os elementos,
+*         as condições seguintes de retorno são verificadas.
+*
+***********************************************************************/
+
+#ifdef _DEBUG
+
+  LIS_tpCondRet VerificarNo( void* pNoParm );
+
+#endif
+
+#undef LISTA_EXT
+
+/********** Fim do módulo de definição: LIS  Lista duplamente encadeada **********/
+
+#else
+#endif
