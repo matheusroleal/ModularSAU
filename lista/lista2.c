@@ -413,85 +413,164 @@ LIS_tpCondRet prev(List* l)
 *  Função: LIS  &Verificar a estrutura de uma lista
 *  ****/
 
-   LIS_tpCondRet LIS_Verificar( void* pNoParm )
+   LIS_tpCondRet VerificarNo( void* pNoParm )
    {
-
+      int Incrementador = 0;
       List* pNo = NULL;
-	  pNo = ( List * )( pNoParm ) ;
-
-
+      pNo = ( List * )( pNoParm ) ;
+      while(pNo->cursor != NULL)
+      {
+      
       /* Verificar se é nó estrutural */
 
          if ( pNoParm == NULL )
          {
-			/* CNT_contar */
+			CNT_CONTAR ("LIS_VerificaListaNula");
 			printf("Lista recebida aponta para NULL!\n\n");
-            return LIS_CondRetErroEstrutura ;
+            		Incrementador++;
 
          }
+
+	  /* Verificar se o cabeça aponta para o mesmo tipo do corrente */
+
+		 if (pNo->Tipo != pNo->cursor->Tipo)
+		 {
+			CNT_CONTAR ("LIS_VerificaTipoCabeca");
+			printf("No corrente aponta para um tipo diferente do no cabeca!\n\n");
+			Incrementador++;
+
+		 }
 
 	  /* Verificar se é nó corrente */
 
 		 if (pNo->cursor == NULL)
 		 {
-			/* CNT_contar */
+			CNT_CONTAR ("LIS_VerificaCorrenteNulo");
 			printf("No corrente aponta para NULL!\n\n");
-			return LIS_CondRetErroEstrutura ;
+			Incrementador++;
+
 		 }
 
 	  /* Verificar se é nó anterior se o nó não for o primeiro */
 
 		if ( pNo->cursor != pNo->first && pNo->cursor->prev == NULL )
 		{
-			/* CNT_contar */
+			CNT_CONTAR ("LIS_VerificaPrevNulo");
 			printf("Ponteiro para no anterior aponta para NULL!\n\n");
-			return LIS_CondRetErroEstrutura ;
+			Incrementador++;
+
 		}
 
 	  /* Verificar se é nó próximo se o nó não for o último */
 
 		if ( pNo->cursor != pNo->last && pNo->cursor->next == NULL )
 		{
-			/* CNT_contar */
+			CNT_CONTAR ("LIS_VerificaNextNulo");
 			printf("Ponteiro para o proximo no aponta para NULL!\n\n");
-			return LIS_CondRetErroEstrutura ;
+			Incrementador++;
+
 		}
 
 	  /* Verificar se é o primeiro nó */
 
 		if ( pNo->first == NULL )
 		{
-			/* CNT_contar */
+			CNT_CONTAR ("LIS_VerificaFirstNulo");
 			printf("Primeiro no aponta para NULL!\n\n");
-			return LIS_CondRetErroEstrutura ;
+			Incrementador++;
+
 		}
 
 	  /* Verificar se é o último nó */
 
 		if ( pNo->last == NULL )
 		{
-			/* CNT_contar */
+			CNT_CONTAR ("LIS_VerificaLastNulo");
 			printf("Ultimo no aponta para NULL!\n\n");
-			return LIS_CondRetErroEstrutura ;
+			Incrementador++;
+
+		}
+	  /* Verificar se o nó corrente é lixo */
+
+		 if (pNo->cursor == EspacoLixo)
+		 {
+			CNT_CONTAR ("LIS_VerificaCorrenteLixo");
+			printf("No corrente aponta para Lixo!\n\n");
+			Incrementador++;
+
+		 }
+
+	  /* Verificar se é nó anterior se o nó não for o primeiro */
+
+		if ( pNo->cursor != pNo->first && pNo->cursor->prev == EspacoLixo )
+		{
+			CNT_CONTAR ("LIS_VerificaPrevLixo");
+			printf("Ponteiro para no anterior aponta para Lixo!\n\n");
+			Incrementador++;
+
 		}
 
+	  /* Verificar se é nó próximo se o nó não for o último */
+
+		if ( pNo->cursor != pNo->last && pNo->cursor->next == EspacoLixo )
+		{
+			CNT_CONTAR ("LIS_VerificaNextLixo");
+			printf("Ponteiro para o proximo no aponta para Lixo!\n\n");
+			Incrementador++;
+
+		}
+
+	  /* Verificar se é o primeiro nó */
+
+		if ( pNo->first == EspacoLixo )
+		{
+			CNT_CONTAR ("LIS_VerificaFirstLixo");
+			printf("Primeiro no aponta para Lixo!\n\n");
+			Incrementador++;
+
+		}
+
+	  /* Verificar se é o último nó */
+
+		if ( pNo->last == EspacoLixo )
+		{
+			CNT_CONTAR ("LIS_VerificaLastLixo");
+			printf("Ultimo no aponta para Lixo!\n\n");
+			Incrementador++;
+
+		}
+		
 	  /* Verificar se o nó anterior ao próximo é o nó corrente */
 		/* Os dois casos verificam o encadeamento da lista */
 
 		if (  pNo->cursor != pNo->last && pNo->cursor->next->prev != pNo->cursor )
 		{
-			/* CNT_contar */
+			CNT_CONTAR ("LIS_VerificaProximoDesencadeado");
 			printf("O no anterior do proximo nao e o no corrente!\n\n");
-			return LIS_CondRetErroEstrutura ;
+			Incrementador++;
+
 		}
 
 		if (  pNo->cursor != pNo->first && pNo->cursor->prev->next != pNo->cursor )
 		{
-			/* CNT_contar */
+			CNT_CONTAR ("LIS_VerificaAnteriorDesencadeado");
 			printf("O proximo no do anterior nao e o no corrente!\n\n");
-			return LIS_CondRetErroEstrutura ;
+			Incrementador++;
+
 		}
 
+		pNo->cursor=pNo->cursor->next;
+	}
+
+	if (Incrementador == 0 )
+	{
+		
+		return LIS_CondRetOK ;	
+
+	}
+	
+	return LIS_CondErroEstrutura ;
+  
  }
 
 #endif
@@ -502,21 +581,31 @@ LIS_tpCondRet prev(List* l)
 *  Função: LIS  &Deturpar lista
 *  ****/
 
-LIS_tpCondRet LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
+void LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
 {
 	   List * pList = NULL ;
 
 
       if ( pListParm == NULL )
       {
-         return LIS_;
+         return LIS_CondRetListaVazia ;
       } /* if */
 
       pList = ( List * )( pListParm ) ;
 
 	  switch ( ModoDeturpar )
 	  {
+		 /* Deturpa Tipo do No */
 
+		 case DeturpaTipoNo :
+		 {
+
+		    pList->cursor->Tipo = 'f' ;
+
+		    break ;
+
+		 } /* fim ativa: Deturpa Tipo do No */
+		
 		  /* Anula ponteiro corrente */
 
 		 case DeturpaCursorNulo :
@@ -588,29 +677,24 @@ LIS_tpCondRet LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar
 		        break ;
 
 		 } /* fim ativa: Anula ponteiro anterior */
-
+		
 		/* Anula valor corrente */
 
-		 case DeturpaValNulo :
+		 case DeturpaValorNulo :
 		 {
-		 	if ( pList->cursor == NULL )
-			{
-
-				return LIS_CondRetCursorNulo ;
-
-			}
+		 	
 		 	pList->cursor->val = NULL ;
 
 		        break ;
 
 		 } /* fim ativa: Anula valor corrente */
-
+		  
 		/* Coloca lixo no ponteiro corrente */
 
 		 case DeturpaCursorLixo :
 		 {
 
-		    pList->cursor = ( List * ) EspacoLixo ;
+		    pList->cursor = ( Node * ) EspacoLixo ;
 
 		    break ;
 
@@ -621,7 +705,7 @@ LIS_tpCondRet LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar
 		 case DeturpaLastLixo :
 		 {
 
-		    pList->last = ( List * ) EspacoLixo ;
+		    pList->last = ( Node * ) EspacoLixo ;
 
 		    break ;
 
@@ -632,7 +716,7 @@ LIS_tpCondRet LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar
 		 case DeturpaFirstLixo :
 		 {
 
-		    pList->first = ( List * ) EspacoLixo ;
+		    pList->first = ( Node * ) EspacoLixo ;
 
 		    break ;
 
@@ -648,7 +732,7 @@ LIS_tpCondRet LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar
 				return LIS_CondRetCursorNulo ;
 
 			}
-		        pList->cursor->next = ( List * ) EspacoLixo ;
+		        pList->cursor->next = ( Node * ) EspacoLixo ;
 
 		        break ;
 
@@ -664,7 +748,7 @@ LIS_tpCondRet LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar
 				return LIS_CondRetCursorNulo ;
 
 			}
-		        pList->cursor->prev = ( List * ) EspacoLixo ;
+		        pList->cursor->prev = ( Node * ) EspacoLixo ;
 
 		        break ;
 
@@ -700,29 +784,21 @@ LIS_tpCondRet LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar
 
 	        } /* fim ativa: Desencadeia o próximo nó do nó corrente */
 
-
+	
 		 /* Atribui valor fora do domínio do espaço */
 
-		 case DeturpaValor :
-		 {
-		 	if ( pList->cursor == NULL )
-			{
-
-				return LIS_CondRetCursorNulo ;
-
-			}
-
-		       /*Podemos realizar a deturpação desta forma?
-		  memcpy( &( pList->cursor->val ) , "<<<<<" , 5 ) ; */
-		        pList->cursor->val = ( char ) EspacoLixo ;
+		 case DeturpaValorLixo :
+		 {  
+			 
+		        pList->cursor->val = ( void * ) EspacoLixo ;
 
 		        break ;
-
+			
 		 }
-
+			 
 		 /* fim ativa: Atribui valor fora do domínio do espaço */
 
 	}
-	return LIS_CondRetOK ;
+	return LIS_CondRetOK ;	
 }
 #endif
