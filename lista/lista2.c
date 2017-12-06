@@ -410,77 +410,106 @@ LIS_tpCondRet prev(List* l)
 #ifdef _DEBUG
 /***************************************************************************
 *
-*  Função: ARV  &Verificar um nó de estrutura
+*  Função: LIS  &Verificar a estrutura de uma lista
 *  ****/
 
    LIS_tpCondRet VerificarNo( void* pNoParm )
    {
 
       List* pNo = NULL;
+	  pNo = ( List * )( pNoParm ) ;
+	  
 
       /* Verificar se é nó estrutural */
 
          if ( pNoParm == NULL )
          {
-          //  TST_NotificarFalha( "Tentou verificar nó inexistente." ) ; Não sabemos o uso disto e se é necessário.
+			/* CNT_contar */
+			printf("Lista recebida aponta para NULL!\n\n");
             return LIS_CondRetErroEstrutura ;
 
          }
 
 	  /* Verificar se é nó corrente */
 
-		 if (pNoParm->cursor == NULL)
+		 if (pNo->cursor == NULL)
 		 {
-
+			/* CNT_contar */
+			printf("No corrente aponta para NULL!\n\n");
 			return LIS_CondRetErroEstrutura ;
 		 }
 
 	  /* Verificar se é nó anterior se o nó não for o primeiro */
 
-		if ( pNoParm->cursor != pNoParm->first && pNoParm->cursor->prev == NULL )
+		if ( pNo->cursor != pNo->first && pNo->cursor->prev == NULL )
 		{
+			/* CNT_contar */
+			printf("Ponteiro para no anterior aponta para NULL!\n\n");
 			return LIS_CondRetErroEstrutura ;
 		}
 
 	  /* Verificar se é nó próximo se o nó não for o último */
 
-		if ( pNoParm->cursor != pNoParm->last && pNoParm->cursor->next == NULL )
+		if ( pNo->cursor != pNo->last && pNo->cursor->next == NULL )
 		{
+			/* CNT_contar */
+			printf("Ponteiro para o proximo no aponta para NULL!\n\n");
 			return LIS_CondRetErroEstrutura ;
 		}
 
 	  /* Verificar se é o primeiro nó */
 
-		if ( pNoParm->first == NULL )
+		if ( pNo->first == NULL )
 		{
+			/* CNT_contar */
+			printf("Primeiro no aponta para NULL!\n\n");
 			return LIS_CondRetErroEstrutura ;
 		}
 
 	  /* Verificar se é o último nó */
 
-		if ( pNoParm->last == NULL )
+		if ( pNo->last == NULL )
 		{
+			/* CNT_contar */
+			printf("Ultimo no aponta para NULL!\n\n");
+			return LIS_CondRetErroEstrutura ;
+		}
+		
+	  /* Verificar se o nó anterior ao próximo é o nó corrente */
+		/* Os dois casos verificam o encadeamento da lista */
+
+		if (  pNo->cursor != pNo->last && pNo->cursor->next->prev != pNo->cursor )
+		{
+			/* CNT_contar */
+			printf("O no anterior do proximo nao e o no corrente!\n\n");
 			return LIS_CondRetErroEstrutura ;
 		}
 
-		// Teriamos ainda que verificar se os nós apontam para lixo?
+		if (  pNo->cursor != pNo->first && pNo->cursor->prev->next != pNo->cursor )
+		{
+			/* CNT_contar */
+			printf("O proximo no do anterior nao e o no corrente!\n\n");
+			return LIS_CondRetErroEstrutura ;
+		}
+  
+ }
 
 #endif
 
 #ifdef _DEBUG
 /***************************************************************************
 *
-*  Função: ARV  &Deturpar lista
+*  Função: LIS  &Deturpar lista
 *  ****/
 
-void LIS_Deturpar( void * pListParm ,
-                      LIS_tpModosDeturpacao ModoDeturpar )
+void LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
 {
 	   List * pList = NULL ;
 
+
       if ( pListParm == NULL )
       {
-         return ;
+         return LIS_;
       } /* if */
 
       pList = ( List * )( pListParm ) ;
@@ -488,61 +517,212 @@ void LIS_Deturpar( void * pListParm ,
 	  switch ( ModoDeturpar )
 	  {
 
-	  /* Anula ponteiro corrente */
+		  /* Anula ponteiro corrente */
 
-         case DeturpaCursorNulo :
-         {
+		 case DeturpaCursorNulo :
+		 {
+		 	if ( pList->cursor == NULL )
+			{
 
-            pList->cursor = NULL ;
+				return LIS_CondRetCursorNulo ;
 
-            break ;
+			}
 
-         } /* fim ativa: Anula ponteiro corrente */
+		        pList->cursor = NULL ;
 
-      /* Anula ponteiro final */
+		        break ;
 
-         case DeturpaLastNulo :
-         {
+		 } /* fim ativa: Anula ponteiro corrente */
 
-            pList->last = NULL ;
+	      /* Anula ponteiro final */
 
-            break ;
+		 case DeturpaLastNulo :
+		 {
 
-         } /* fim ativa: Anula ponteiro final */
+		    pList->last = NULL ;
 
-	/* Anula ponteiro inicial */
+		    break ;
 
-         case DeturpaFirstNulo :
-         {
+		 } /* fim ativa: Anula ponteiro final */
 
-            pList->first = NULL ;
+		/* Anula ponteiro inicial */
 
-            break ;
+		 case DeturpaFirstNulo :
+		 {
 
-         } /* fim ativa: Anula ponteiro inicial */
+		    pList->first = NULL ;
 
-	/* Anula próximo ponteiro */
+		    break ;
 
-         case DeturpaNextNulo :
-         {
+		 } /* fim ativa: Anula ponteiro inicial */
 
-            pList->cursor->next = NULL ;
+		/* Anula próximo ponteiro */
 
-            break ;
+		 case DeturpaNextNulo :
+		 {
+		 	if ( pList->cursor == NULL )
+			{
 
-         } /* fim ativa: Anula próximo ponteiro */
+				return LIS_CondRetCursorNulo ;
 
-	/* Anula ponteiro anterior */
+			}
 
-         case DeturpaPrevNulo :
-         {
+		    	pList->cursor->next = NULL ;
 
-            pList->cursor->prev = NULL ;
+		    break ;
 
-            break ;
+		 } /* fim ativa: Anula próximo ponteiro */
 
-         } /* fim ativa: Anula ponteiro anterior */
-	  }
-		 // Não sabemos se temos que utilizar o Modo Deturpador
+		/* Anula ponteiro anterior */
+
+		 case DeturpaPrevNulo :
+		 {
+		 	if ( pList->cursor == NULL )
+			{
+
+				return LIS_CondRetCursorNulo ;
+
+			}
+		 	pList->cursor->prev = NULL ;
+
+		        break ;
+
+		 } /* fim ativa: Anula ponteiro anterior */
+		
+		/* Anula valor corrente */
+
+		 case DeturpaValNulo :
+		 {
+		 	if ( pList->cursor == NULL )
+			{
+
+				return LIS_CondRetCursorNulo ;
+
+			}
+		 	pList->cursor->val = NULL ;
+
+		        break ;
+
+		 } /* fim ativa: Anula valor corrente */
+		  
+		/* Coloca lixo no ponteiro corrente */
+
+		 case DeturpaCursorLixo :
+		 {
+
+		    pList->cursor = ( List * ) EspacoLixo ;
+
+		    break ;
+
+		 } /* fim ativa: Coloca lixo no ponteiro corrente */
+
+	      /* Coloca lixo no ponteiro final */
+
+		 case DeturpaLastLixo :
+		 {
+
+		    pList->last = ( List * ) EspacoLixo ;
+
+		    break ;
+
+		 } /* fim ativa: Coloca lixo no ponteiro final */
+
+		/* Coloca lixo no ponteiro inicial */
+
+		 case DeturpaFirstLixo :
+		 {
+
+		    pList->first = ( List * ) EspacoLixo ;
+
+		    break ;
+
+		 } /* fim ativa: Coloca lixo no ponteiro inicial */
+
+		/* Coloca lixo no  próximo ponteiro */
+
+		 case DeturpaNextLixo :
+		 {
+		 	if ( pList->cursor == NULL )
+			{
+
+				return LIS_CondRetCursorNulo ;
+
+			}
+		        pList->cursor->next = ( List * ) EspacoLixo ;
+
+		        break ;
+
+		 } /* fim ativa: Coloca lixo no próximo ponteiro */
+
+		/* Coloca lixo no ponteiro anterior */
+
+		 case DeturpaPrevLixo :
+		 {
+		 	if ( pList->cursor == NULL )
+			{
+
+				return LIS_CondRetCursorNulo ;
+
+			}
+		        pList->cursor->prev = ( List * ) EspacoLixo ;
+
+		        break ;
+
+		 } /* fim ativa: Coloca lixo no ponteiro anterior */
+
+		/* Desencadeia o nó anterior ao nó corrente */
+
+		 case DeturpaDesencadeiaNoPrev :
+		{
+			if ( pList->cursor != pList->first )
+			{
+
+				pList->cursor->prev->next = NULL;
+
+				break ;
+
+			}
+
+	         } /* fim ativa: Desencadeia o próximo nó do nó corrente */
+
+		/* Desencadeia o próximo nó do nó corrente */
+
+		 case DeturpaDesencadeiaNoNext :
+		{
+			if ( pList->cursor != pList->last )
+			{
+
+				pList->cursor->next->prev = NULL;
+
+				break ;
+
+			}
+
+	        } /* fim ativa: Desencadeia o próximo nó do nó corrente */
+
+	
+		 /* Atribui valor fora do domínio do espaço */
+
+		 case DeturpaValor :
+		 {  
+		 	if ( pList->cursor == NULL )
+			{
+
+				return LIS_CondRetCursorNulo ;
+
+			}
+
+		       /*Podemos realizar a deturpação desta forma?
+		  memcpy( &( pList->cursor->val ) , "<<<<<" , 5 ) ; */
+		        pList->cursor->val = ( char ) EspacoLixo ;
+
+		        break ;
+			
+		 }
+			 
+		 /* fim ativa: Atribui valor fora do domínio do espaço */
+
+	}
+	return LIS_CondRetOK ;	
 }
 #endif
