@@ -11,25 +11,7 @@
 =declararparm  Vazia        int 1
 =declararparm  Memoria      int 2
 =declararparm  NoFinal      int 3
-=declararparm  NoInicio     int 4
-=declararparm  ErroEstrut   int 5
-=declararparm  CursorNulo   int 6
-
-=declararparm  DetTipoNo       int 0
-=declararparm  DetCursorNulo   int 1
-=declararparm  DetLastNulo     int 2
-=declararparm  DetFirstNulo    int 3
-=declararparm  DetNextNulo     int 4
-=declararparm  DetPrevNulo     int 5
-=declararparm  DetValorNulo    int 6
-=declararparm  DetCursorLixo   int 7
-=declararparm  DetLastLixo     int 8
-=declararparm  DetFirstLixo    int 9
-=declararparm  DetNextLixo     int 10
-=declararparm  DetPrevLixo     int 11
-=declararparm  DetValorLixo    int 12
-=declararparm  DetDesencPrev   int 13
-=declararparm  DetDesencNext   int 14
+=declararparm  NoInicio     int 3
 
 == Declarar os conteudos
 =declararparm  listaTam  int  0
