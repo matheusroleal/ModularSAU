@@ -60,7 +60,14 @@ struct list
 *
 *  Função: LIS create list
 *  ****/
-LIS_tpCondRet createList(List** l){ (*l) = (List*) calloc(1, sizeof(List)); if(!l) return LIS_CondRetFaltouMemoria; (*l)->first = NULL; (*l)->last = NULL; (*l)->cursor = NULL; return LIS_CondRetOK; }
+LIS_tpCondRet createList(List** l){ 
+	(*l) = (List*) calloc(1, sizeof(List)); 
+		if(!l) return LIS_CondRetFaltouMemoria; 
+			
+	  (*l)->first = NULL; 
+	(*l)->last = NULL; 
+	(*l)->cursor = NULL;
+	return LIS_CondRetOK; }
 /* Fim função: LIS create lista */
 /***************************************************************************
 *
