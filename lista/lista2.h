@@ -60,12 +60,13 @@ typedef struct list List;
      LIS_CondRetFaltouMemoria = 2 ,
      /* Faltou memória ao alocar dados */
      LIS_CondRetCursorNoFinal = 3,
-	 /* Impossível obter próximo */
-	 LIS_CondRetCursorNoInicio = 4,
-	 /* Impossível obter anterior*/
-	 LIS_CondRetErroEstrutura  = 5
-	 /* Erro de Estrutura */
-
+     /* Impossível obter próximo */
+     LIS_CondRetCursorNoInicio = 4,
+     /* Impossível obter anterior*/
+     LIS_CondRetErroEstrutura  = 5,
+     /* Erro de Estrutura */
+     LIS_CondRetCursorNulo = 6
+     /* No corrente e nulo */
    }LIS_tpCondRet;
 
    /***********************************************************************
@@ -79,8 +80,8 @@ typedef struct list List;
 
    typedef enum {
 
-         DeturpaCursorNulo      =  1 ,
-               /* Anula ponteiro corrente */
+         	 DeturpaCursorNulo      =  1 ,
+               		   /* Anula ponteiro corrente */
 		 DeturpaLastNulo	    =  2 ,
 			   /* Anula ponteiro Last */
 		 DeturpaFirstNulo		=  3 ,
@@ -90,15 +91,21 @@ typedef struct list List;
 		 DeturpaPrevNulo	    =  5 ,
 			   /* Anula ponteiro Prev */
 		 DeturpaCursorLixo      =  6 ,
-               /* Faz corrente apontar para lixo */
+               		   /* Coloca lixo no ponteiro corrente */
 		 DeturpaLastLixo	    =  7 ,
-			   /* Faz Last apontar para lixo */
+			   /* Coloca lixo no ponteiro Last */
 		 DeturpaFirstLixo		=  8 ,
-			   /* Faz First apontar para lixo */
+			   /* Coloca lixo no ponteiro First */
 		 DeturpaNextLixo		=  9 ,
-			   /* Faz Next apontar para lixo */
+			   /* Coloca lixo no ponteiro Next */
 		 DeturpaPrevLixo	    =  10 ,
-			   /* Faz Prev apontar para lixo */
+			   /* Coloca lixo no ponteiro Prev */ 
+	   	 DeturpaValorLixo	    =  11 ,
+			   /* Coloca lixo no Valor */ 
+		 DeturpaDesencadeiaNoPrev   = 12 ,
+			   /* Desencadeia nó anterior ao corrente */
+		 DeturpaDesencadeiaNoNext  = 13
+		       /* Desencadeia nó posterior ao nó corrente */
 
    } LIS_tpModosDeturpacao ;
 
