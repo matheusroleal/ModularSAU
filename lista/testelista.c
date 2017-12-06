@@ -349,16 +349,13 @@ List *lst = NULL;
 		else if (strcmp(ComandoTeste , DETURPAR_CMD) == 0)
 		{
 
-			numLidos = LER_LerParametros("i" , &IntEsperado) ;
+			numLidos = LER_LerParametros("ii" , &IntEsperado, &CondRetEsperada) ;
 
 			if (numLidos != 1)
 			{
 				return TST_CondRetParm ;
 			} /* if */
-
-			LIS_Deturpar(lst, IntEsperado) ;
-
-			return TST_CondRetOK ;
+			return TST_CompararInt(CondRetEsperada,	LIS_Deturpar(lst, IntEsperado) ,	"Retorno incorreto ao deturpar lista.");
 
 		} /* fim ativa: Deturpar uma lista */
 
@@ -366,12 +363,12 @@ List *lst = NULL;
 		else if (strcmp(ComandoTeste , VER_LISTA_CMD) == 0)
 		{
 
-		numLidos = LER_LerParametros("i" , &CondRetEsp) ;
+		numLidos = LER_LerParametros("i" , &CondRetEsperada) ;
 		if (numLidos != 1){
 			return TST_CondRetParm ;
 		} /* if */
 
-		return TST_CompararInt(CondRetEsp ,	LIS_Verificar(lst) ,	"Retorno incorreto ao verificar lista.") ;
+		return TST_CompararInt(CondRetEsperada,	LIS_Verificar(lst) ,	"Retorno incorreto ao verificar lista.") ;
 
 		} /* fim ativa: Testar verificador de lista */
   #endif

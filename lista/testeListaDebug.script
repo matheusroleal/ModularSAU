@@ -1,0 +1,126 @@
+// Script:    TesteListaDebug.script
+// Autores:   Matheus Rodrigues de Oliveira Leal
+// Data:      6/12/2017
+// Propósito: Testar o módulo lista genérica duplamente encadeada - instrumentação
+
+== Declarar as condicoes de retorno
+=declararparm  OK           int 0
+=declararparm  Vazia        int 1
+=declararparm  Memoria      int 2
+=declararparm  NoFinal      int 3
+=declararparm  NoInicio     int 3
+
+== Declarar as ações do Deturparlista
+=declararparm  EliminaCorrente                int
+=declararparm  NULLpProx                      int
+=declararparm  LixopProx                      int
+=declararparm  NULLpValorCorrente             int
+=declararparm  DesencadeiaSemFree             int
+=declararparm  AumentaNumeroElementos         int
+=declararparm  NULLpUltimo                    int
+=declararparm  NumeroDeElementosNegativo      int
+
+== Declarar retornos do VerificarLista
+=declararparm  Cabeca_pUltimoNULL             int
+=declararparm  Cabeca_NumElemenInvalido       int
+=declararparm  Cabeca_pUltimoIncorreto        int
+=declararparm  Elemento_ErroEncadeamento      int
+=declararparm  Elemento_pValorNULL            int
+=declararparm  Cabeca_NumElemenInconsistente  int
+=declararparm  Lista_VazamentoDeMemoria       int
+=declararparm  ListaValida                    int
+
+== Declarar os conteudos
+=declararparm  listaTam  int  0
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "Lista"
+=iniciarcontagem
+
+== Problema na Cabeca - ponteiro para Ultimo eh NULL
+=geralist OK
+=pushf OK
+=deturparlista   NULLpUltimo OK
+=verificarlista  Cabeca_pUltimoNULL
+=dellist OK
+
+== Problema na Cabeca - Numero de elementos eh incorreto
+=geralist OK
+=pushf OK
+=deturparlista  AumentaNumeroElementos OK
+=verificarlista Cabeca_NumElemenInconsistente
+=dellist OK
+
+== Problema na Cabeca - Numero de elementos eh invalido
+=geralist OK
+=pushf OK
+=deturparlista NumeroDeElementosNegativo OK
+=verificarlista Cabeca_NumElemenInvalido
+=dellist OK
+
+== Problema na Cabeca - ponteiro para Ultimo eh incorreto
+=geralist OK
+=pushf OK
+=firstlist OK
+=deturparlista LixopProx OK
+=verificarlista Cabeca_pUltimoIncorreto
+=dellist OK
+
+== Problema no Elemento - pProximo eh NULL e Elemento não é ultimo
+=geralist OK
+=pushf OK
+=pushf OK
+=firstlist OK
+=deturparlista  NULLpProx OK
+=verificarlista Elemento_ErroEncadeamento
+=dellist OK
+
+== Problema no Elemento - pProximo esta incorreto
+=geralist OK
+=pushf OK
+=pushf OK
+=firstlist OK
+=deturparlista  LixopProx OK
+=verificarlista  Elemento_ErroEncadeamento
+=dellist OK
+
+== Problema no Elemento - elemento no meio eliminado incorretamente
+=geralist OK
+=pushf OK
+=pushf OK
+=pushf OK
+=firstlist OK
+=nextno OK
+=deturparlista  EliminaCorrente OK
+=verificarlista  Elemento_ErroEncadeamento
+
+== Problema no Elemento - pValor eh NULL
+=geralist OK
+=pushf OK
+=firstlist OK
+=deturparlista  NULLpValorCorrente OK
+=verificarlista Elemento_pValorNULL
+=dellist OK
+
+== Problema no Elemento - vazamento de memória
+=geralist OK
+=pushf OK
+=verificarlista ListaValida
+=deturparlista  DesencadeiaSemFree OK
+=verificarlista Lista_VazamentoDeMemoria
+
+== Verificar vazamento de memória
+=obternumeroespacosalocados 0
+
+== Terminar controlar contadores
+=pararcontagem
+=verificarcontagens    0
+
+== Registrar acumulador
+=registraracumulador   "Contadores"
+
+== Terminar contagem
+=terminarcontadores
+
+// fim

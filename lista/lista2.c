@@ -502,7 +502,7 @@ LIS_tpCondRet prev(List* l)
 *  Função: LIS  &Deturpar lista
 *  ****/
 
-void LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
+LIS_tpCondRet LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
 {
 	   List * pList = NULL ;
 

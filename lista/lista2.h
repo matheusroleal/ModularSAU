@@ -38,8 +38,8 @@
 #ifdef _DEBUG
    #include   "conta.h"
    #include   "cespdin.h"
-   #include "IdTiposEspaco.def"
-   #include    "generico.h"
+   #include   "IdTiposEspaco.def"
+   #include   "generico.h"
 #endif
 
 typedef struct node Node;
@@ -99,9 +99,9 @@ typedef struct list List;
 		 DeturpaNextLixo		=  9 ,
 			   /* Coloca lixo no ponteiro Next */
 		 DeturpaPrevLixo	    =  10 ,
-			   /* Coloca lixo no ponteiro Prev */ 
+			   /* Coloca lixo no ponteiro Prev */
 	   	 DeturpaValorLixo	    =  11 ,
-			   /* Coloca lixo no Valor */ 
+			   /* Coloca lixo no Valor */
 		 DeturpaDesencadeiaNoPrev   = 12 ,
 			   /* Desencadeia nó anterior ao corrente */
 		 DeturpaDesencadeiaNoNext  = 13
@@ -282,7 +282,7 @@ LIS_tpCondRet prev(List* l);//atualiza o cursor para o nó anterior
 
 #ifdef _DEBUG
 
-  LIS_tpCondRet VerificarNo( void* pNoParm );
+  LIS_tpCondRet LIS_Verificar( void* pNoParm );
 
 #endif
 
