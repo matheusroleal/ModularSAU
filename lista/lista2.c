@@ -413,12 +413,12 @@ LIS_tpCondRet prev(List* l)
 *  Função: LIS  &Verificar a estrutura de uma lista
 *  ****/
 
-   LIS_tpCondRet VerificarNo( void* pNoParm )
+   LIS_tpCondRet LIS_Verificar( void* pNoParm )
    {
 
       List* pNo = NULL;
 	  pNo = ( List * )( pNoParm ) ;
-	  
+
 
       /* Verificar se é nó estrutural */
 
@@ -474,7 +474,7 @@ LIS_tpCondRet prev(List* l)
 			printf("Ultimo no aponta para NULL!\n\n");
 			return LIS_CondRetErroEstrutura ;
 		}
-		
+
 	  /* Verificar se o nó anterior ao próximo é o nó corrente */
 		/* Os dois casos verificam o encadeamento da lista */
 
@@ -491,7 +491,7 @@ LIS_tpCondRet prev(List* l)
 			printf("O proximo no do anterior nao e o no corrente!\n\n");
 			return LIS_CondRetErroEstrutura ;
 		}
-  
+
  }
 
 #endif
@@ -588,7 +588,7 @@ void LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
 		        break ;
 
 		 } /* fim ativa: Anula ponteiro anterior */
-		
+
 		/* Anula valor corrente */
 
 		 case DeturpaValNulo :
@@ -604,7 +604,7 @@ void LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
 		        break ;
 
 		 } /* fim ativa: Anula valor corrente */
-		  
+
 		/* Coloca lixo no ponteiro corrente */
 
 		 case DeturpaCursorLixo :
@@ -700,11 +700,11 @@ void LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
 
 	        } /* fim ativa: Desencadeia o próximo nó do nó corrente */
 
-	
+
 		 /* Atribui valor fora do domínio do espaço */
 
 		 case DeturpaValor :
-		 {  
+		 {
 		 	if ( pList->cursor == NULL )
 			{
 
@@ -717,12 +717,12 @@ void LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
 		        pList->cursor->val = ( char ) EspacoLixo ;
 
 		        break ;
-			
+
 		 }
-			 
+
 		 /* fim ativa: Atribui valor fora do domínio do espaço */
 
 	}
-	return LIS_CondRetOK ;	
+	return LIS_CondRetOK ;
 }
 #endif

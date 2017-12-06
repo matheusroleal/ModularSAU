@@ -82,7 +82,8 @@
 
 /* os comandos a seguir somente operam em modo _DEBUG */
 #define VER_MEMORIA_CMD "=verificarmemoria" ;
-
+#define VER_LISTA_CMD "=verificarlista" ;
+#define DETURPAR_CMD  "=deturparlista" ;
 /*****  Código das funções exportadas pelo módulo  *****/
 
 
@@ -112,9 +113,10 @@ List *lst = NULL;
 
       /* inicializa para qualquer coisa */
       int ValorEsperado33 = 0;
+			int IntEsperado;
       void *structX = NULL;
-	  int NumLidos = -1;
-	  int a[3] = {10,120,570};
+	  	int NumLidos = -1;
+	  	int a[3] = {10,120,570};
       TST_tpCondRet Ret;
       /* Testar LST Gerar lista */
 
@@ -331,10 +333,10 @@ List *lst = NULL;
 
    } /* fim ativa: Testar deletar uma lista já criada */
 
-  /* Verificar vazamento de memória */
   #ifdef _DEBUG
 
-   else if ( strcmp( ComandoTeste , VER_MEMORIA_CMD ) == 0 )
+	/* Verificar vazamento de memória */
+   else if (strcmp( ComandoTeste , VER_MEMORIA_CMD ) == 0 )
    {
 
       CED_ExibirTodosEspacos( CED_ExibirTodos ) ;
@@ -342,6 +344,36 @@ List *lst = NULL;
       return TST_CondRetOK ;
 
    } /* fim ativa: Verificar vazamento de memória */
+
+	 /* Deturpar uma lista */
+		else if (strcmp(ComandoTeste , DETURPAR_CMD) == 0)
+		{
+
+			numLidos = LER_LerParametros("i" , &IntEsperado) ;
+
+			if (numLidos != 1)
+			{
+				return TST_CondRetParm ;
+			} /* if */
+
+			LIS_Deturpar(lst, IntEsperado) ;
+
+			return TST_CondRetOK ;
+
+		} /* fim ativa: Deturpar uma lista */
+
+		/* Verificar uma lista */
+		else if (strcmp(ComandoTeste , VER_LISTA_CMD) == 0)
+		{
+
+		numLidos = LER_LerParametros("i" , &CondRetEsp) ;
+		if (numLidos != 1){
+			return TST_CondRetParm ;
+		} /* if */
+
+		return TST_CompararInt(CondRetEsp ,	LIS_Verificar(lst) ,	"Retorno incorreto ao verificar lista.") ;
+
+		} /* fim ativa: Testar verificador de lista */
   #endif
 
   return TST_CondRetNaoConhec ;
