@@ -8,27 +8,30 @@
 =declararparm  Vazia        int 1
 =declararparm  Memoria      int 2
 =declararparm  NoFinal      int 3
-=declararparm  NoInicio     int 3
+=declararparm  NoInicio     int 4
 
 == Declarar as ações do Deturparlista
-=declararparm  EliminaCorrente                int
-=declararparm  NULLpProx                      int
-=declararparm  LixopProx                      int
-=declararparm  NULLpValorCorrente             int
-=declararparm  DesencadeiaSemFree             int
-=declararparm  AumentaNumeroElementos         int
-=declararparm  NULLpUltimo                    int
-=declararparm  NumeroDeElementosNegativo      int
+=declararparm  TipoNo              int  0 
+=declararparm  CursorNulo          int  1
+=declararparm  LastNulo            int  2
+=declararparm  FirstNulo           int  3
+=declararparm  NextNulo            int  4
+=declararparm  PrevNulo            int  5
+=declararparm  ValorNulo           int  6
+=declararparm  CursorLixo          int  7
+=declararparm  LastLixo            int  8
+=declararparm  FirstLixo           int  9 
+=declararparm  NextLixo            int  10
+=declararparm  PrevLixo            int  11
+=declararparm  ValorLixo           int  12
+=declararparm  DesencadeiaPrev     int  13
+=declararparm  DesencadeiaNext     int  14
+
 
 == Declarar retornos do VerificarLista
-=declararparm  Cabeca_pUltimoNULL             int
-=declararparm  Cabeca_NumElemenInvalido       int
-=declararparm  Cabeca_pUltimoIncorreto        int
-=declararparm  Elemento_ErroEncadeamento      int
-=declararparm  Elemento_pValorNULL            int
-=declararparm  Cabeca_NumElemenInconsistente  int
-=declararparm  Lista_VazamentoDeMemoria       int
-=declararparm  ListaValida                    int
+=declararparm  Ok              int  0
+=declararparm  ErroEstrutura   int  1
+
 
 == Declarar os conteudos
 =declararparm  listaTam  int  0
