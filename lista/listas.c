@@ -163,6 +163,16 @@ LIS_tpCondRet push_front(List* l, void* val)
 *  ****/
 LIS_tpCondRet pop_back(List* l, void** val)
 {
+	
+	#ifdef _DEBUG
+	if(l == NULL){
+		printf("Ponteiro lista eh nulo");
+		}
+	if(*val == NULL){
+		printf("Ponteiro val eh nulo");
+	}
+
+#endif
 	Node* tnode;
 	if(l->first == NULL) {
 		/* Lista Vazia! */
@@ -184,6 +194,16 @@ LIS_tpCondRet pop_back(List* l, void** val)
 	l->last = l->last->prev;
 	l->last->next = NULL;
 	tnode->prev = NULL;
+	
+	#ifdef _DEBUG
+	if(l->last == NULL){
+		printf("ultimo elemento da lista eh nulo");
+}
+	if(l->last->prev->next != l->last){
+		printf("Erro no encadeamento");
+
+}
+	#endif
 	return LIS_CondRetOK;
 } /* Fim função: LIS pop back */
 /***************************************************************************
