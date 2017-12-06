@@ -80,6 +80,8 @@ typedef struct list List;
 
    typedef enum {
 
+         	 DeturpaTipoNo         = 0,
+			   /* Deturpa o tipo do no */
          	 DeturpaCursorNulo      =  1 ,
                		   /* Anula ponteiro corrente */
 		 DeturpaLastNulo	    =  2 ,
@@ -90,21 +92,23 @@ typedef struct list List;
 			   /* Anula ponteiro Next */
 		 DeturpaPrevNulo	    =  5 ,
 			   /* Anula ponteiro Prev */
-		 DeturpaCursorLixo      =  6 ,
+		 DeturpaValorNulo           = 6 ,
+                           /*Anula Valor*/
+		 DeturpaCursorLixo      =  7 ,
                		   /* Coloca lixo no ponteiro corrente */
-		 DeturpaLastLixo	    =  7 ,
+		 DeturpaLastLixo	    =  8 ,
 			   /* Coloca lixo no ponteiro Last */
-		 DeturpaFirstLixo		=  8 ,
+		 DeturpaFirstLixo		=  9 ,
 			   /* Coloca lixo no ponteiro First */
-		 DeturpaNextLixo		=  9 ,
+		 DeturpaNextLixo		=  10 ,
 			   /* Coloca lixo no ponteiro Next */
-		 DeturpaPrevLixo	    =  10 ,
-			   /* Coloca lixo no ponteiro Prev */
-	   	 DeturpaValorLixo	    =  11 ,
-			   /* Coloca lixo no Valor */
-		 DeturpaDesencadeiaNoPrev   = 12 ,
+		 DeturpaPrevLixo	    =  11 ,
+			   /* Coloca lixo no ponteiro Prev */ 
+	   	 DeturpaValorLixo	    =  12 ,
+			   /* Coloca lixo no Valor */ 
+		 DeturpaDesencadeiaNoPrev   = 13 ,
 			   /* Desencadeia nó anterior ao corrente */
-		 DeturpaDesencadeiaNoNext  = 13
+		 DeturpaDesencadeiaNoNext  = 14
 		       /* Desencadeia nó posterior ao nó corrente */
 
    } LIS_tpModosDeturpacao ;
