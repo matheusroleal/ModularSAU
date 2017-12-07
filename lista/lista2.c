@@ -415,9 +415,29 @@ LIS_tpCondRet prev(List* l)
 
    LIS_tpCondRet VerificarNo( void* pNoParm )
    {
-      int Incrementador = 0;
-      List* pNo = NULL;
+
+      Node* No_Lixo = NULL ;   // No usado para verificacao de Lixo dentro dos Nos
+      Node* Prev = NULL ;      // No usado para verificacao de encadeamento do No anterior
+      Node* Next = NULL ;      // No usado para verificacao de encadeamento do No posterior
+      int Incrementador = 0 ;
+      List* pNo = NULL ;
+
       pNo = ( List * )( pNoParm ) ;
+
+      if( pNo->first != pNo->cursor ) // 
+      {
+
+      		Prev = pNo->cursor->prev;
+
+      }
+
+      if( pNo->last != pNo->cursor )
+      {
+
+      		Next = pNo->cursor->next;
+
+      }
+
       while(pNo->cursor != NULL)
       {
       
@@ -490,9 +510,12 @@ LIS_tpCondRet prev(List* l)
 			Incrementador++;
 
 		}
+		
+		No_Lixo = ( Node * ) EspacoLixo ;		
+
 	  /* Verificar se o nó corrente é lixo */
 
-		 if (pNo->cursor == EspacoLixo)
+		 if (pNo->cursor == No_Lixo)
 		 {
 			CNT_CONTAR ("LIS_VerificaCorrenteLixo");
 			printf("No corrente aponta para Lixo!\n\n");
@@ -502,7 +525,7 @@ LIS_tpCondRet prev(List* l)
 
 	  /* Verificar se é nó anterior se o nó não for o primeiro */
 
-		if ( pNo->cursor != pNo->first && pNo->cursor->prev == EspacoLixo )
+		if ( pNo->cursor != pNo->first && pNo->cursor->prev == No_Lixo )
 		{
 			CNT_CONTAR ("LIS_VerificaPrevLixo");
 			printf("Ponteiro para no anterior aponta para Lixo!\n\n");
@@ -512,7 +535,7 @@ LIS_tpCondRet prev(List* l)
 
 	  /* Verificar se é nó próximo se o nó não for o último */
 
-		if ( pNo->cursor != pNo->last && pNo->cursor->next == EspacoLixo )
+		if ( pNo->cursor != pNo->last && pNo->cursor->next == No_Lixo )
 		{
 			CNT_CONTAR ("LIS_VerificaNextLixo");
 			printf("Ponteiro para o proximo no aponta para Lixo!\n\n");
@@ -522,7 +545,7 @@ LIS_tpCondRet prev(List* l)
 
 	  /* Verificar se é o primeiro nó */
 
-		if ( pNo->first == EspacoLixo )
+		if ( pNo->first == No_Lixo )
 		{
 			CNT_CONTAR ("LIS_VerificaFirstLixo");
 			printf("Primeiro no aponta para Lixo!\n\n");
@@ -532,7 +555,7 @@ LIS_tpCondRet prev(List* l)
 
 	  /* Verificar se é o último nó */
 
-		if ( pNo->last == EspacoLixo )
+		if ( pNo->last == No_Lixo )
 		{
 			CNT_CONTAR ("LIS_VerificaLastLixo");
 			printf("Ultimo no aponta para Lixo!\n\n");
@@ -543,15 +566,17 @@ LIS_tpCondRet prev(List* l)
 	  /* Verificar se o nó anterior ao próximo é o nó corrente */
 		/* Os dois casos verificam o encadeamento da lista */
 
-		if (  pNo->cursor != pNo->last && pNo->cursor->next->prev != pNo->cursor )
+
+		if (  pNo->cursor != pNo->last && Next->prev != pNo->cursor )
 		{
 			CNT_CONTAR ("LIS_VerificaProximoDesencadeado");
 			printf("O no anterior do proximo nao e o no corrente!\n\n");
 			Incrementador++;
 
 		}
+		
 
-		if (  pNo->cursor != pNo->first && pNo->cursor->prev->next != pNo->cursor )
+		if (  pNo->cursor != pNo->first && Prev->next != pNo->cursor )
 		{
 			CNT_CONTAR ("LIS_VerificaAnteriorDesencadeado");
 			printf("O proximo no do anterior nao e o no corrente!\n\n");
