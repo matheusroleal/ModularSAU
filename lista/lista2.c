@@ -584,6 +584,34 @@ LIS_tpCondRet prev(List* l)
 
 		}
 
+		if ( pNo->cursor->prev == NULL )
+		{
+			if ( pNo->first != pNo->cursor )
+			{
+
+				CNT_CONTAR("LIS_VerificaFirstDesencadeado");
+				printf("O no que nao tem anterior nao e o primeiro no!\n\n");
+			        Incrementador++;
+	
+			}
+		
+
+		}
+
+		if ( pNo->cursor->next == NULL )
+		{
+			if ( pNo->last != pNo->cursor )
+			{
+
+				CNT_CONTAR("LIS_VerificaLastDesencadeado");
+				printf("O no que nao tem posterior nao e o ultimo no!\n\n");
+			        Incrementador++;
+	
+			}
+		
+
+		}
+
 		pNo->cursor=pNo->cursor->next;
 	}
 
@@ -809,6 +837,35 @@ void LIS_Deturpar( void * pListParm, LIS_tpModosDeturpacao ModoDeturpar )
 
 	        } /* fim ativa: Desencadeia o próximo nó do nó corrente */
 
+		/* Desencadeia o primeiro nó */
+
+		 case DeturpaDesencadeiaFirst :
+		{
+			if ( pList->cursor == pList->first )
+			{
+
+				pList->cursor->prev = ( Node * ) EspacoLixo;
+
+				break ;
+
+			}
+
+	        } /* fim ativa: Desencadeia o primeiro nó */
+
+		/* Desencadeia o ultimo nó */
+
+		 case DeturpaDesencadeiaLast :
+		{
+			if ( pList->cursor == pList->last )
+			{
+
+				pList->cursor->next = ( Node * ) EspacoLixo;
+
+				break ;
+
+			}
+
+	        } /* fim ativa: Desencadeia o ultimo nó */
 	
 		 /* Atribui valor fora do domínio do espaço */
 
