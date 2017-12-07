@@ -108,8 +108,12 @@ typedef struct list List;
 			   /* Coloca lixo no Valor */ 
 		 DeturpaDesencadeiaNoPrev   = 13 ,
 			   /* Desencadeia nó anterior ao corrente */
-		 DeturpaDesencadeiaNoNext  = 14
-		       /* Desencadeia nó posterior ao nó corrente */
+		 DeturpaDesencadeiaNoNext  = 14 ,
+		           /* Desencadeia nó posterior ao nó corrente */
+		 DeturpaDesencadeiaFirst   = 15 ,
+			   /* Desencadeia nó first */
+		 DeturpaDesencadeiaLast  = 16
+		           /* Desencadeia nó last */
 
    } LIS_tpModosDeturpacao ;
 
