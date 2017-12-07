@@ -416,14 +416,22 @@ LIS_tpCondRet prev(List* l)
    LIS_tpCondRet VerificarNo( void* pNoParm )
    {
 
+      void* PonteiroVoid = NULL ;
       Node* No_Lixo = NULL ;   // No usado para verificacao de Lixo dentro dos Nos
       Node* Prev = NULL ;      // No usado para verificacao de encadeamento do No anterior
       Node* Next = NULL ;      // No usado para verificacao de encadeamento do No posterior
       int Incrementador = 0 ;
+      int Tipo_Cabeca =-1 ;
+      int Tipo_No = -1 ;
       List* pNo = NULL ;
 
       pNo = ( List * )( pNoParm ) ;
 
+      PonteiroVoid = ( void * ) pNo ;
+      Tipo_Cabeca = CED_ObterTipoEspaco(PonteiroVoid) ;
+      PonteiroVoid = CED_ObterPonteiroEspacoCorrente() ;
+      Tipo_No = CED_ObterTipoEspaco(PonteiroVoid) ;	   
+	   
       if( pNo->first != pNo->cursor ) // 
       {
 
@@ -453,7 +461,7 @@ LIS_tpCondRet prev(List* l)
 
 	  /* Verificar se o cabeça aponta para o mesmo tipo do corrente */
 
-		 if ( pNo->cursor->Tipo != pNo->pCabeca->Tipo )
+		 if ( Tipo_Cabeca != Tipo_No )
 		 {
 			CNT_CONTAR ("LIS_VerificaTipoCabeca");
 			printf("No corrente aponta para um tipo diferente do no cabeca!\n\n");
