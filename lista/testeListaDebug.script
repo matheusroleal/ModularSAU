@@ -26,7 +26,8 @@
 =declararparm  ValorLixo           int  12
 =declararparm  DesencadeiaPrev     int  13
 =declararparm  DesencadeiaNext     int  14
-
+=declararparm  DesencadeiaFirst    int  15
+=declararparm  DesencadeiaLast     int  16
 
 == Declarar retornos do VerificarLista
 =declararparm  Ok              int  0
