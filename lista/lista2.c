@@ -567,7 +567,7 @@ LIS_tpCondRet prev(List* l)
 		/* Os dois casos verificam o encadeamento da lista */
 
 
-		if (  pNo->cursor != pNo->last && Next->prev != pNo->cursor )
+		if (  pNo->cursor != pNo->last && Next != NULL && Next->prev != pNo->cursor )
 		{
 			CNT_CONTAR ("LIS_VerificaProximoDesencadeado");
 			printf("O no anterior do proximo nao e o no corrente!\n\n");
@@ -576,7 +576,7 @@ LIS_tpCondRet prev(List* l)
 		}
 		
 
-		if (  pNo->cursor != pNo->first && Prev->next != pNo->cursor )
+		if (  pNo->cursor != pNo->first && Prev != NULL && Prev->next != pNo->cursor )
 		{
 			CNT_CONTAR ("LIS_VerificaAnteriorDesencadeado");
 			printf("O proximo no do anterior nao e o no corrente!\n\n");
