@@ -563,9 +563,9 @@ LIS_tpCondRet prev(List* l)
 
 		}
 		
+	      /* Casos de Encadeamento */
+	      
 	  /* Verificar se o nó anterior ao próximo é o nó corrente */
-		/* Os dois casos verificam o encadeamento da lista */
-
 
 		if (  pNo->cursor != pNo->last && Next != NULL && Next->prev != pNo->cursor )
 		{
@@ -575,6 +575,7 @@ LIS_tpCondRet prev(List* l)
 
 		}
 		
+	   /* Verifica se o próximo no ao anterior  o nó corrente */ 
 
 		if (  pNo->cursor != pNo->first && Prev != NULL && Prev->next != pNo->cursor )
 		{
@@ -583,7 +584,9 @@ LIS_tpCondRet prev(List* l)
 			Incrementador++;
 
 		}
-
+	
+	      /* Verifica se o no que nao tem anterior é o primeiro nó */
+	      
 		if ( pNo->cursor->prev == NULL )
 		{
 			if ( pNo->first != pNo->cursor )
@@ -598,6 +601,8 @@ LIS_tpCondRet prev(List* l)
 
 		}
 
+	      /* Verifica se o nó que não tem posterior é o último nó */
+	      
 		if ( pNo->cursor->next == NULL )
 		{
 			if ( pNo->last != pNo->cursor )
