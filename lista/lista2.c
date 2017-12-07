@@ -453,7 +453,7 @@ LIS_tpCondRet prev(List* l)
 
 	  /* Verificar se o cabeça aponta para o mesmo tipo do corrente */
 
-		 if (pNo->Tipo != pNo->cursor->Tipo)
+		 if (CED_ObterTipoEspaco(pNo) != CED_ObterTipoEspaco(pNo->cursor) )
 		 {
 			CNT_CONTAR ("LIS_VerificaTipoCabeca");
 			printf("No corrente aponta para um tipo diferente do no cabeca!\n\n");
