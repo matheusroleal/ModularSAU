@@ -1,4 +1,4 @@
-# Trab_Modular
+# ModularSAU
 Repositório do gurpo 4 para o trabalho da disciplina Programação Modular INF1301 da PUC-Rio 2017.2
 
 ## Objetivo
